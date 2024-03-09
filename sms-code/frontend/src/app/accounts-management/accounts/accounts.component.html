@@ -1,0 +1,125 @@
+<div class="container-div">
+
+  <button mat-icon-button class="refresh-button" (click)="getAll()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+
+  <button mat-icon-button class="add-button" (click)="add()">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Advanced Filter
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+        <mat-form-field>
+        <mat-label>Filter</mat-label>
+          <input matInput (keyup.enter)="getAll()" placeholder="Account" #input>
+        </mat-form-field>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <table mat-table [dataSource]="dataSource">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="account_number">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let model"> {{model.number}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let model"> {{model.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="city_name">
+      <th mat-header-cell *matHeaderCellDef> City </th>
+      <td mat-cell *matCellDef="let model"> {{model.city_name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let model"> {{model.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone_number1">
+      <th mat-header-cell *matHeaderCellDef> Phone Number 1 </th>
+      <td mat-cell *matCellDef="let model"> {{model.phone_number1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone_number2">
+      <th mat-header-cell *matHeaderCellDef> Phone Number 2 </th>
+      <td mat-cell *matCellDef="let model"> {{model.phone_number2}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="whatsapp_number">
+      <th mat-header-cell *matHeaderCellDef> Whatsapp Number </th>
+      <td mat-cell *matCellDef="let model"> {{model.whatsapp_number}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="security_number">
+      <th mat-header-cell *matHeaderCellDef> Security Number </th>
+      <td mat-cell *matCellDef="let model"> {{model.security_number}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="memo">
+      <th mat-header-cell *matHeaderCellDef> Memo </th>
+      <td mat-cell *matCellDef="let model"> {{model.memo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="created_at">
+      <th mat-header-cell *matHeaderCellDef> Memo </th>
+      <td mat-cell *matCellDef="let model"> {{model.created_at}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="updated_at">
+      <th mat-header-cell *matHeaderCellDef> Memo </th>
+      <td mat-cell *matCellDef="let model"> {{model.updated_at}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="created_by">
+      <th mat-header-cell *matHeaderCellDef> Memo </th>
+      <td mat-cell *matCellDef="let model"> {{model.created_by}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let model">
+        <button mat-icon-button class="add-button" (click)="view(model)">
+          <mat-icon>pageview</mat-icon>
+        </button>
+        <button mat-icon-button class="add-button" (click)="edit(model)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button class="add-button" (click)="delete(model)" >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+  <mat-paginator
+    #paginator
+    [pageSizeOptions]="pageSizes"
+    showFirstLastButtons
+  ></mat-paginator>
+
+</div>

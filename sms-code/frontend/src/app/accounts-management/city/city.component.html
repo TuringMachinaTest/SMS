@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Account</h2>
+<mat-dialog-content>
+  <div>
+    <mat-form-field class="mat-input-wrapper">
+      <mat-label>Name</mat-label>
+      <input matInput [disabled]="this.data.isView" maxlength="40" [(ngModel)]="model.name">
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="" >Cancel</button>
+  <button mat-button *ngIf="!this.data.isView" (click)="this.data.isEdit ? edit() : add()" cdkFocusInitial>Save</button>
+</mat-dialog-actions>
