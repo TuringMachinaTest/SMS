@@ -1,0 +1,61 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %} Accounts {% endblock title %}
+
+{% block bodyclass %} hold-transition sidebar-mini layout-fixed {% endblock bodyclass %}
+
+{% block content %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Account List</h1>
+            <a type="button" class="btn btn-success" href="{% url 'account_create' %}">Add</a>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Account List</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+            <!-- general form elements -->
+            <!-- general form elements disabled -->
+            {% load django_tables2 %}
+            {% load bootstrap4 %}
+            {% if filter %}
+                <form action="" method="get" class="form form-inline">
+                    {% bootstrap_form filter.form layout='inline' %}
+                    {% bootstrap_button 'filter' %}
+                </form>
+            {% endif %}
+           
+            <table class="table">
+                {% render_table table %}
+            </table>
+            </div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    
+{% endblock content %}
