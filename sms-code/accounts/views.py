@@ -7,20 +7,14 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django_filters.views import FilterView
 from django_tables2 import LazyPaginator, SingleTableMixin, SingleTableView
-from extra_views import CreateWithInlinesView, InlineFormSetFactory
+from extra_views import CreateWithInlinesView, InlineFormSetFactory, UpdateWithInlinesView
 
 from accounts.filters import AccountFilter
 
 from .tables import AccountsTable
 
-from .forms import AccountForm, AccountUserForm, CityForm
+from .forms import AccountForm, AccountUserForm, AccountUserInlineFormSet, CityForm
 from .models import Account, AccountUser
-
-
-class InvoiceItemInline(InlineFormSetFactory):
-    model = AccountUser
-    form_class = AccountUserForm
-    factory_kwargs = {"extra": 0}
 
 
 class ListAccounts(PermissionRequiredMixin, SingleTableMixin, FilterView):
@@ -42,10 +36,10 @@ class CreateAccount(PermissionRequiredMixin, CreateWithInlinesView):
     
     model = Account
     form_class = AccountForm
-    inlines = [InvoiceItemInline]
+    inlines = [AccountUserInlineFormSet]
 
     template_name = 'accounts/create-update.html'
-    success_url = "/thanks/"
+    success_url = "accounts/list"
     
     def get_form_kwargs(self):
         # Get the default form kwargs
@@ -58,16 +52,16 @@ class CreateAccount(PermissionRequiredMixin, CreateWithInlinesView):
 
 
 
-class UpdateeAccount(PermissionRequiredMixin, UpdateView):
+class UpdateeAccount(PermissionRequiredMixin, UpdateWithInlinesView):
     
     permission_required = 'accounts.view_account'
     
     model = Account
     form_class = AccountForm
-    inlines = [InvoiceItemInline]
+    inlines = [AccountUserInlineFormSet]
     
     template_name = 'accounts/create-update.html'
-    success_url = "/thanks/"
+    success_url = "accounts/list"
     
     def get_form_kwargs(self):
         # Get the default form kwargs

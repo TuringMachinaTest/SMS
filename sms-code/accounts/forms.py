@@ -1,4 +1,5 @@
 from django import forms
+from extra_views import InlineFormSetFactory
 
 from .models import Account, AccountUser, City
 
@@ -19,6 +20,8 @@ class CityForm(forms.ModelForm):
         
         
 class AccountForm(forms.ModelForm):
+
+    installation_date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
 
     class Meta:
         model = Account
@@ -104,10 +107,28 @@ class AccountForm(forms.ModelForm):
                 
                 Tab("Users",
                     ModalEditFormsetLayout(
-                        "InvoiceItemInline",
-                        list_display=["name"],
+                        "AccountUserInlineFormSet",
+                        list_display=["name", "title", "partition", "phone_number1", "phone_number2", "phone_number3"],
                     ),
 
+                ),
+                
+                Tab("Installation",
+                    Row(
+                       Column("installation_company_name"),
+                       Column("installation_date"),                  
+                    ),
+                    Row(
+                        Column("installation_company_phone_number1"), 
+                        Column("transmitter_phone_number"),    
+                    ),
+                    Row(
+                        Column("installation_company_phone_number2"), 
+                        Column("transmitter_phone_number"),    
+                    ),
+                    Row(
+                       Column("installation_note"), 
+                    )
                 )
             ),
         )
@@ -122,10 +143,19 @@ class AccountForm(forms.ModelForm):
             # self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary', disabled=True))
 
 
+class DatePicker(forms.widgets.DateInput):
+    input_type = 'date'
+    
+    
+class TimePicker(forms.widgets.TimeInput):
+    input_type = 'time'
         
         
 class AccountUserForm(forms.ModelForm):
-
+    
+    holiday_begins = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    holiday_ends = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    
     class Meta:
         model = AccountUser
         fields = '__all__'
@@ -135,11 +165,63 @@ class AccountUserForm(forms.ModelForm):
         
         self.helper = ModalEditFormHelper()
         self.helper.layout = ModalEditLayout(
-            TabHolder(
-            Tab('Basic',
+                Fieldset("Information",
                     Row(
-                        Column('id', css_class="col-1"),
-                        Column('name', css_class="col-12"), ))
-            )
+                        Column('partition', css_class="col-4"),
+                        Column('name', css_class="col-8"),
+
+                    ),
+                    Row(
+                        Column('in_out_codes'),
+                        Column('password'), 
+                    ),
+                    Row(
+                        Column('phone_number1'),
+                        Column('title'), 
+                    ),
+                    Row(
+                        Column('phone_number2', css_class="col-6"),
+                    ),
+                    Row(
+                        Column('phone_number3', css_class="col-6"),
+                    ),
+                ),
+                Fieldset("Control",
+                    Row(
+                        Column('holiday_begins'),
+                        Column('holiday_ends'),
+                    ),            
+                    Row(
+                        Column('keypad_code'),
+                        Column('hot_user'),
+                    ),
+                    Row(
+                        Column('authorized_days_sun'),
+                        Column('authorized_days_thu'),
+                    ),
+                    Row(
+                        Column('authorized_days_mon'),
+                        Column('authorized_days_fri'),
+                    ),
+                   Row(
+                        Column('authorized_days_tue'),
+                        Column('authorized_days_sat'),
+                    ),
+                    Row(
+                        Column('authorized_days_wed', css_class="col-6"),
+                    ),
+                )
         )
-            
+        
+        # Disable submit button for non-admin users
+        if has_permissions:
+            self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+        else:           
+            for field in self.fields:
+                self.fields[field].disabled = True
+                
+                
+class AccountUserInlineFormSet(InlineFormSetFactory):
+    model = AccountUser
+    form_class = AccountUserForm
+    factory_kwargs = {"extra": 0}
