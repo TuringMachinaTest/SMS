@@ -5,6 +5,7 @@ beautifulsoup4==4.12.3
 crispy-bootstrap4==2024.1
 Django==5.0.3
 django-admin-adminlte==1.0.5
+django-appconf==1.0.6
 django-bootstrap4==24.1
 django-braces==1.15.0
 django-crispy-forms==2.1
@@ -12,7 +13,8 @@ django-crispy-formset-modal==0.6
 django-extra-views==0.14.0
 django-filter==24.1
 django-phonenumber-field==7.3.0
-django-report-builder @ https://codeload.github.com/TuringMachinaTest/django-report-builder/zip/refs/tags/v6.5#sha256=515fe647906c83972b6b7198fa0404362b76913c643bd2bd89ed69889706aa7a
+django-report-builder @ https://codeload.github.com/TuringMachinaTest/django-report-builder/zip/refs/heads/master#sha256=7ff7fe229dd20a0ff7bbf853f4ed52a2cfb427039be144daaf082f21c93a80e8
+django-select2==8.1.2
 django-tables2==2.7.0
 djangorestframework==3.14.0
 et-xmlfile==1.1.0
@@ -21,6 +23,7 @@ openpyxl==3.1.2
 packaging==24.0
 phonenumbers==8.13.32
 phonenumberslite==8.13.32
+pyserial==3.5
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 pytz==2024.1

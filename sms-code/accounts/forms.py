@@ -52,14 +52,6 @@ class InstallationCompanyForm(forms.ModelForm):
         else:            
             for field in self.fields:
                 self.fields[field].disabled = True
-     
-              
-class AuthorWidget(s2forms.ModelSelect2Widget):
-    search_fields = [
-        "name__icontains",
-    ]
-    theme = 'bootstrap4'
-    attrs = {'class': 'custom-select'}
               
                 
 class AccountForm(forms.ModelForm):
@@ -69,7 +61,18 @@ class AccountForm(forms.ModelForm):
     installation_company_phone_number1 = formfields.PhoneNumberField(region="SY", max_length=20, required=False, widget=widgets.TextInput(attrs={'readonly': 'True'}))
     installation_company_phone_number2 = formfields.PhoneNumberField(region="SY", max_length=20, required=False, widget=widgets.TextInput(attrs={'readonly': 'True'}))
     
-    city = forms.ModelChoiceField(queryset=City.objects.all(), required=False, widget=AuthorWidget())
+    city = forms.ModelChoiceField(queryset=City.objects.all(), required=False, widget=s2forms.ModelSelect2Widget(
+        search_fields = [
+            "name__icontains",
+        ],
+    ))
+    
+    installation_company = forms.ModelChoiceField(queryset=InstallationCompany.objects.all(), required=False, widget=s2forms.ModelSelect2Widget(
+        search_fields = [
+            "name__icontains",
+        ],
+    ))
+    
     
     class Meta:
         model = Account
