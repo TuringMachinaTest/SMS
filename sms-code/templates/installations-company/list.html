@@ -13,14 +13,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Account Users List</h1>
-            <a type="button" class="btn btn-success" href="{% url 'account_create' %}">Add</a>
+            <h1>Installation Companies List</h1>
+            <a type="button" class="btn btn-success" href="{% url 'installation_company_create' %}">Add</a>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Account</li>
-              <li class="breadcrumb-item active">Account Users</li>
+              <li class="breadcrumb-item active">Installation Companies List</li>
             </ol>
           </div>
         </div>
@@ -35,6 +34,9 @@
           <!-- left column -->
           <div class="col-md-12">
             <div class="card">
+              <div class="card-header">
+                <a type="button" class="btn btn-success" href="{% url 'installation_company_list' %}?_export=csv">Export</a>
+              </div>
               <!-- /.card-header -->
               <div class="card-body">
             <!-- general form elements -->

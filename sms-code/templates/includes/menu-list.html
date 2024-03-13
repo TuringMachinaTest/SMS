@@ -4,6 +4,39 @@
     <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
 
+           
+  {% if request.user.is_authenticated %}
+    <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
+      <a href="#" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
+        <i class="nav-icon fas fa-tachometer-alt"></i>
+        <p>
+          Dashboard
+          <i class="right fas fa-angle-left"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="/" class="nav-link {% if 'dashboardv1' in segment %} active {% endif %}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Dashboard v1</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboardv2' %}" class="nav-link {% if 'dashboardv2' in segment %} active {% endif %}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Dashboard v2</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboardv3' %}" class="nav-link {% if 'dashboardv3' in segment %} active {% endif %}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Dashboard v3</p>
+          </a>
+        </li>
+      </ul>
+    </li>
+  {% endif %}
+
     {% admin_get_menu as app_list %}
     {% if app_list %}
     {% for app in app_list %}
@@ -42,8 +75,30 @@
 
     {% if request.user.is_authenticated %}
     <li class="nav-item">
-      <a href="{% url 'account_list' %}" class="nav-link {% if 'accounts' in request.path %}active{% endif %}">
-        <i class="nav-icon fas fa-th"></i>
+      <a href="{% url 'city_list' %}" class="nav-link {% if '/cities/' in request.path %}active{% endif %}">
+        <i class="nav-icon fas fa-globe"></i>
+        <p>
+          Cities
+        </p>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+    <li class="nav-item">
+      <a href="{% url 'installation_company_list' %}" class="nav-link {% if '/installation_company/' in request.path %}active{% endif %}">
+        <i class="nav-icon fas fa-building"></i>
+        <p>
+          Installation Companies
+        </p>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+    <li class="nav-item">
+      <a href="{% url 'account_list' %}" class="nav-link {% if '/accounts/' in request.path %}active{% endif %}">
+        <i class="nav-icon fas fa-user"></i>
         <p>
           Accounts Management
         </p>
@@ -51,37 +106,6 @@
     </li>
     {% endif %}
 
-    {% if request.user.is_authenticated %}
-      <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
-        <a href="#" class="nav-link {% if 'dashboard' in parent %} active {% endif %}">
-          <i class="nav-icon fas fa-tachometer-alt"></i>
-          <p>
-            Dashboard
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="/" class="nav-link {% if 'dashboardv1' in segment %} active {% endif %}">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dashboard v1</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{% url 'dashboardv2' %}" class="nav-link {% if 'dashboardv2' in segment %} active {% endif %}">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dashboard v2</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{% url 'dashboardv3' %}" class="nav-link {% if 'dashboardv3' in segment %} active {% endif %}">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dashboard v3</p>
-            </a>
-          </li>
-        </ul>
-      </li>
-    {% endif %}
 
     {% if request.user.is_authenticated %}
     <li class="nav-item">

@@ -13,12 +13,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Account Form</h1>
+            <h1>Cities List</h1>
+            <a type="button" class="btn btn-success" href="{% url 'city_create' %}">Add</a>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Account Form</li>
+              <li class="breadcrumb-item active">Cities List</li>
             </ol>
           </div>
         </div>
@@ -32,36 +33,32 @@
         <div class="row">
           <!-- left column -->
           <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <a type="button" class="btn btn-success" href="{% url 'installation_company_list' %}?_export=csv">Export</a>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
             <!-- general form elements -->
             <!-- general form elements disabled -->
-            <form method="post">
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Account</h3>
-                </div>
-    
+            {% load django_tables2 %}
+            {% load bootstrap4 %}
+            {% if filter %}
+                <form action="" method="get" class="form form-inline">
+                    {% bootstrap_form filter.form layout='inline' %}
+                    {% bootstrap_button 'filter' %}
+                </form>
+            {% endif %}
+           
+            <table class="table">
+                {% render_table table %}
+            </table>
+            </div>
+          </div>
 
-                <!-- /.card-header -->
-                <div class="card-body">
-
-                      {% csrf_token %}
-                      {% load crispy_forms_tags %}
-                      {% crispy form %}
-                  
-                </div>
-              </div>
-            </form>
           </div>
         </div>
       </div>
     </section>
-  <div>
-
+    
 {% endblock content %}
-
-{% block extra_scripts %}
-  $('.mbox').each(function() {
-    console.log($(this).html());
-    mvar += $(this).html();
-  });
-{% endblock extra_scripts %}

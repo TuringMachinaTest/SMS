@@ -1,7 +1,8 @@
+from .utils import get_partitions_choices
 from django import forms
 from extra_views import InlineFormSetFactory
 
-from .models import Account, AccountUser, City
+from .models import Account, AccountUser, City, InstallationCompany
 
 from crispy_formset_modal.helper import ModalEditFormHelper
 from crispy_formset_modal.layout import ModalEditLayout
@@ -11,6 +12,9 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, Div, Row, Column
 from crispy_forms.bootstrap import TabHolder, Tab
 
+from django_select2 import forms as s2forms
+
+from phonenumber_field import formfields, widgets
 
 class CityForm(forms.ModelForm):
 
@@ -18,18 +22,62 @@ class CityForm(forms.ModelForm):
         model = City
         fields = '__all__'
         
+    def __init__(self, has_permissions=False, *args, **kwargs):
+        super().__init__(*args, **kwargs)        
         
+        self.helper = FormHelper()
+
+
+        if has_permissions:
+            self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+        else:            
+            for field in self.fields:
+                self.fields[field].disabled = True
+                
+                
+class InstallationCompanyForm(forms.ModelForm):
+
+    class Meta:
+        model = InstallationCompany
+        fields = '__all__'
+    
+    def __init__(self, has_permissions=False, *args, **kwargs):
+        super().__init__(*args, **kwargs)        
+        
+        self.helper = FormHelper()
+
+
+        if has_permissions:
+            self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+        else:            
+            for field in self.fields:
+                self.fields[field].disabled = True
+     
+              
+class AuthorWidget(s2forms.ModelSelect2Widget):
+    search_fields = [
+        "name__icontains",
+    ]
+    theme = 'bootstrap4'
+    attrs = {'class': 'custom-select'}
+              
+                
 class AccountForm(forms.ModelForm):
 
-    installation_date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    installation_date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}), required=False)
 
+    installation_company_phone_number1 = formfields.PhoneNumberField(region="SY", max_length=20, required=False, widget=widgets.TextInput(attrs={'readonly': 'True'}))
+    installation_company_phone_number2 = formfields.PhoneNumberField(region="SY", max_length=20, required=False, widget=widgets.TextInput(attrs={'readonly': 'True'}))
+    
+    city = forms.ModelChoiceField(queryset=City.objects.all(), required=False, widget=AuthorWidget())
+    
     class Meta:
         model = Account
         fields = '__all__'
         
     def __init__(self, has_permissions=False, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+            
         self.helper = FormHelper()
         self.helper.layout = Layout(
             TabHolder(
@@ -83,6 +131,7 @@ class AccountForm(forms.ModelForm):
                 ),
                 Tab('Partitions',
                     Row(
+                       Column("partition_name0"),
                        Column("partition_name1"),
                        Column("partition_name2"),
                        Column("partition_name3") ,
@@ -90,17 +139,18 @@ class AccountForm(forms.ModelForm):
                     Row(
                        Column("partition_name4"),
                        Column("partition_name5"),
-                       Column("partition_name6") ,       
-                    ),
-                    Row(
+                       Column("partition_name6") , 
                        Column("partition_name7"),
-                       Column("partition_name8"),
-                       Column("partition_name9") ,                     
+      
                     ),
                     Row(
+                       Column("partition_name8"),
+                       Column("partition_name9") , 
                        Column("partition_name10"),
-                       Column(),
-                       Column() ,                       
+                       Column(),                    
+                    ),
+                    Row(
+                   
                     ),
                 
                 ),
@@ -115,12 +165,12 @@ class AccountForm(forms.ModelForm):
                 
                 Tab("Installation",
                     Row(
-                       Column("installation_company_name"),
+                       Column("installation_company"),
                        Column("installation_date"),                  
                     ),
                     Row(
                         Column("installation_company_phone_number1"), 
-                        Column("transmitter_phone_number"),    
+                        Column("receiver_phone_number"),    
                     ),
                     Row(
                         Column("installation_company_phone_number2"), 
@@ -141,6 +191,14 @@ class AccountForm(forms.ModelForm):
                 self.fields[field].disabled = True
                 
             # self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary', disabled=True))
+            
+        instance = kwargs.pop('instance', None)
+        
+        if instance:
+            if instance.installation_company:
+                self.fields["installation_company_phone_number1"].initial = instance.installation_company.phone_number1
+                self.fields["installation_company_phone_number2"].initial = instance.installation_company.phone_number2
+
 
 
 class DatePicker(forms.widgets.DateInput):
@@ -153,23 +211,22 @@ class TimePicker(forms.widgets.TimeInput):
         
 class AccountUserForm(forms.ModelForm):
     
-    holiday_begins = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
-    holiday_ends = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}))
+    holiday_begins = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}), required=False)
+    holiday_ends = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}), required=False)
     
     class Meta:
         model = AccountUser
         fields = '__all__'
         
-    def __init__(self, has_permissions=False, *args, **kwargs):
+    def __init__(self, has_permissions = False, account_id = -1,  *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+            
         self.helper = ModalEditFormHelper()
         self.helper.layout = ModalEditLayout(
                 Fieldset("Information",
                     Row(
                         Column('partition', css_class="col-4"),
                         Column('name', css_class="col-8"),
-
                     ),
                     Row(
                         Column('in_out_codes'),
@@ -213,6 +270,8 @@ class AccountUserForm(forms.ModelForm):
                 )
         )
         
+        self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id))
+        
         # Disable submit button for non-admin users
         if has_permissions:
             self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
@@ -225,3 +284,19 @@ class AccountUserInlineFormSet(InlineFormSetFactory):
     model = AccountUser
     form_class = AccountUserForm
     factory_kwargs = {"extra": 0}
+    
+    #formset_kwargs = {'form_kwargs': { 'account_id': -1 }}
+    
+    def get_formset_kwargs(self):
+        kwargs = super(AccountUserInlineFormSet, self).get_formset_kwargs()
+
+        #self.formset_kwargs = { 'form_kwargs' : { 'account_id' : kwargs['instance'].id}}
+        # Add any additional parameters you want to pass to the form
+        #print(kwargs)
+        
+        kwargs['form_kwargs'] = {}
+        if kwargs['instance']:
+            kwargs['form_kwargs']['account_id'] = kwargs['instance'].id 
+        kwargs['form_kwargs']['has_permissions'] = True
+                
+        return kwargs

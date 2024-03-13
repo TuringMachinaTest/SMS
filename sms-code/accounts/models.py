@@ -9,6 +9,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.validators import MaxValueValidator, MinValueValidator 
 
+from phonenumber_field import modelfields
+
 # Create your models here.
 
 class City(models.Model):
@@ -19,7 +21,16 @@ class City(models.Model):
     def __str__(self):
         return self.name 
     
+    
+class InstallationCompany(models.Model):
+    name = models.CharField(max_length=30, blank=True)
+    phone_number1 = modelfields.PhoneNumberField(region="SY", max_length=20, blank=True)
+    phone_number2 = modelfields.PhoneNumberField(region="SY", max_length=20, blank=True)
 
+    def __str__(self):
+        return self.name 
+    
+    
 class Account(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=40)
@@ -34,28 +45,29 @@ class Account(models.Model):
 
     email = models.EmailField(max_length=30, blank=True)
 
-    phone_number1 = models.CharField(max_length=20, blank=True)
-    phone_number2 = models.CharField(max_length=20, blank=True)
-    whatsapp_number = models.CharField(max_length=20, blank=True)
+    phone_number1 = modelfields.PhoneNumberField(region="SY", max_length=20, blank=True)
+    phone_number2 = modelfields.PhoneNumberField(region="SY", max_length=20, blank=True)
+    whatsapp_number = modelfields.PhoneNumberField(region="SY", max_length=20, blank=True)
 
     # Accounts MISC
     security_number = models.CharField(max_length=20, blank=True)
 
     memo = models.TextField(max_length=120, blank=True)
 
-    police_number1 = models.CharField(max_length=20, blank=True)
-    police_number2 = models.CharField(max_length=20, blank=True)
-    police_number3 = models.CharField(max_length=20, blank=True)
+    police_number1 = modelfields.PhoneNumberField(region="SY",max_length=20, blank=True)
+    police_number2 = modelfields.PhoneNumberField(region="SY",max_length=20, blank=True)
+    police_number3 = modelfields.PhoneNumberField(region="SY",max_length=20, blank=True)
 
-    fire_dept_number1 = models.CharField(max_length=20, blank=True)
-    fire_dept_number2 = models.CharField(max_length=20, blank=True)
-    fire_dept_number3 = models.CharField(max_length=20, blank=True)
+    fire_dept_number1 = modelfields.PhoneNumberField(region="SY",max_length=20, blank=True)
+    fire_dept_number2 = modelfields.PhoneNumberField(region="SY",max_length=20, blank=True)
+    fire_dept_number3 = modelfields.PhoneNumberField(region="SY",max_length=20, blank=True)
 
-    emergency_number1 = models.CharField(max_length=20, blank=True)
-    emergency_number2 = models.CharField(max_length=20, blank=True)
-    emergency_number3 = models.CharField(max_length=20, blank=True)
+    emergency_number1 = modelfields.PhoneNumberField(region="SY",max_length=20, blank=True)
+    emergency_number2 = modelfields.PhoneNumberField(region="SY",max_length=20, blank=True)
+    emergency_number3 = modelfields.PhoneNumberField(region="SY",max_length=20, blank=True)
 
     # Partitions
+    partition_name0 = models.CharField(max_length=30, default="Default")
     partition_name1 = models.CharField(max_length=30, blank=True)
     partition_name2 = models.CharField(max_length=30, blank=True)
     partition_name3 = models.CharField(max_length=30, blank=True)
@@ -68,9 +80,7 @@ class Account(models.Model):
     partition_name10 = models.CharField(max_length=30, blank=True)
     
     # Installation
-    installation_company_name = models.CharField(max_length=30, blank=True)
-    installation_company_phone_number1 = models.CharField(max_length=20, blank=True)
-    installation_company_phone_number2 = models.CharField(max_length=20, blank=True)
+    installation_company = models.ForeignKey(InstallationCompany, on_delete=models.SET_NULL, null=True, blank=True)
 
     installation_date = models.DateField(null=True, blank=True)
     installation_note = models.TextField(max_length=120, blank=True)
@@ -93,7 +103,7 @@ class AccountUser(models.Model):
         ]
 
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    partition = models.IntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(10)])
+    partition = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])
 
     # Information
     name = models.CharField(max_length=40)

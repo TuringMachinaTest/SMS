@@ -1,14 +1,32 @@
-# Core
-django==4.2.9
-python-dotenv==1.0.1
-str2bool==1.1
+# requirements.txt
 
-# UI
+asgiref==3.7.2
+beautifulsoup4==4.12.3
+crispy-bootstrap4==2024.1
+Django==5.0.3
 django-admin-adminlte==1.0.5
-
-# Deployment
-whitenoise==6.6.0
+django-bootstrap4==24.1
+django-braces==1.15.0
+django-crispy-forms==2.1
+django-crispy-formset-modal==0.6
+django-extra-views==0.14.0
+django-filter==24.1
+django-phonenumber-field==7.3.0
+django-report-builder @ https://codeload.github.com/TuringMachinaTest/django-report-builder/zip/refs/tags/v6.5#sha256=515fe647906c83972b6b7198fa0404362b76913c643bd2bd89ed69889706aa7a
+django-tables2==2.7.0
+djangorestframework==3.14.0
+et-xmlfile==1.1.0
 gunicorn==21.2.0
-
-# psycopg2-binary
-# mysqlclient
+openpyxl==3.1.2
+packaging==24.0
+phonenumbers==8.13.32
+phonenumberslite==8.13.32
+python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
+pytz==2024.1
+six==1.16.0
+soupsieve==2.5
+sqlparse==0.4.4
+str2bool==1.1
+tablib==3.5.0
+whitenoise==6.6.0
