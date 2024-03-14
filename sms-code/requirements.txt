@@ -13,9 +13,11 @@ django-crispy-formset-modal==0.6
 django-extra-views==0.14.0
 django-filter==24.1
 django-phonenumber-field==7.3.0
+django-redis==5.4.0
 django-report-builder @ https://codeload.github.com/TuringMachinaTest/django-report-builder/zip/refs/heads/master#sha256=7ff7fe229dd20a0ff7bbf853f4ed52a2cfb427039be144daaf082f21c93a80e8
 django-select2==8.1.2
 django-tables2==2.7.0
+django-view-breadcrumbs==2.5.1
 djangorestframework==3.14.0
 et-xmlfile==1.1.0
 gunicorn==21.2.0
@@ -27,9 +29,11 @@ pyserial==3.5
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 pytz==2024.1
+redis==5.0.3
 six==1.16.0
 soupsieve==2.5
 sqlparse==0.4.4
 str2bool==1.1
 tablib==3.5.0
+tzdata==2024.1
 whitenoise==6.6.0

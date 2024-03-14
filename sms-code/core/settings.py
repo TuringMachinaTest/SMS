@@ -67,7 +67,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'report_builder',
     
-    'django_celery_beat',
+#    'django_celery_beat',
     
     'home',
     'accounts',
@@ -217,11 +217,11 @@ SELECT2_CSS = [
     ]
 
 # CELERY STUFF
-CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Replace with your Redis URL
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'  # Replace with your Redis URL
+#CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Replace with your Redis URL
+#CELERY_RESULT_BACKEND = 'redis://localhost:6379'  # Replace with your Redis URL
 
-CELERY_TIMEZONE = "Asia/Damascus"
-CELERY_TASK_TRACK_STARTED = True
+#CELERY_TIMEZONE = "Asia/Damascus"
+#CELERY_TASK_TRACK_STARTED = True
 
 # Bread Crumbs
 BREADCRUMBS_HOME_LABEL = "Home"
