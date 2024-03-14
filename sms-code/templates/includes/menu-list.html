@@ -84,7 +84,7 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="{% url 'city_list' %}" class="nav-link {% if '/cities/' in request.path %}active{% endif %}">
+          <a href="{% url 'accounts:city_list' %}" class="nav-link {% if '/cities/' in request.path %}active{% endif %}">
             <i class="nav-icon fas fa-globe"></i>
             <p>
               Cities
@@ -94,7 +94,7 @@
       </ul>
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="{% url 'installation_company_list' %}" class="nav-link {% if '/installation_company/' in request.path %}active{% endif %}">
+          <a href="{% url 'accounts:installationcompany_list' %}" class="nav-link {% if '/installation_company/' in request.path %}active{% endif %}">
             <i class="nav-icon fas fa-building"></i>
             <p>
               Installation Companies
@@ -105,7 +105,7 @@
 
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="{% url 'account_list' %}" class="nav-link {% if '/accounts/' in request.path %}active{% endif %}">
+          <a href="{% url 'accounts:account_list' %}" class="nav-link {% if '/accounts/' in request.path %}active{% endif %}">
             <i class="nav-icon fas fa-user"></i>
             <p>
               Accounts

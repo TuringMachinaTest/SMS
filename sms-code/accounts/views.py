@@ -11,7 +11,7 @@ from django_filters.views import FilterView
 from django_tables2 import LazyPaginator, SingleTableMixin, SingleTableView
 from django_tables2.export.views import ExportMixin
 from extra_views import CreateWithInlinesView, InlineFormSetFactory, ModelFormSetView, UpdateWithInlinesView
-from view_breadcrumbs import DetailBreadcrumbMixin, ListBreadcrumbMixin, CreateBreadcrumbMixin
+from view_breadcrumbs import DetailBreadcrumbMixin, ListBreadcrumbMixin, CreateBreadcrumbMixin, UpdateBreadcrumbMixin, DeleteBreadcrumbMixin
 
 from .filters import AccountFilter, CityFilter, InstallationCompanyFilter
 
@@ -32,16 +32,12 @@ class ListAccounts(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, Si
     filterset_class = AccountFilter
     
     template_name = 'generic/list.html'
-    
-    crumbs = [
-        ("Accounts", reverse_lazy('account_list'))
-    ]
-        
+
     def get_context_data(self, **kwargs):
         context = super(ListAccounts, self).get_context_data(**kwargs)
         
-        context['add_url'] = reverse_lazy('account_create')
-        context['export_url'] = reverse_lazy('account_list') + "?_export=csv"
+        context['add_url'] = reverse_lazy('accounts:account_create')
+        context['export_url'] = reverse_lazy('accounts:account_list') + "?_export=csv"
         context['view_name'] = "Accounts"
 
         return context
@@ -53,14 +49,9 @@ class CreateAccount(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithIn
     model = Account
     form_class = AccountForm
     inlines = [AccountUserInlineFormSet]
-
-    crumbs = [
-        ("Accounts", reverse_lazy('account_list')),
-        ("Create", reverse_lazy('account_create'))
-    ]
     
     template_name = 'generic/details-create-update.html'
-    success_url = reverse_lazy('account_list')
+    success_url = reverse_lazy('accounts:account_list')
 
     def get_context_data(self, **kwargs):
         context = super(CreateAccount, self).get_context_data(**kwargs)
@@ -72,8 +63,6 @@ class CreateAccount(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithIn
 class DetailsAccount(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateWithInlinesView, DetailView):
         
     permission_required = 'accounts.view_account'
-    
-    
     
     model = Account
     form_class = AccountForm
@@ -102,7 +91,7 @@ class DetailsAccount(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateWithI
         return Account.objects.filter(pk=self.kwargs["pk"])
 
 
-class UpdateeAccount(PermissionRequiredMixin, UpdateWithInlinesView):
+class UpdateeAccount(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateWithInlinesView):
     
     permission_required = 'accounts.view_account'
     
@@ -113,14 +102,14 @@ class UpdateeAccount(PermissionRequiredMixin, UpdateWithInlinesView):
     formset_kwargs = {'form_kwargs': {'test': False}}
 
     template_name = 'generic/details-create-update.html'
-    success_url = reverse_lazy('account_list')
+    success_url = reverse_lazy('accounts:account_list')
     
     def get_queryset(self):
         # Customize the queryset as needed (e.g., filter by user, etc.)
         return Account.objects.filter(pk=self.kwargs["pk"])
     
     
-class DeleteAccount(PermissionRequiredMixin, DeleteView):
+class DeleteAccount(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
     
     permission_required = 'accounts.delete_account'
     
@@ -130,7 +119,7 @@ class DeleteAccount(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy("account_list")
     
     
-class ListInstallationCompanies(PermissionRequiredMixin, ExportMixin, SingleTableMixin, FilterView):
+class ListInstallationCompanies(PermissionRequiredMixin, ListBreadcrumbMixin, ExportMixin, SingleTableMixin, FilterView):
     
     permission_required = 'accounts.view_account'
     
@@ -143,7 +132,7 @@ class ListInstallationCompanies(PermissionRequiredMixin, ExportMixin, SingleTabl
     template_name = 'generic/list.html'
     
 
-class CreatInstallationCompany(PermissionRequiredMixin, CreateWithInlinesView):
+class CreatInstallationCompany(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithInlinesView):
         
     permission_required = 'accounts.add_account'
     
@@ -151,10 +140,10 @@ class CreatInstallationCompany(PermissionRequiredMixin, CreateWithInlinesView):
     form_class = InstallationCompanyForm
 
     template_name = 'generic/details-create-update.html'
-    success_url = reverse_lazy('installation_company_list')
+    success_url = reverse_lazy('accounts:installationcompany_list')
 
 
-class UpdateeInstallationCompany(PermissionRequiredMixin, UpdateWithInlinesView):
+class UpdateeInstallationCompany(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateWithInlinesView):
     
     permission_required = 'accounts.view_account'
     
@@ -162,14 +151,14 @@ class UpdateeInstallationCompany(PermissionRequiredMixin, UpdateWithInlinesView)
     form_class = InstallationCompanyForm
     
     template_name = 'generic/details-create-update.html'
-    success_url = reverse_lazy('installation_company_list')
+    success_url = reverse_lazy('accounts:installationcompany_list')
     
     def get_queryset(self):
         # Customize the queryset as needed (e.g., filter by user, etc.)
         return InstallationCompany.objects.filter(pk=self.kwargs["pk"])
     
     
-class DetailsInstallationCompany(PermissionRequiredMixin, UpdateWithInlinesView, DetailView):
+class DetailsInstallationCompany(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateWithInlinesView, DetailView):
     
     permission_required = 'accounts.view_account'
     
@@ -178,22 +167,37 @@ class DetailsInstallationCompany(PermissionRequiredMixin, UpdateWithInlinesView,
     
     template_name = 'generic/details-create-update.html'
     
+    def get_form_kwargs(self):
+        # Get the default form kwargs
+        kwargs = super().get_form_kwargs()
+                
+        # Add any additional parameters you want to pass to the form
+        kwargs['details'] = True
+        
+        return kwargs
+    
+    def get_context_data(self, **kwargs):
+        context = super(DetailsInstallationCompany, self).get_context_data(**kwargs)
+        
+        context['details'] = True
+        
+        return context
     def get_queryset(self):
         # Customize the queryset as needed (e.g., filter by user, etc.)
         return InstallationCompany.objects.filter(pk=self.kwargs["pk"])
     
     
-class DeleteInstallationCompany(PermissionRequiredMixin, DeleteView):
+class DeleteInstallationCompany(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
     
     permission_required = 'accounts.delete_account'
     
     model = InstallationCompany
     template_name = 'generic/confirm-delete.html'
 
-    success_url = reverse_lazy("installation_company_list")
+    success_url = reverse_lazy("installationcompany_list")
     
     
-class ListCities(PermissionRequiredMixin, ExportMixin, SingleTableMixin, FilterView):
+class ListCities(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, SingleTableMixin, FilterView):
     
     permission_required = 'accounts.view_account'
     
@@ -206,7 +210,7 @@ class ListCities(PermissionRequiredMixin, ExportMixin, SingleTableMixin, FilterV
     template_name = 'generic/list.html'
     
 
-class CreatCity(PermissionRequiredMixin, CreateWithInlinesView):
+class CreatCity(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithInlinesView):
         
     permission_required = 'accounts.add_account'
     
@@ -214,10 +218,10 @@ class CreatCity(PermissionRequiredMixin, CreateWithInlinesView):
     form_class = CityForm
 
     template_name = 'generic/details-create-update.html'
-    success_url = reverse_lazy('city_list')
+    success_url = reverse_lazy('accounts:city_list')
 
 
-class UpdateeCity(PermissionRequiredMixin, UpdateWithInlinesView):
+class DetailsCity(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateView):
     
     permission_required = 'accounts.view_account'
     
@@ -225,14 +229,44 @@ class UpdateeCity(PermissionRequiredMixin, UpdateWithInlinesView):
     form_class = CityForm
     
     template_name = 'generic/details-create-update.html'
-    success_url = reverse_lazy('city_list')
+
+    def get_form_kwargs(self):
+        # Get the default form kwargs
+        kwargs = super().get_form_kwargs()
+                
+        # Add any additional parameters you want to pass to the form
+        kwargs['details'] = True
+        
+        return kwargs
+    
+    def get_context_data(self, **kwargs):
+        context = super(DetailsCity, self).get_context_data(**kwargs)
+        
+        context['details'] = True
+        
+        return context
+        
+    def get_queryset(self):
+        # Customize the queryset as needed (e.g., filter by user, etc.)
+        return City.objects.filter(pk=self.kwargs["pk"])
+    
+
+class UpdateeCity(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateView):
+    
+    permission_required = 'accounts.view_account'
+    
+    model = City
+    form_class = CityForm
+    
+    template_name = 'generic/details-create-update.html'
+    success_url = reverse_lazy('accounts:city_list')
     
     def get_queryset(self):
         # Customize the queryset as needed (e.g., filter by user, etc.)
         return City.objects.filter(pk=self.kwargs["pk"])
     
     
-class DeleteCity(PermissionRequiredMixin, DeleteView):
+class DeleteCity(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
     
     permission_required = 'accounts.delete_account'
     

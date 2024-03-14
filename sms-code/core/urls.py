@@ -18,8 +18,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-urlpatterns = [
-    path('accounts-management/', include('accounts.urls')),
+urlpatterns = [    
+    path('accounts-management/', include(('accounts.urls', 'accounts'), namespace="accounts")),
+    
     path("admin/", admin.site.urls),
     
     path("select2/", include("django_select2.urls")),
