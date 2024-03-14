@@ -14,8 +14,8 @@ from events.models import RawEvent
 redis_client = redis.Redis(host='localhost', port=6379)
 
 @app.task(bind=True)
-def message_listener(self, name, com, baud_rate, end_line):
-    lock = redis_client.lock(name)
+def message_listener(self, device_id, com, baud_rate, end_line):
+    lock = redis_client.lock("device-lock:" + device_id)
 
     if lock.locked():
         print("Already Running")
@@ -48,7 +48,7 @@ def message_listener(self, name, com, baud_rate, end_line):
                 message += cc.decode()
                 if cc == end_line:
                     raw_event = RawEvent()
-                    raw_event.device_name = name
+                    raw_event.device = device_id
                     raw_event.data = message
                     raw_event.save()
                     if raw_event.pk is not None:
@@ -65,7 +65,7 @@ def message_listener(self, name, com, baud_rate, end_line):
 def remove_locks(**kwargs):
     devices = Device.objects.all()
     for device in devices:
-        lock = redis_client.lock(device.name)
+        lock = redis_client.lock("device-lock:" + device.id)
         try:
             lock.release()
         except:

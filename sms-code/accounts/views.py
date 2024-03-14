@@ -150,7 +150,7 @@ class ListInstallationCompanies(PermissionRequiredMixin, ListBreadcrumbMixin, Ex
         return context    
 
 
-class CreatInstallationCompany(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithInlinesView):
+class CreateInstallationCompany(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithInlinesView):
         
     permission_required = 'accounts.add_account'
     
@@ -161,7 +161,7 @@ class CreatInstallationCompany(PermissionRequiredMixin, CreateBreadcrumbMixin, C
     success_url = reverse_lazy('accounts:installationcompany_list')
 
     def get_context_data(self, **kwargs):
-        context = super(CreatInstallationCompany, self).get_context_data(**kwargs)
+        context = super(CreateInstallationCompany, self).get_context_data(**kwargs)
         
         context['view_name'] = _("Create Installation Company")
 
@@ -252,7 +252,7 @@ class ListCities(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, Sing
         return context    
 
 
-class CreatCity(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithInlinesView):
+class CreateCity(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithInlinesView):
         
     permission_required = 'accounts.add_account'
     
@@ -263,7 +263,7 @@ class CreatCity(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithInline
     success_url = reverse_lazy('accounts:city_list')
 
     def get_context_data(self, **kwargs):
-        context = super(CreatCity, self).get_context_data(**kwargs)
+        context = super(CreateCity, self).get_context_data(**kwargs)
         
         context['view_name'] = _("Create City")
 

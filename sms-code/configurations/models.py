@@ -19,7 +19,6 @@ class AlarmCode(models.Model):
 class DecryptionConfiguration(models.Model):
     name = models.CharField(max_length=30)
     decryption_mask = models.TextField()
-    end_line = models.CharField(max_length=10, choices={"<CR>": "<CR>", "<DC4>": "<DC4>"})
     
     def __str__(self):
             return self.name
@@ -33,6 +32,7 @@ class Device(models.Model):
     baud_rate = models.IntegerField(default=9600)
 
     decryption_configurations = models.ManyToManyField(DecryptionConfiguration, null=True)
+    end_line = models.CharField(max_length=10, choices={"<CR>": "<CR>", "<DC4>": "<DC4>"})
 
     task = models.ForeignKey(PeriodicTask, null=True, on_delete=models.SET_NULL, blank=True)
 
@@ -57,8 +57,8 @@ def create_device_task(sender, instance, **kwargs):
             name=instance.name,
             task="events.tasks.message_listener",
             args=json.dumps([
-                instance.name, instance.com, instance.baud_rate,
-                instance.decryption_configurations
+                instance.id, instance.com, instance.baud_rate,
+                instance.end_line, instance.decryption_configurations
             ]),
             kwargs=json.dumps({
                 
@@ -76,8 +76,8 @@ def update_device_task(sender, instance, created, **kwargs):
         instance.task.name = instance.name
         instance.task.task = "events.tasks.message_listener"
         args=json.dumps([
-            instance.name, instance.com, instance.baud_rate,
-            instance.decryption_configurations
+            instance.id, instance.com, instance.baud_rate,
+            instance.end_line, instance.decryption_configurations
         ]),
         kwargs=json.dumps({
             

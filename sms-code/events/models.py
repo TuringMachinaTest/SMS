@@ -1,12 +1,12 @@
 from django.db import models
 
 from accounts.models import Account, AccountUser
-from configurations.models import AlarmCode
+from configurations.models import AlarmCode, Device
 
 
 class RawEvent(models.Model):
     data = models.TextField()
-    device_name = models.CharField(max_length=30)
+    device = models.ForeignKey(Device, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
 
 

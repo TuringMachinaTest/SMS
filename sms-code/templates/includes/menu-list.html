@@ -76,7 +76,7 @@
     {% if perms.accounts.view_accounts %}
     <li class="nav-item {% if '/accounts-management/' in request.path %} menu-open {% endif %}">
       <a href="#" class="nav-link {% if '/accounts-management/' in request.path %} active {% endif %}">
-        <i class="nav-icon fas fa-copy"></i>
+        <i class="nav-icon fas fa-user"></i>
         <p>
           {% trans 'Accounts Management' %}
           <i class="fas fa-angle-left right"></i>
@@ -85,7 +85,7 @@
       <ul class="nav nav-treeview">
         <li class="nav-item">
           <a href="{% url 'accounts:city_list' %}" class="nav-link {% if '/cities/' in request.path %}active{% endif %}">
-            <i class="nav-icon fas fa-globe"></i>
+            <i class="nav-icon far fa-circle"></i>
             <p>
               {% trans 'Cities' %}
             </p>
@@ -95,7 +95,7 @@
       <ul class="nav nav-treeview">
         <li class="nav-item">
           <a href="{% url 'accounts:installationcompany_list' %}" class="nav-link {% if '/installation_company/' in request.path %}active{% endif %}">
-            <i class="nav-icon fas fa-building"></i>
+            <i class="nav-icon far fa-circle"></i>
             <p>
               {% trans 'Installation Companies' %}
             </p>
@@ -106,7 +106,7 @@
       <ul class="nav nav-treeview">
         <li class="nav-item">
           <a href="{% url 'accounts:account_list' %}" class="nav-link {% if '/accounts/' in request.path %}active{% endif %}">
-            <i class="nav-icon fas fa-user"></i>
+            <i class="nav-icon far fa-circle"></i>
             <p>
               {% trans 'Accounts' %}
             </p>
@@ -116,6 +116,69 @@
     </li>
     {% endif %}
 
+    {% if perms.accounts.view_accounts %}
+    <li class="nav-item {% if '/configurations/' in request.path %} menu-open {% endif %}">
+      <a href="#" class="nav-link {% if '/configurations/' in request.path %} active {% endif %}">
+        <i class="nav-icon fas fa-bell"></i>
+        <p>
+          {% trans 'Configurations' %}
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{% url 'configurations:device_list' %}" class="nav-link {% if '/devices/' in request.path %}active{% endif %}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              {% trans 'Devices' %}
+            </p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{% url 'configurations:decryption_configurations' %}" class="nav-link {% if '/raw_events/' in request.path %}active{% endif %}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              {% trans 'Raw Events' %}
+            </p>
+          </a>
+        </li>
+      </ul>
+    </li>
+    {% endif %}
+
+    {% if perms.accounts.view_accounts %}
+    <li class="nav-item {% if '/events-management/' in request.path %} menu-open {% endif %}">
+      <a href="#" class="nav-link {% if '/events-management/' in request.path %} active {% endif %}">
+        <i class="nav-icon fas fa-bell"></i>
+        <p>
+          {% trans 'Events Management' %}
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{% url 'events:rawevent_list' %}" class="nav-link {% if '/decrypted_events/' in request.path %}active{% endif %}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              {% trans 'Events' %}
+            </p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{% url 'events:rawevent_list' %}" class="nav-link {% if '/raw_events/' in request.path %}active{% endif %}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              {% trans 'Raw Events' %}
+            </p>
+          </a>
+        </li>
+      </ul>
+    </li>
+    {% endif %}
 
     {% if request.user.is_authenticated %}
     <li class="nav-item">
