@@ -108,7 +108,7 @@
           <a href="{% url 'accounts:account_list' %}" class="nav-link {% if '/accounts/' in request.path %}active{% endif %}">
             <i class="nav-icon fas fa-user"></i>
             <p>
-              Accounts
+              {% trans 'Accounts' %}
             </p>
           </a>
         </li>

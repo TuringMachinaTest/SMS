@@ -1,5 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %} {{ view_name }} {% endblock title %}
 
@@ -16,7 +17,7 @@
           <form method="post">
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title"><h3>
+                <h3 class="card-title">{% trans "Card" %}<h3>
               </div>
   
 
