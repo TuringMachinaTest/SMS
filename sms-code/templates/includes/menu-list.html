@@ -78,7 +78,7 @@
       <a href="#" class="nav-link {% if '/accounts-management/' in request.path %} active {% endif %}">
         <i class="nav-icon fas fa-copy"></i>
         <p>
-          Accounts Management
+          {% trans 'Accounts Management' %}
           <i class="fas fa-angle-left right"></i>
         </p>
       </a>
@@ -87,7 +87,7 @@
           <a href="{% url 'accounts:city_list' %}" class="nav-link {% if '/cities/' in request.path %}active{% endif %}">
             <i class="nav-icon fas fa-globe"></i>
             <p>
-              Cities
+              {% trans 'Cities' %}
             </p>
           </a>
         </li>
@@ -97,7 +97,7 @@
           <a href="{% url 'accounts:installationcompany_list' %}" class="nav-link {% if '/installation_company/' in request.path %}active{% endif %}">
             <i class="nav-icon fas fa-building"></i>
             <p>
-              Installation Companies
+              {% trans 'Installation Companies' %}
             </p>
           </a>
         </li>

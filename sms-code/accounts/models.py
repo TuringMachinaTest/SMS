@@ -11,6 +11,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 from phonenumber_field import modelfields
 
+from django.utils.translation import gettext as _
 # Create your models here.
 
 class City(models.Model):
@@ -23,10 +24,13 @@ class City(models.Model):
     
     
 class InstallationCompany(models.Model):
-    name = models.CharField(max_length=30, blank=True)
-    phone_number1 = modelfields.PhoneNumberField(region="SY", max_length=20, blank=True)
-    phone_number2 = modelfields.PhoneNumberField(region="SY", max_length=20, blank=True)
-
+    
+    class Meta:
+        verbose_name = _("Installation Companies")
+    
+    name = models.CharField(max_length=30, blank=True, verbose_name = _("Company Name"))
+    phone_number1 = modelfields.PhoneNumberField(region="SY", max_length=20, blank=True, verbose_name=_("Phone Number 1"))
+    phone_number2 = modelfields.PhoneNumberField(region="SY", max_length=20, blank=True, verbose_name=_("Phone Number 2"))
     def __str__(self):
         return self.name 
     
