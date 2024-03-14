@@ -63,12 +63,16 @@ INSTALLED_APPS = [
     "bootstrap4",
     "phonenumber_field",
     'django_select2',
-    
+    'view_breadcrumbs',
     'rest_framework',
     'report_builder',
     
-    "home",
-    "accounts",
+    'django_celery_beat',
+    
+    'home',
+    'accounts',
+    'configurations',
+    'events',
 
 ]
 
@@ -137,6 +141,19 @@ else:
         }
     }
 
+
+# CACHE
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -190,11 +207,23 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
+# CRISPY FORMS STUFF
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
+# SELECT2 STUFF
 SELECT2_CSS = [
         'css/select2/select2.min.css',
         'css/select2/select2-bootstrap4.min.css'
     ]
+
+# CELERY STUFF
+CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Replace with your Redis URL
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'  # Replace with your Redis URL
+
+CELERY_TIMEZONE = "Asia/Damascus"
+CELERY_TASK_TRACK_STARTED = True
+
+# Bread Crumbs
+BREADCRUMBS_HOME_LABEL = "Home"
+BREADCRUMBS_TEMPLATE = "view_breadcrumbs/bootstrap4.html"

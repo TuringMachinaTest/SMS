@@ -9,7 +9,11 @@ class AccountsTable(tables.Table):
         template_name = "django_tables2/bootstrap4-responsive.html"
         fields = ("id", "name" )
 
-    edit = tables.LinkColumn('account_update',text="View / Edit", args=[tables.A('id')], attrs={
+    view = tables.LinkColumn('account_details',text="View", args=[tables.A('id')], attrs={
+            'a': {'class': 'btn btn-info'},
+    })
+    
+    edit = tables.LinkColumn('account_update',text="Edit", args=[tables.A('id')], attrs={
             'a': {'class': 'btn btn-warning'},
     })
     
@@ -23,8 +27,12 @@ class InstallationCompanyTable(tables.Table):
         model = InstallationCompany
         template_name = "django_tables2/bootstrap4-responsive.html"
         fields = ("name", "phone_number1", "phone_number2")
-
-    edit = tables.LinkColumn('installation_company_update',text="View / Edit", args=[tables.A('id')], attrs={
+        
+    view = tables.LinkColumn('installation_company_details',text="View", args=[tables.A('id')], attrs={
+            'a': {'class': 'btn btn-info'},
+    })
+    
+    edit = tables.LinkColumn('installation_company_update',text="Edit", args=[tables.A('id')], attrs={
             'a': {'class': 'btn btn-warning'},
     })
     
@@ -38,8 +46,12 @@ class CityTable(tables.Table):
         model = City
         template_name = "django_tables2/bootstrap4-responsive.html"
         fields = ("name",)
-
-    edit = tables.LinkColumn('city_update',text="View / Edit", args=[tables.A('id')], attrs={
+        
+    view = tables.LinkColumn('city_details',text="View", args=[tables.A('id')], attrs={
+            'a': {'class': 'btn btn-info'},
+    })
+    
+    edit = tables.LinkColumn('city_update',text="Edit", args=[tables.A('id')], attrs={
             'a': {'class': 'btn btn-warning'},
     })
     

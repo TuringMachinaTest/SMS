@@ -1,0 +1,49 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %} {{ view_name }} {% endblock title %}
+
+{% block bodyclass %} hold-transition sidebar-mini layout-fixed {% endblock bodyclass %}
+
+{% block content %}
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <!-- general form elements disabled -->
+          <form method="post">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">{{ view_name }}</h3>
+              </div>
+  
+
+              <!-- /.card-header -->
+              <div class="card-body">
+
+                    {% csrf_token %}
+                    {% load crispy_forms_tags %}
+                    {% crispy form %}
+          
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}
+
+{% block extra_scripts %}
+{% if details %}
+
+<script>
+  // TODO: Fix Inline Table Permission Delete Issue
+  var inputs = document.getElementsByClassName('select-all'); for (var i = inputs.length, n = 0; n < i; n++) { inputs[n].disabled = !inputs[n].disabled; }
+  var inputs = document.getElementsByClassName('select-row'); for (var i = inputs.length, n = 0; n < i; n++) { inputs[n].disabled = !inputs[n].disabled; }  
+</script>
+{% endif %}
+{% endblock extra_scripts %}

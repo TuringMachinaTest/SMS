@@ -73,36 +73,46 @@
     {% endfor %}
     {% endif %}
 
-    {% if request.user.is_authenticated %}
-    <li class="nav-item">
-      <a href="{% url 'city_list' %}" class="nav-link {% if '/cities/' in request.path %}active{% endif %}">
-        <i class="nav-icon fas fa-globe"></i>
-        <p>
-          Cities
-        </p>
-      </a>
-    </li>
-    {% endif %}
-
-    {% if request.user.is_authenticated %}
-    <li class="nav-item">
-      <a href="{% url 'installation_company_list' %}" class="nav-link {% if '/installation_company/' in request.path %}active{% endif %}">
-        <i class="nav-icon fas fa-building"></i>
-        <p>
-          Installation Companies
-        </p>
-      </a>
-    </li>
-    {% endif %}
-
-    {% if request.user.is_authenticated %}
-    <li class="nav-item">
-      <a href="{% url 'account_list' %}" class="nav-link {% if '/accounts/' in request.path %}active{% endif %}">
-        <i class="nav-icon fas fa-user"></i>
+    {% if perms.accounts.view_accounts %}
+    <li class="nav-item {% if '/accounts-management/' in request.path %} menu-open {% endif %}">
+      <a href="#" class="nav-link {% if '/accounts-management/' in request.path %} active {% endif %}">
+        <i class="nav-icon fas fa-copy"></i>
         <p>
           Accounts Management
+          <i class="fas fa-angle-left right"></i>
         </p>
       </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{% url 'city_list' %}" class="nav-link {% if '/cities/' in request.path %}active{% endif %}">
+            <i class="nav-icon fas fa-globe"></i>
+            <p>
+              Cities
+            </p>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{% url 'installation_company_list' %}" class="nav-link {% if '/installation_company/' in request.path %}active{% endif %}">
+            <i class="nav-icon fas fa-building"></i>
+            <p>
+              Installation Companies
+            </p>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{% url 'account_list' %}" class="nav-link {% if '/accounts/' in request.path %}active{% endif %}">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              Accounts
+            </p>
+          </a>
+        </li>
+      </ul>
     </li>
     {% endif %}
 

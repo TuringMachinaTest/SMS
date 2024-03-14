@@ -37,9 +37,29 @@
     {% block sidebar %}
       {% include 'includes/sidebar.html' %}
     {% endblock sidebar %}
-    
-    {% block content %}{% endblock content %}
+<!-- Content Wrapper. Contains page content -->
 
+
+        <section class="content-wrapper">
+          <!-- Content Header (Page header) -->
+          <section class="content-header">
+            <div class="container-fluid">
+              <div class="row mb-2">
+                <div class="col-sm-6">
+                  <h1>{{ view_name }}</h1>
+                </div>
+                <div class="col-sm-6">
+                  {% load view_breadcrumbs %}
+
+                  {% block breadcrumbs %}
+                      {% render_breadcrumbs "view_breadcrumbs/bootstrap5.html" %} {# Optionally provide a custom template e.g {% render_breadcrumbs "view_breadcrumbs/bootstrap5.html" %} #}
+                  {% endblock %}
+                </div>
+              </div>
+            </div><!-- /.container-fluid -->
+          </section>
+        {% block content %}{% endblock content %}
+        </section>
     {% block footer %}
       {% include 'includes/footer.html' %}
     {% endblock footer %}
@@ -55,8 +75,7 @@
     {% endblock control_sidebar %}
 
   </div>
-  
-  
+
   {% include 'includes/scripts.html' %}
   {% block extra_scripts %}{% endblock extra_scripts %}
 

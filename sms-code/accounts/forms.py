@@ -22,13 +22,12 @@ class CityForm(forms.ModelForm):
         model = City
         fields = '__all__'
         
-    def __init__(self, has_permissions=False, *args, **kwargs):
+    def __init__(self, details=False, *args, **kwargs):
         super().__init__(*args, **kwargs)        
         
         self.helper = FormHelper()
 
-
-        if has_permissions:
+        if not details:
             self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
         else:            
             for field in self.fields:
@@ -41,13 +40,12 @@ class InstallationCompanyForm(forms.ModelForm):
         model = InstallationCompany
         fields = '__all__'
     
-    def __init__(self, has_permissions=False, *args, **kwargs):
+    def __init__(self, details=False, *args, **kwargs):
         super().__init__(*args, **kwargs)        
         
         self.helper = FormHelper()
 
-
-        if has_permissions:
+        if not details:
             self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
         else:            
             for field in self.fields:
@@ -78,7 +76,7 @@ class AccountForm(forms.ModelForm):
         model = Account
         fields = '__all__'
         
-    def __init__(self, has_permissions=False, *args, **kwargs):
+    def __init__(self, details=False, *args, **kwargs):
         super().__init__(*args, **kwargs)
             
         self.helper = FormHelper()
@@ -187,7 +185,7 @@ class AccountForm(forms.ModelForm):
         )
         
         # Disable submit button for non-admin users
-        if has_permissions:
+        if not details:
             self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
         else:            
             for field in self.fields:
@@ -221,9 +219,9 @@ class AccountUserForm(forms.ModelForm):
         model = AccountUser
         fields = '__all__'
         
-    def __init__(self, has_permissions = False, account_id = -1,  *args, **kwargs):
+    def __init__(self, details = False, account_id = -1,  *args, **kwargs):
         super().__init__(*args, **kwargs)
-            
+        
         self.helper = ModalEditFormHelper()
         self.helper.layout = ModalEditLayout(
                 Fieldset("Information",
@@ -276,19 +274,15 @@ class AccountUserForm(forms.ModelForm):
         self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id))
         
         # Disable submit button for non-admin users
-        if has_permissions:
-            self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
-        else:           
+        if not details:
             for field in self.fields:
                 self.fields[field].disabled = True
                 
-                
+    
 class AccountUserInlineFormSet(InlineFormSetFactory):
     model = AccountUser
     form_class = AccountUserForm
     factory_kwargs = {"extra": 0}
-    
-    #formset_kwargs = {'form_kwargs': { 'account_id': -1 }}
     
     def get_formset_kwargs(self):
         kwargs = super(AccountUserInlineFormSet, self).get_formset_kwargs()
@@ -300,6 +294,6 @@ class AccountUserInlineFormSet(InlineFormSetFactory):
         kwargs['form_kwargs'] = {}
         if kwargs['instance']:
             kwargs['form_kwargs']['account_id'] = kwargs['instance'].id 
-        kwargs['form_kwargs']['has_permissions'] = True
+        kwargs['form_kwargs']['details'] = True
                 
         return kwargs

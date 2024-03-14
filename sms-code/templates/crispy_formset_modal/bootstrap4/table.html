@@ -69,7 +69,9 @@
         </table>
     </div>
     <div class="d-flex mb-3">
-        <button type="button" class="btn btn-primary btn-sm {% if not perms.accounts.add_accountuser %} disabled {% endif %}" {% if perms.accounts.add_accountuser %} data-formset-add {% endif %}>{% trans "Add" %}</button>
-        <button type="button" class="btn btn-danger btn-sm delete-selected ml-1 {% if not perms.accounts.add_accountuser %} disabled {% endif %}" hidden>{% trans "Delete" %}</button>
+        <button type="button" class="btn btn-primary btn-sm" {% if details %} hidden {% endif %} data-formset-add >{% trans "Add" %}</button>
+        <button type="button" class="btn btn-danger btn-sm delete-selected ml-1" hidden>{% trans "Delete" %}</button>
     </div>
 </div>
+
+
