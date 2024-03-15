@@ -15,10 +15,17 @@ class AlarmCode(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['account', 'code',], name='configurations.alarmcode.unique_id')
         ]
-        
+    
+    TYPES= (
+        (0, "Zone"),
+        (1, "User")
+    )
+    
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     code = models.CharField(max_length=4)
     name = models.CharField(max_length=30)
+    #0 Zone, 1 User
+    type = models.IntegerField(default=0, choices=TYPES)
     
     def __str__(self):
             return self.name 

@@ -83,13 +83,18 @@ def dycrypt_events():
             event.receiveer_no = receiveer_no
             event.line_no = line_no
             
-            event.alarm_code = AlarmCode.objects.filter(code=alarm_code).first()
             event.account = Account.objects.filter(pk=account_no).first()
-            
+            event.alarm_code = AlarmCode.objects.filter(code=alarm_code, account=event.account.id).first()
+
             event.partition  = partition
             
             event.success = True
-            #event.user = AlarmCode.objects.get(keypad_code=zone)
+
+            if(event.alarm_code.type == 0):
+                event.zone = AlarmCode.objects.filter(code=zone, account=event.account.id).first()
+            elif(event.alarm_code.type == 1):
+                event.user = AlarmCode.objects.get(keypad_code=zone, account=event.account.id)
+
 
             event.save()
         

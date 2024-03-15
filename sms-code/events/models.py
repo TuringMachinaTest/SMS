@@ -1,6 +1,6 @@
 from django.db import models
 
-from accounts.models import Account, AccountUser
+from accounts.models import Account, AccountUser, Zone
 from configurations.models import AlarmCode, Device
 
 class RawEvent(models.Model):
@@ -23,13 +23,18 @@ class DecryptedEvent(models.Model):
     receiveer_no = models.IntegerField()
     line_no = models.IntegerField()
     
-    alarm_code = models.ForeignKey(AlarmCode, on_delete=models.SET_NULL, null=True)
-    account = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True)
+    alarm_code = models.ForeignKey(AlarmCode, on_delete=models.PROTECT, null=True)
+    account = models.ForeignKey(Account, on_delete=models.PROTECT, null=True)
     partition = models.IntegerField(default=0)
-    user = models.ForeignKey(AccountUser, on_delete=models.SET_NULL, null=True)
+    zone = models.ForeignKey(Zone, on_delete=models.PROTECT, null=True)
+    user = models.ForeignKey(AccountUser, on_delete=models.PROTECT, null=True)
     
     success = models.BooleanField(default=False)
     
+    follow = models.BooleanField(default=False)
+    pending = models.BooleanField(default=False)
+    
+    commit = models.BooleanField(default=False)
     custom = models.BooleanField(default=False)
    
     created_at = models.DateTimeField(auto_now_add=True)

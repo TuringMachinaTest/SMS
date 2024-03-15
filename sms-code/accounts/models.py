@@ -144,3 +144,14 @@ class AccountUser(models.Model):
     
     def __str__(self):
         return self.name 
+    
+    
+class Zone(models.Model):
+    
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+
+    name = models.CharField(max_length=30)
+    code = models.IntegerField()
+        
+    def __str__(self):
+        return self.name 
