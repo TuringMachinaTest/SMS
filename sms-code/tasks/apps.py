@@ -8,3 +8,5 @@ class TasksConfig(AppConfig):
     def ready(self):
         from . import scheduler
         scheduler.start()
+    
+    

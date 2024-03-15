@@ -35,3 +35,6 @@ class ListRawEvents(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, S
         context['view_name'] = _("Raw Events")
 
         return context   
+    
+    
+    

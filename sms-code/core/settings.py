@@ -46,6 +46,10 @@ if RENDER_EXTERNAL_HOSTNAME:
 # Application definition
 
 INSTALLED_APPS = [
+    
+    'daphne',
+    'channels',
+    
     'admin_adminlte.apps.AdminAdminlteConfig',
     "django.contrib.admin",
     "django.contrib.auth",
@@ -227,3 +231,15 @@ SELECT2_CSS = [
 # Bread Crumbs
 BREADCRUMBS_HOME_LABEL = "Home"
 BREADCRUMBS_TEMPLATE = "view_breadcrumbs/bootstrap4.html"
+
+# CHANNELS STUFF
+ASGI_APPLICATION = 'core.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}

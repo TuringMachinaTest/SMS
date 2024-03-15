@@ -145,6 +145,8 @@ class ListInstallationCompanies(PermissionRequiredMixin, ListBreadcrumbMixin, Ex
     def get_context_data(self, **kwargs):
         context = super(ListInstallationCompanies, self).get_context_data(**kwargs)
         
+        context['add_url'] = reverse_lazy('accounts:installationcompany_create')
+        context['export_url'] = reverse_lazy('accounts:installationcompany_list') + "?_export=csv"
         context['view_name'] = _("Installation Companies")
 
         return context    
@@ -247,6 +249,8 @@ class ListCities(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, Sing
     def get_context_data(self, **kwargs):
         context = super(ListCities, self).get_context_data(**kwargs)
         
+        context['add_url'] = reverse_lazy('accounts:city_create')
+        context['export_url'] = reverse_lazy('accounts:city_list') + "?_export=csv"
         context['view_name'] = _("Cities")
 
         return context    

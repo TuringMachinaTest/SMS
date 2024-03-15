@@ -1,4 +1,4 @@
-def decrypt_event_mcidi(data):
+def decrypt_event_mcdi(data):
         
     data = data.split()
     
@@ -11,20 +11,20 @@ def decrypt_event_mcidi(data):
         account_no = CCCC = data[3]
         #Alarm Code
         alarm_code = TAAA = data[5]
-        #Zone
-        zone = GG = data[6]
-        #User
-        user = ZZZ = data[7]
+        #Partition
+        partition = GG = data[6]
+        #User/Zone
+        zone = ZZZ = data[7]
         
-        return receiveer_no, line_no, account_no, alarm_code, zone, user
+        return True, receiveer_no, line_no, account_no, alarm_code, partition, zone
 
     except:
-        pass
+        return False, None, None, None, None, None, None, 
     
     print(R, L, CCCC, TAAA, GG, ZZZ)
     
 
-def decrypt_event_sg(data):
+def decrypt_event_surgard(data):
         
     data = data.split()
     
@@ -39,15 +39,15 @@ def decrypt_event_sg(data):
         account_no = CCCC = data[1][2:6]
         #Alarm Code
         alarm_code = TAAA = data[1][6:10]
-        #Zone
-        zone = GG = data[1][10:12]
-        #User
-        user = ZZZ = data[1][12:15]
+        #Partition
+        partition = GG = data[1][10:12]
+        #User/Zone
+        zone = ZZZ = data[1][12:15]
         
-        return protocole, receiveer_no, line_no, account_no, alarm_code, zone, user
+        return True, protocole, receiveer_no, line_no, account_no, alarm_code, partition, zone
 
     except:
-        pass
+        return False, None, None, None, None, None, None, None, 
     
     print(P, R, L, CCCC, TAAA, GG, ZZZ)
     
@@ -57,5 +57,5 @@ mask = "ORRLLL_18CCCCTAAAGGZZZ"
 data = "11:20  01/22  11 0516 18 E400 01 001"
 
 
-decrypt_event_mcidi("11:20  01/22  11 0516 18 E400 01 001")
-decrypt_event_sg("ORRLLL 18CCCCTAAAGGZZZ")
+decrypt_event_mcdi("11:20  01/22  11 0516 18 E400 01 001")
+decrypt_event_surgard("ORRLLL 18CCCCTAAAGGZZZ")

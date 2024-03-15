@@ -23,6 +23,8 @@ urlpatterns = [
     path('events-management/', include(('events.urls', 'events'), namespace="events")),
     path('configurations/', include(('configurations.urls', 'configurations'), namespace="configurations")),
 
+    path('monitoring/', include(('monitoring.urls', 'monitoring'), namespace="monitoring")),
+
     path("admin/", admin.site.urls),
     
     path("select2/", include("django_select2.urls")),

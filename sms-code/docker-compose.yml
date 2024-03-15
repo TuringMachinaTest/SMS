@@ -1,27 +1,14 @@
 version: '3.8'
 services:
-  appseed-app:
-    container_name: appseed_app
-    restart: always
-    build: .
-    networks:
-      - db_network
-      - web_network
-  nginx:
-    container_name: nginx
-    restart: always
-    image: "nginx:latest"
+  redis:
+    image: redis/redis-stack-server:7.2.0-v9
     ports:
-      - "5085:5085"
+      - 6379:6379
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
     volumes:
-      - ./nginx:/etc/nginx/conf.d
-    networks:
-      - web_network
-    depends_on: 
-      - appseed-app
-networks:
-  db_network:
-    driver: bridge
-  web_network:
-    driver: bridge
+      - redis_data:/data
+
+volumes:
+  redis_data:
  

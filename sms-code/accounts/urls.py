@@ -11,7 +11,7 @@ urlpatterns = [
 
     path('installation_company/list', ListInstallationCompanies.as_view(), name='installationcompany_list'),
     path('installation_company/details/<int:pk>', DetailsInstallationCompany.as_view(), name='installationcompany_detail'),
-    path('installation_company/create/', CreateInstallationCompany.as_view(), name='installation_companycreate'),
+    path('installation_company/create/', CreateInstallationCompany.as_view(), name='installationcompany_create'),
     path('installation_company/update/<int:pk>', UpdateeInstallationCompany.as_view(), name='installationcompany_update'),
     path('installation_company/view/<int:pk>', DeleteInstallationCompany.as_view(), name='installationcompany_delete'),
     

@@ -103,7 +103,7 @@ class Account(models.Model):
 class AccountUser(models.Model):
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['account', 'partition', 'name'], name='unique_id')
+            models.UniqueConstraint(fields=['account', 'partition', 'name'], name='accounts.accountuser.unique_id')
         ]
 
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
