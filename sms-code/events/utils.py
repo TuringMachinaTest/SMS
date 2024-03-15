@@ -10,11 +10,14 @@ def decrypt_event_mcidi(data):
         #Account
         account_no = CCCC = data[3]
         #Alarm Code
-        alarm_clock = TAAA = data[5]
+        alarm_code = TAAA = data[5]
         #Zone
         zone = GG = data[6]
         #User
         user = ZZZ = data[7]
+        
+        return receiveer_no, line_no, account_no, alarm_code, zone, user
+
     except:
         pass
     
@@ -40,6 +43,9 @@ def decrypt_event_sg(data):
         zone = GG = data[1][10:12]
         #User
         user = ZZZ = data[1][12:15]
+        
+        return protocole, receiveer_no, line_no, account_no, alarm_code, zone, user
+
     except:
         pass
     

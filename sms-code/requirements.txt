@@ -20,7 +20,6 @@ django-tables2==2.7.0
 django-view-breadcrumbs==2.5.1
 djangorestframework==3.14.0
 et-xmlfile==1.1.0
-gunicorn==21.2.0
 openpyxl==3.1.2
 packaging==24.0
 phonenumbers==8.13.32
