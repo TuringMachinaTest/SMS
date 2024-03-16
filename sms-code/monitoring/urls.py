@@ -10,5 +10,5 @@ urlpatterns = [
 
     path('lobby', lobby),
     
-    path('', index)
+    path('operator', index, name='operator')
 ]
