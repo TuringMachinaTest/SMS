@@ -1,8 +1,9 @@
+import json
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from braces.views import PermissionRequiredMixin
-from django import forms
+from django.core import serializers
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
@@ -87,6 +88,7 @@ class DetailsAccount(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateWithI
         
         context['details'] = True
         context['view_name'] = _("Accounts Details")
+        #context['history'] = serializers.serialize("python", self.get_queryset().first().history.all())
 
         return context
     
@@ -256,7 +258,7 @@ class ListCities(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, Sing
         return context    
 
 
-class CreateCity(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithInlinesView):
+class CreateCity(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateView):
         
     permission_required = 'accounts.add_account'
     

@@ -1,18 +1,13 @@
 from django.db import models
-
-# Create your models here.
-
-
 from django.conf import settings
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.core.validators import MaxValueValidator, MinValueValidator 
 
 from phonenumber_field import modelfields
 
 from django.utils.translation import gettext as _
-# Create your models here.
+from simple_history.models import HistoricalRecords
+
 
 class City(models.Model):
     class Meta:
@@ -96,6 +91,8 @@ class Account(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     
+    history = HistoricalRecords()
+    
     def __str__(self):
         return self.name 
     
@@ -141,7 +138,7 @@ class AccountUser(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
-    
+        
     def __str__(self):
         return self.name 
     

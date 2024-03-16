@@ -9,6 +9,7 @@
 {% block content %}
   <section class="content">
     <div class="container-fluid">
+
       <div class="row">
         <!-- left column -->
         <div class="col-md-12">
@@ -33,18 +34,88 @@
           </form>
         </div>
       </div>
+
+      {% if history %}
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">DataTable with minimal features & hover style</h3>
+            </div>
+
+            <!-- /.card-header -->
+              <div class="card-body">
+
+                <table id="historyGrid" class="table table-bordered table-hover">
+                  <thead>
+                    {% for field in history.0.fields %}
+                    <th>
+                      {{ field }}
+                    </th>
+                    {% endfor %}
+                  </thead>
+                  {% for instance in history %}
+                  <tr>
+                    {% for fields, value in instance.fields.items %}
+                    <td>
+                      {{ value }}
+                    </td>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </table>
+              </div>
+
+          </div>
+        </div>
+      </div>
+      {%endif%}
+
     </div>
   </section>
 
 {% endblock content %}
 
 {% block extra_scripts %}
-{% if details %}
-
-<script>
-  // TODO: Fix Inline Table Permission Delete Issue
-  var inputs = document.getElementsByClassName('select-all'); for (var i = inputs.length, n = 0; n < i; n++) { inputs[n].disabled = !inputs[n].disabled; }
-  var inputs = document.getElementsByClassName('select-row'); for (var i = inputs.length, n = 0; n < i; n++) { inputs[n].disabled = !inputs[n].disabled; }  
-</script>
+{% if history %}
+<!-- DataTables  & Plugins -->
+<script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/jszip/jszip.min.js' %}"></script>
+<script src="{% static 'plugins/pdfmake/pdfmake.min.js' %}"></script>
+<script src="{% static 'plugins/pdfmake/vfs_fonts.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
 {% endif %}
+<!-- Page specific script -->
+<script>
+  $(function () {
+
+    {% if history %}
+    $("#historyGrid").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": true,  "scrollX": true 
+    });
+    {% endif %}
+
+  });
+
+  {% if details %}
+  // TODO: Fix Inline Table Permission Delete Issue
+  var inputs = document.getElementsByClassName('select-all');
+  for (var i = inputs.length, n = 0; n < i; n++) { inputs[n].disabled = !inputs[n].disabled; }
+  
+  var inputs = document.getElementsByClassName('select-row');
+  for (var i = inputs.length, n = 0; n < i; n++) { inputs[n].disabled = !inputs[n].disabled; }  
+  {% endif %}
+</script>
+
+
+
+
+
 {% endblock extra_scripts %}

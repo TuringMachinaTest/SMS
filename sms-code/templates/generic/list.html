@@ -1,5 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %} {{ view_name }} {% endblock title %}
 
@@ -15,8 +16,8 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <a type="button" class="btn btn-success" href="{{ add_url }}">Add</a>
-              <a type="button" class="btn btn-success float-sm-right" href="{{ export_url }}">Export</a>
+              {% if add_url %}<a type="button" class="btn btn-success" href="{{ add_url }}">{% trans "Add" %}</a>{% endif %}
+              <a type="button" class="btn btn-success float-sm-right" href="{{ export_url }}">{% trans "Export"%}</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">

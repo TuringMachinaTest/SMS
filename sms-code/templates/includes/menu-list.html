@@ -41,7 +41,7 @@
     {% if app_list %}
     {% for app in app_list %}
     {% if app.has_perms and not app.pinned %}
-    <li class="nav-item {% if 'dashboard' in parent %} menu-open {% endif %}">
+    <li class="nav-item {% if 'admin' in parent %} menu-open {% endif %}">
       <a class="nav-link {% if app_label != app.label and app.url not in request.path|urlencode  %} collapsed{% endif %}"
         data-bs-toggle="collapse" data-bs-target="#submenu-{{ app.app_label }}" href="{{ app.url }}">
         <i class="nav-icon {{ app.icon }}"></i>
@@ -159,7 +159,7 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="{% url 'events:rawevent_list' %}" class="nav-link {% if '/decrypted_events/' in request.path %}active{% endif %}">
+          <a href="{% url 'events:decryptedevent_list' %}" class="nav-link {% if '/decrypted_events/' in request.path %}active{% endif %}">
             <i class="nav-icon far fa-circle"></i>
             <p>
               {% trans 'Events' %}

@@ -58,14 +58,16 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    "extra_views",
-    "crispy_forms",
-    "crispy_formset_modal",
-    "crispy_bootstrap4",
-    "django_tables2",
-    "django_filters",
-    "bootstrap4",
-    "phonenumber_field",
+    'simple_history',
+    
+    'extra_views',
+    'crispy_forms',
+    'crispy_formset_modal',
+    'crispy_bootstrap4',
+    'django_tables2',
+    'django_filters',
+    'bootstrap4',
+    'phonenumber_field',
     'django_select2',
     'view_breadcrumbs',
     'rest_framework',
@@ -90,6 +92,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "simple_history.middleware.HistoryRequestMiddleware",
 ]
 
 ROOT_URLCONF = "core.urls"
