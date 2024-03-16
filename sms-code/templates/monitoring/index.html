@@ -327,23 +327,38 @@
 
   let url = `ws://${window.location.host}/live/events/`
 
-  const chatSocket = new WebSocket(url)
+  const eventsSocket = new WebSocket(url)
 
-  chatSocket.onmessage = function(e){
+  eventsSocket.onmessage = function(e){
       let data = JSON.parse(e.data)
       console.log('Data:', data)
 
       if(data.type === 'raw_event'){
           let messages = document.getElementById('messages')
           rawEvents.push(data.message)
-          console.log(rawEvents)
           $('#rawEventsGrid').jsGrid("option", "data", rawEvents)
       }
       else if(data.type === 'uncommited_event'){
         let messages = document.getElementById('messages')
         uncommitedEvents.push(data.message)
-        console.log(rawEvents)
         $('#uncommitedEventsGrid').jsGrid("option", "data", uncommitedEvents)
+      }
+      else if(data.type === 'lock_event'){
+        let messages = document.getElementById('messages')
+        lockedEvents.push(data.message)
+        $('#lockedEventsGrid').jsGrid("option", "data", lockedEvents)
+
+        const index = uncommitedEvents.map(x => x.id).indexOf(data.message.id);
+        uncommitedEvents.splice(index, 1);
+        $('#uncommitedEventsGrid').jsGrid("option", "data", uncommitedEvents)
+      }
+      else if(data.type === 'remove_lock_event'){
+        let messages = document.getElementById('messages')
+
+        const index = lockedEvents.map(x => x.id).indexOf(data.message);
+        lockedEvents.splice(index, 1);
+
+        $('#lockedEventsGrid').jsGrid("option", "data", lockedEvents)
       }
   }
 </script>

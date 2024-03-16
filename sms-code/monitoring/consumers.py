@@ -34,3 +34,19 @@ class EventConsumer(WebsocketConsumer):
             'type':'uncommited_event',
             'message':message
         }))
+        
+    def send_lock_event(self, event):
+        message = event['message']
+
+        self.send(text_data=json.dumps({
+            'type':'lock_event',
+            'message':message
+        }))
+        
+    def remove_lock_event(self, event):
+        message = event['message']
+
+        self.send(text_data=json.dumps({
+            'type':'remove_lock_event',
+            'message':message
+        }))

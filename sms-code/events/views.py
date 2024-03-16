@@ -10,6 +10,7 @@ from braces.views import PermissionRequiredMixin
 from django.core import serializers
 
 from events.forms import DecryptedEventForm
+from events.serializers import DecryptedEventSerializer
 
 from .models import DecryptedEvent, RawEvent
 
@@ -18,8 +19,6 @@ from .tables import DecryptedEventTable, RawEventTable
 from .filter import DecryptedEventFilter, RawEventFilter
 
 from django.utils.translation import gettext as _
-
-
 class ListRawEvents(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, SingleTableMixin, FilterView):
     
     permission_required = 'accounts.view_account'

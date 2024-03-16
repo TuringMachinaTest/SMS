@@ -56,5 +56,5 @@ class DecryptedEvent(models.Model):
     def save(self, *args, **kwargs):
         if self.status != -1:
             self.locked_at = None
-            
+                        
         super().save(*args, **kwargs)
