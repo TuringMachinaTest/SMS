@@ -1,9 +1,11 @@
+import json
 from serial import Serial
 from django.core.cache import cache
 
 from accounts.models import Account
 from configurations.models import AlarmCode, Device
 from events.models import DecryptedEvent, RawEvent
+from events.serializers import DecryptedEventSerializer, RawEventSerializer
 from events.utils import decrypt_event_mcdi, decrypt_event_surgard
 
 from asgiref.sync import async_to_sync
@@ -65,7 +67,15 @@ def event_listener(device_no):
                 serial_port.write(b'\x06')
 
             #print(data.decode())
-
+            channel_layer = get_channel_layer()
+            async_to_sync(channel_layer.group_send)(
+                'events',
+                {
+                    'type':'send_raw_event',
+                    'message': RawEventSerializer(event).data
+                }
+            )
+        
 def dycrypt_events():
     
     for raw_event in RawEvent.objects.filter(decrypted=False):
@@ -95,6 +105,7 @@ def dycrypt_events():
             elif(event.alarm_code.type == 1):
                 event.user = AlarmCode.objects.get(keypad_code=zone, account=event.account.id)
 
+            event.created_at = raw_event.created_at
 
             event.save()
         
@@ -103,9 +114,9 @@ def dycrypt_events():
         
         channel_layer = get_channel_layer()
         async_to_sync(channel_layer.group_send)(
-            'test',
+            'events',
             {
-                'type':'chat_message',
-                'message':raw_event.data
+                'type':'send_uncommited_event',
+                'message': DecryptedEventSerializer(event).data
             }
         )

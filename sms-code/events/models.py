@@ -18,7 +18,15 @@ class RawEvent(models.Model):
 class DecryptedEvent(models.Model):
     class Meta:
         ordering = ('-created_at',)
-        
+    
+    STATUS_CHOICES = (
+        (-1,"locked"),
+        (0,"Not Saved"),
+        (1,"Saved"),
+        (2,"Pending"),
+        (3, "Follow")
+    )
+    
     raw_event = models.ForeignKey(RawEvent, on_delete=models.CASCADE)
     receiveer_no = models.IntegerField()
     line_no = models.IntegerField()
@@ -31,11 +39,9 @@ class DecryptedEvent(models.Model):
     
     success = models.BooleanField(default=False)
     
-    follow = models.BooleanField(default=False)
-    pending = models.BooleanField(default=False)
+    status = models.IntegerField(choices=STATUS_CHOICES, default=0)
     
-    commit = models.BooleanField(default=False)
     custom = models.BooleanField(default=False)
    
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField()
     

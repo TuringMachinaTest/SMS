@@ -3,9 +3,9 @@ from channels.generic.websocket import WebsocketConsumer
 from asgiref.sync import async_to_sync
 
 
-class ChatConsumer(WebsocketConsumer):
+class EventConsumer(WebsocketConsumer):
     def connect(self):
-        self.room_group_name = 'test'
+        self.room_group_name = 'events'
 
         async_to_sync(self.channel_layer.group_add)(
             self.room_group_name,
@@ -17,20 +17,20 @@ class ChatConsumer(WebsocketConsumer):
 
     def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        message = text_data_json['message']
 
-        async_to_sync(self.channel_layer.group_send)(
-            self.room_group_name,
-            {
-                'type':'chat_message',
-                'message':message
-            }
-        )
 
-    def chat_message(self, event):
+    def send_raw_event(self, event):
         message = event['message']
 
         self.send(text_data=json.dumps({
-            'type':'chat',
+            'type':'raw_event',
+            'message':message
+        }))
+        
+    def send_uncommited_event(self, event):
+        message = event['message']
+
+        self.send(text_data=json.dumps({
+            'type':'uncommited_event',
             'message':message
         }))

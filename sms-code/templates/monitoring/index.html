@@ -8,38 +8,185 @@
 {% endblock extrastyle %}
 {% block bodyclass %} hold-transition sidebar-mini {% endblock bodyclass %}
 {% block content %}
-  <!-- Content Wrapper. Contains page content -->
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>jsGrid</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">jsGrid</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">jsGrid</h3>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-info">
+            <div class="inner">
+              <h3>150</h3>
+
+              <p>New Orders</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
         </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-          <div id="jsGrid1"></div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+              <p>Bounce Rate</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
         </div>
-        <!-- /.card-body -->
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-warning">
+            <div class="inner">
+              <h3>44</h3>
+
+              <p>User Registrations</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3>65</h3>
+
+              <p>Unique Visitors</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
       </div>
-      <!-- /.card -->
-    </section>
+      <!-- /.row -->
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-12 connectedSortable">
+
+          <!-- Uncommited Events -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="ion ion-clipboard mr-1"></i>
+                Uncommited Events
+              </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="card-body">
+                <div id="uncommitedEventsGrid"></div>
+              </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer clearfix">
+            </div>
+          </div>
+          <!-- /.card -->
+          <div class="row">
+            <!-- Follow Up Events -->
+            <div class="card col-lg-6">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="ion ion-clipboard mr-1"></i>
+                  Follow Up Events
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="card-body">
+                  <div id="followEventsGrid"></div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+              </div>
+            </div>
+            <!-- Pending Events -->
+            <div class="card col-lg-6">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="ion ion-clipboard mr-1"></i>
+                  Pending Events
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="card-body">
+                  <div id="pendingEventsGrid"></div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+              </div>
+            </div>
+          </div>
+            <!-- /.card -->
+          <div class="row">
+            <!-- Locked Events -->
+            <div class="card col-lg-6">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="ion ion-clipboard mr-1"></i>
+                  Locked Events
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="card-body">
+                  <div id="lockedEventsGrid"></div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+              </div>
+            </div>
+            <!-- /.card -->
+            <!-- Raw Events -->
+            <div class="card col-lg-6">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="ion ion-clipboard mr-1"></i>
+                  Raw Events
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="card-body">
+                  <div id="rawEventsGrid"></div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+              </div>
+            </div>
+            <!-- /.card -->
+          </di>
+        </section>
+        <!-- /.Left col -->
+
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+  </section>
     <!-- /.content -->
 {% endblock content %}
 {% block extra_scripts %}
@@ -47,32 +194,138 @@
 <script src="{% static 'plugins/jsgrid/jsgrid.min.js' %}"></script>
 <!-- Page specific script -->
 <script>
-  evvents = [
-    {
-      "Name": "Otto Clay",
-      "Age": 61,
-      "Country": 6,
-      "Address": "Ap #897-1459 Quam Avenue",
-      "Married": false
-    },
-  ];
+
+  let uncommitedEvents = {{ uncommited_events|safe }};
+  let followEvents = {{ follow_events|safe }};
+  let pendingEvents = {{ pending_events|safe }};
+  let lockedEvents = {{ locked_events|safe }};
+  let rawEvents = [];
 
   $(function () {
-    $("#jsGrid1").jsGrid({
-        width: "100%",
 
-        sorting: true,
-        paging: true,
+    $("#uncommitedEventsGrid").jsGrid({
+      width: "100%",
 
-        data: evvents,
+      sorting: true,
+      paging: true,
+      editing: true,
 
-        fields: [
-            { name: "Name", type: "text", width: 150 }
-        ]
+      data: uncommitedEvents,
+
+      onItemEditing: function(args) {
+        // cancel editing of the row of item with field 'ID' = 0
+        console.log(args.item.id)
+          args.cancel = true;
+        //  window.location.href = 'https://docs.google.com';
+
+      },
+
+      fields: [
+          { name: "id", type: "number", title: "ID", width:15 },
+          { name: "raw_event.data", type: "text", width: 150 },
+          { name: "device.name", type: "text", width: 150 },
+          { name: "device.com", type: "text", width: 150 },
+          { name: "created_at", type: "datetime", width: 150, sorting: true }
+      ]
     });
+
+    $("#followEventsGrid").jsGrid({
+      width: "100%",
+
+      sorting: true,
+      paging: true,
+      editing: true,
+
+      data: followEvents,
+
+      onItemEditing: function(args) {
+        // cancel editing of the row of item with field 'ID' = 0
+        console.log(args.item.id)
+          args.cancel = true;
+        //  window.location.href = 'https://docs.google.com';
+
+      },
+
+      fields: [
+          { name: "id", type: "number", title: "ID", width:15 },
+          { name: "raw_event.data", type: "text", width: 150 },
+          { name: "device.name", type: "text", width: 150 },
+          { name: "device.com", type: "text", width: 150 },
+          { name: "created_at", type: "datetime", width: 150, sorting: true }
+      ]
+    });
+    
+    $("#pendingEventsGrid").jsGrid({
+      width: "100%",
+
+      sorting: true,
+      paging: true,
+      editing: true,
+
+      data: pendingEvents,
+
+      onItemEditing: function(args) {
+        // cancel editing of the row of item with field 'ID' = 0
+        console.log(args.item.id)
+          args.cancel = true;
+        //  window.location.href = 'https://docs.google.com';
+
+      },
+
+      fields: [
+          { name: "id", type: "number", title: "ID", width:15 },
+          { name: "raw_event.data", type: "text", width: 150 },
+          { name: "device.name", type: "text", width: 150 },
+          { name: "device.com", type: "text", width: 150 },
+          { name: "created_at", type: "datetime", width: 150, sorting: true }
+      ]
+    });
+    
+    $("#lockedEventsGrid").jsGrid({
+      width: "100%",
+
+      sorting: true,
+      paging: true,
+      editing: true,
+
+      data: lockedEvents,
+
+      onItemEditing: function(args) {
+        // cancel editing of the row of item with field 'ID' = 0
+        console.log(args.item.id)
+          args.cancel = true;
+        //  window.location.href = 'https://docs.google.com';
+
+      },
+
+      fields: [
+          { name: "id", type: "number", title: "ID", width:15 },
+          { name: "raw_event.data", type: "text", width: 150 },
+          { name: "device.name", type: "text", width: 150 },
+          { name: "device.com", type: "text", width: 150 },
+          { name: "created_at", type: "datetime", width: 150, sorting: true }
+      ]
+    });
+
+    $("#rawEventsGrid").jsGrid({
+      width: "100%",
+
+      sorting: true,
+      paging: true,
+
+      data: rawEvents,
+
+      fields: [
+          { name: "data", type: "text", width: 150 },
+          { name: "device.name", type: "text", width: 150 },
+          { name: "device.com", type: "text", width: 150 },
+          { name: "created_at", type: "datetime", width: 150 }
+      ]
+    });
+
   });
 
-  let url = `ws://${window.location.host}/ws/socket-server/`
+  let url = `ws://${window.location.host}/live/events/`
 
   const chatSocket = new WebSocket(url)
 
@@ -80,10 +333,17 @@
       let data = JSON.parse(e.data)
       console.log('Data:', data)
 
-      if(data.type === 'chat'){
+      if(data.type === 'raw_event'){
           let messages = document.getElementById('messages')
-          evvents.push({"Name": data.message})
-          jQuery('#jsGrid1').jsGrid("option", "data", evvents)
+          rawEvents.push(data.message)
+          console.log(rawEvents)
+          $('#rawEventsGrid').jsGrid("option", "data", rawEvents)
+      }
+      else if(data.type === 'uncommited_event'){
+        let messages = document.getElementById('messages')
+        uncommitedEvents.push(data.message)
+        console.log(rawEvents)
+        $('#uncommitedEventsGrid').jsGrid("option", "data", uncommitedEvents)
       }
   }
 </script>
