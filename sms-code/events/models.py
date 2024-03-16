@@ -6,7 +6,7 @@ from simple_history.models import HistoricalRecords
 
 class RawEvent(models.Model):
     class Meta:
-        ordering = ('-created_at',)
+        ordering = ('-id',)
     
     data = models.TextField()
     device = models.ForeignKey(Device, on_delete=models.PROTECT)
@@ -20,7 +20,7 @@ class RawEvent(models.Model):
 
 class DecryptedEvent(models.Model):
     class Meta:
-        ordering = ('-created_at',)
+        ordering = ('-id',)
     
     STATUS_CHOICES = (
         (-1,"locked"),
