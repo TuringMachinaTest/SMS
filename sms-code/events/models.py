@@ -4,6 +4,8 @@ from accounts.models import Account, AccountUser, Zone
 from configurations.models import AlarmCode, Device
 from simple_history.models import HistoricalRecords
 
+from django.conf import settings
+
 class RawEvent(models.Model):
     class Meta:
         ordering = ('-id',)
@@ -50,6 +52,7 @@ class DecryptedEvent(models.Model):
    
     created_at = models.DateTimeField()
     locked_at = models.DateTimeField(null=True, blank=True)
+    locked_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     
     history = HistoricalRecords()
 

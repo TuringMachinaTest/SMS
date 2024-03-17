@@ -120,20 +120,35 @@ class UpdateDecryptedEvent(PermissionRequiredMixin, UpdateBreadcrumbMixin, Updat
     form_class = DecryptedEventForm
     
     template_name = 'generic/form.html'
+    
     success_url = reverse_lazy('monitoring:operator')
-
+    
+    def get_form_kwargs(self):
+        # Get the default form kwargs
+        kwargs = super().get_form_kwargs()
+        
+        instance = self.get_queryset().first()
+        if instance.status == -1 and (instance.locked_by == None or instance.locked_by != self.request.user.id) and not self.request.user.is_superuser:
+            kwargs['details'] = True        
+        # Add any additional parameters you want to pass to the form
+        
+        return kwargs
+    
     def get_context_data(self, **kwargs):
         context = super(UpdateDecryptedEvent, self).get_context_data(**kwargs)
         
         instance = self.get_queryset().first()
-        instance.status = -1
-        instance.locked_at = datetime.now()
-        instance.save()
-        
+        if instance.status != -1:
+            instance.status = -1
+            instance.locked_at = datetime.now()
+            instance.locked_by = self.request.user
+            instance.save()
+        elif instance.locked_by == None or instance.locked_by != self.request.user.id:
+            context['details'] = True
+
         context['view_name'] = _("Update Event")
         context['history'] = serializers.serialize("python", instance.history.all())
         self.success_url = self.request.META.get('HTTP_REFERER')
-
 
         return context
     
