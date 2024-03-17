@@ -100,7 +100,7 @@ class Account(models.Model):
 class AccountUser(models.Model):
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['account', 'partition', 'name'], name='accounts.accountuser.unique_id')
+            models.UniqueConstraint(fields=['account', 'partition', 'code'], name='accounts.accountuser.unique_id')
         ]
 
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
@@ -108,6 +108,7 @@ class AccountUser(models.Model):
 
     # Information
     name = models.CharField(max_length=40)
+    code = models.IntegerField()
 
     in_out_codes = models.CharField(max_length=20, blank=True)
     password = models.CharField(max_length=15, blank=True)
@@ -144,8 +145,13 @@ class AccountUser(models.Model):
     
     
 class Zone(models.Model):
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['account', 'partition', 'code'], name='accounts.zone.unique_id')
+        ]
     
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    partition = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])
 
     name = models.CharField(max_length=30)
     code = models.IntegerField()

@@ -95,7 +95,7 @@ def dycrypt_events():
             if(event.alarm_code.type == 0):
                 event.zone = AlarmCode.objects.filter(code=zone, account=event.account.id).first()
             elif(event.alarm_code.type == 1):
-                event.user = AlarmCode.objects.get(keypad_code=zone, account=event.account.id)
+                event.user = AlarmCode.objects.get(code=zone, account=event.account.id)
 
             event.created_at = raw_event.created_at
 

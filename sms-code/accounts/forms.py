@@ -2,7 +2,7 @@ from .utils import get_partitions_choices
 from django import forms
 from extra_views import InlineFormSetFactory
 
-from .models import Account, AccountUser, City, InstallationCompany
+from .models import Account, AccountUser, City, InstallationCompany, Zone
 
 from crispy_formset_modal.helper import ModalEditFormHelper
 from crispy_formset_modal.layout import ModalEditLayout
@@ -156,6 +156,14 @@ class AccountForm(forms.ModelForm):
                 
                 ),
                 
+                Tab("Zones",
+                    ModalEditFormsetLayout(
+                        "ZoneInlineFormSet",
+                        list_display=["partition", "name", "code", ],
+                    ),
+
+                ),
+                
                 Tab("Users",
                     ModalEditFormsetLayout(
                         "AccountUserInlineFormSet",
@@ -226,7 +234,10 @@ class AccountUserForm(forms.ModelForm):
         self.helper.layout = ModalEditLayout(
                 Fieldset("Information",
                     Row(
-                        Column('partition', css_class="col-4"),
+                        Column('partition',),
+                    ),
+                    Row(
+                        Column('code', css_class="col-4"),
                         Column('name', css_class="col-8"),
                     ),
                     Row(
@@ -276,16 +287,64 @@ class AccountUserForm(forms.ModelForm):
         # Disable submit button for non-admin users
         if not details:
             for field in self.fields:
-                self.fields[field].disabled = True
-                
+                self.fields[field].disabled = True             
     
 class AccountUserInlineFormSet(InlineFormSetFactory):
+   
     model = AccountUser
     form_class = AccountUserForm
     factory_kwargs = {"extra": 0}
     
     def get_formset_kwargs(self):
         kwargs = super(AccountUserInlineFormSet, self).get_formset_kwargs()
+
+        #self.formset_kwargs = { 'form_kwargs' : { 'account_id' : kwargs['instance'].id}}
+        # Add any additional parameters you want to pass to the form
+        #print(kwargs)
+        
+        kwargs['form_kwargs'] = {}
+        if kwargs['instance']:
+            kwargs['form_kwargs']['account_id'] = kwargs['instance'].id 
+        kwargs['form_kwargs']['details'] = True
+                
+        return kwargs
+    
+
+class ZoneForm(forms.ModelForm):    
+    class Meta:
+        model = Zone
+        fields = '__all__' 
+    
+    def __init__(self, details = False, account_id = -1,  *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.helper = ModalEditFormHelper()
+        self.helper.layout = ModalEditLayout(
+            Row(
+                Column("partition")
+            ),
+            Row(
+                Column("code", css_class="col-4"),
+                Column("name", css_class="col-8"),
+            )
+        )
+        
+        self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id))
+        
+        # Disable submit button for non-admin users
+        if not details:
+            for field in self.fields:
+                self.fields[field].disabled = True             
+
+
+class ZoneInlineFormSet(InlineFormSetFactory):
+   
+    model = Zone
+    form_class = ZoneForm
+    factory_kwargs = {"extra": 0}
+    
+    def get_formset_kwargs(self):
+        kwargs = super(ZoneInlineFormSet, self).get_formset_kwargs()
 
         #self.formset_kwargs = { 'form_kwargs' : { 'account_id' : kwargs['instance'].id}}
         # Add any additional parameters you want to pass to the form
