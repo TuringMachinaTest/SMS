@@ -1,7 +1,9 @@
+from django.utils.translation import gettext as _
 from django.core.cache import cache
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save, pre_save, pre_delete
+from django.core.validators import RegexValidator
 
 from accounts.models import Account
 
@@ -22,7 +24,7 @@ class AlarmCode(models.Model):
     )
     
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    code = models.CharField(max_length=4)
+    code = models.CharField(max_length=4, validators=[RegexValidator(regex=r"^[ER](\d+)$", message=_('Code does not comply'),)],)
     name = models.CharField(max_length=30)
     #0 Zone, 1 User
     type = models.IntegerField(default=0, choices=TYPES)

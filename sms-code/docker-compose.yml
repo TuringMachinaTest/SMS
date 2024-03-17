@@ -9,6 +9,18 @@ services:
     volumes:
       - redis_data:/data
 
+  database:
+    image: 'postgres:latest'
+    ports:
+      - 5432:5432
+    volumes:
+      - pg-data:/var/lib/postgresql
+    environment:
+      POSTGRES_USER: username # The PostgreSQL user (useful to connect to the database)
+      POSTGRES_PASSWORD: password # The PostgreSQL password (useful to connect to the database)
+      POSTGRES_DB: test # The PostgreSQL default database (automatically created at first launch)
+
 volumes:
+  pg-data:
   redis_data:
  

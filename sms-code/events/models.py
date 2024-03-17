@@ -13,7 +13,8 @@ class RawEvent(models.Model):
     data = models.TextField()
     device = models.ForeignKey(Device, on_delete=models.PROTECT)
     
-    decrypted = models.BooleanField(default=False)
+    decrypted = models.BooleanField(default=False, db_index=True)
+    has_errors = models.BooleanField(default=False, db_index=True)
     
     created_at = models.DateTimeField(auto_now_add=True)
     
@@ -33,18 +34,20 @@ class DecryptedEvent(models.Model):
     )
     
     raw_event = models.ForeignKey(RawEvent, on_delete=models.CASCADE)
+    
+    protocole = models.IntegerField()
     receiveer_no = models.IntegerField()
     line_no = models.IntegerField()
     
     alarm_code = models.ForeignKey(AlarmCode, on_delete=models.PROTECT, null=True, blank=True)
-    account = models.ForeignKey(Account, on_delete=models.PROTECT, null=True, blank=True)
-    partition = models.IntegerField(default=0)
-    zone = models.ForeignKey(Zone, on_delete=models.PROTECT, null=True, blank=True)
-    user = models.ForeignKey(AccountUser, on_delete=models.PROTECT, null=True, blank=True)
+    account = models.ForeignKey(Account, on_delete=models.PROTECT, null=True, blank=True, db_index=True,)
+    partition = models.IntegerField(default=0, db_index=True)
+    zone = models.ForeignKey(Zone, on_delete=models.PROTECT, null=True, blank=True,db_index=True)
+    user = models.ForeignKey(AccountUser, on_delete=models.PROTECT, null=True, blank=True, db_index=True)
     
-    success = models.BooleanField(default=False)
+    success = models.BooleanField(default=False, db_index=True)
     
-    status = models.IntegerField(choices=STATUS_CHOICES, default=0)
+    status = models.IntegerField(choices=STATUS_CHOICES, default=0, db_index=True)
     
     custom = models.BooleanField(default=False)
    
@@ -52,7 +55,7 @@ class DecryptedEvent(models.Model):
    
     created_at = models.DateTimeField()
     locked_at = models.DateTimeField(null=True, blank=True)
-    locked_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
+    locked_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True, db_index=True)
     
     history = HistoricalRecords()
 

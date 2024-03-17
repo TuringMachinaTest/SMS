@@ -8,7 +8,12 @@ from monitoring.utisl import send_message
 
 @receiver(pre_save, sender=DecryptedEvent, dispatch_uid="update_event_status")
 def update_event_status(sender, instance, **kwargs):
-    old_instance = DecryptedEvent.objects.get(pk=instance.id)
+    
+    old_instance = DecryptedEvent.objects.filter(pk=instance.id).first()
+    
+    if old_instance == None:
+        return
+    
     if instance.status != old_instance.status:
         # Old Value
         if old_instance.status == -1:
