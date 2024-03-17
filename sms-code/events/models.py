@@ -6,9 +6,17 @@ from simple_history.models import HistoricalRecords
 
 from django.conf import settings
 
-class RawEvent(models.Model):
+from psqlextra.types import PostgresPartitioningMethod
+from psqlextra.models import PostgresPartitionedModel
+
+
+class RawEvent(PostgresPartitionedModel):
     class Meta:
         ordering = ('-id',)
+        
+    class PartitioningMeta:
+        method = PostgresPartitioningMethod.RANGE
+        key = ["created_at"]
     
     data = models.TextField()
     device = models.ForeignKey(Device, on_delete=models.PROTECT)
@@ -21,10 +29,13 @@ class RawEvent(models.Model):
     def __str__(self):
             return self.data 
 
-class DecryptedEvent(models.Model):
+class DecryptedEvent(PostgresPartitionedModel):
     class Meta:
         ordering = ('-id',)
-    
+    class PartitioningMeta:
+        method = PostgresPartitioningMethod.RANGE
+        key = ["created_at"]
+        
     STATUS_CHOICES = (
         (-1,"locked"),
         (0,"Not Saved"),
@@ -33,7 +44,7 @@ class DecryptedEvent(models.Model):
         (3, "Follow")
     )
     
-    raw_event = models.ForeignKey(RawEvent, on_delete=models.CASCADE)
+    raw_event = models.IntegerField()
     
     protocole = models.IntegerField()
     receiveer_no = models.IntegerField()

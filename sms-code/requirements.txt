@@ -23,6 +23,7 @@ django-crispy-formset-modal==0.6
 django-extra-views==0.14.0
 django-filter==24.1
 django-phonenumber-field==7.3.0
+django-postgres-extra==2.0.9rc10
 django-redis==5.4.0
 django-report-builder @ https://codeload.github.com/TuringMachinaTest/django-report-builder/zip/refs/heads/master#sha256=7ff7fe229dd20a0ff7bbf853f4ed52a2cfb427039be144daaf082f21c93a80e8
 django-select2==8.1.2
@@ -43,6 +44,8 @@ packaging==24.0
 phonenumbers==8.13.32
 phonenumberslite==8.13.32
 priority==1.3.0
+psycopg==3.1.18
+psycopg-binary==3.1.18
 pyasn1==0.5.1
 pyasn1-modules==0.3.0
 pycparser==2.21

@@ -57,7 +57,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
+    
+    "django.contrib.postgres",
+    'psqlextra',
+    
     'simple_history',
     
     'extra_views',
@@ -123,7 +126,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DB_ENGINE   = os.getenv('DB_ENGINE'   , "postgresql")
+DB_ENGINE   = os.getenv('DB_ENGINE'   , "psqlextra.backend")
 DB_USERNAME = os.getenv('DB_USERNAME' , "username")
 DB_PASS     = os.getenv('DB_PASS'     , "password")
 DB_HOST     = os.getenv('DB_HOST'     , "localhost")
@@ -133,7 +136,7 @@ DB_NAME     = os.getenv('DB_NAME'     , "test")
 if DB_ENGINE and DB_NAME and DB_USERNAME:
     DATABASES = { 
       'default': {
-        'ENGINE'  : 'django.db.backends.' + DB_ENGINE, 
+        'ENGINE'  : DB_ENGINE, 
         'NAME'    : DB_NAME,
         'USER'    : DB_USERNAME,
         'PASSWORD': DB_PASS,
@@ -246,3 +249,6 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+# PARTITIONING STUFF
+PSQLEXTRA_PARTITIONING_MANAGER = 'events.partitioning.manager'

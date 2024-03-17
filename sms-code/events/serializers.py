@@ -11,9 +11,7 @@ class RawEventSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class DecryptedEventSerializer(serializers.ModelSerializer):
-    raw_event = RawEventSerializer()
-    
+class DecryptedEventSerializer(serializers.ModelSerializer):    
     class Meta:
         model = DecryptedEvent
         fields = '__all__'

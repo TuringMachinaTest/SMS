@@ -80,7 +80,7 @@ def dycrypt_events():
             (success, protocole, receiveer_no, line_no, account_no, alarm_code, partition, zone) = decrypt_event_surgard(raw_event.data)
             
         event = DecryptedEvent()
-        event.raw_event = raw_event
+        event.raw_event = raw_event.id
         
         #success = success and receiveer_no is int and line_no is int and account_no is int and partition is int and zone is int
         
