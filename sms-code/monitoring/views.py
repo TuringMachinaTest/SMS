@@ -19,16 +19,16 @@ def lobby(request):
 
 def index(request):
     
-    uncommited_events = DecryptedEvent.objects.filter(status=0)
+    uncommited_events = DecryptedEvent.objects.filter(status=0).order_by('id')
     uncommited_events = DecryptedEventSerializer(uncommited_events, many=True).data
     
-    follow_events = DecryptedEvent.objects.filter(status=3)
+    follow_events = DecryptedEvent.objects.filter(status=3).order_by('id')
     follow_events = DecryptedEventSerializer(follow_events, many=True).data
     
-    pending_events = DecryptedEvent.objects.filter(status=2)
+    pending_events = DecryptedEvent.objects.filter(status=2).order_by('id')
     pending_events = DecryptedEventSerializer(pending_events, many=True).data
     
-    locked_events = DecryptedEvent.objects.filter(status=-1)
+    locked_events = DecryptedEvent.objects.filter(status=-1).order_by('id')
     locked_events = DecryptedEventSerializer(locked_events, many=True).data
     
     return render(request, 'monitoring/index.html', 

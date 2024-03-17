@@ -8,8 +8,7 @@ from events.models import DecryptedEvent, RawEvent
 from events.serializers import DecryptedEventSerializer, RawEventSerializer
 from events.utils import decrypt_event_mcdi, decrypt_event_surgard
 
-from asgiref.sync import async_to_sync
-from channels.layers import get_channel_layer
+from monitoring.utisl import send_message
 
 def event_listener(device_no):
     
@@ -67,15 +66,8 @@ def event_listener(device_no):
                 serial_port.write(b'\x06')
 
             #print(data.decode())
-            channel_layer = get_channel_layer()
-            async_to_sync(channel_layer.group_send)(
-                'events',
-                {
-                    'type':'send_raw_event',
-                    'message': RawEventSerializer(event).data
-                }
-            )
-        
+            send_message('events', 'send_raw_event', RawEventSerializer(event).data )
+
 def dycrypt_events():
     
     for raw_event in RawEvent.objects.filter(decrypted=False):
@@ -112,11 +104,4 @@ def dycrypt_events():
         raw_event.decrypted = True
         raw_event.save()
         
-        channel_layer = get_channel_layer()
-        async_to_sync(channel_layer.group_send)(
-            'events',
-            {
-                'type':'send_uncommited_event',
-                'message': DecryptedEventSerializer(event).data
-            }
-        )
+        send_message('events', 'send_uncommited_event', DecryptedEventSerializer(event).data )

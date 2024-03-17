@@ -120,7 +120,7 @@ class UpdateDecryptedEvent(PermissionRequiredMixin, UpdateBreadcrumbMixin, Updat
     form_class = DecryptedEventForm
     
     template_name = 'generic/form.html'
-    success_url = reverse_lazy('events:decryptedevent_list')
+    success_url = reverse_lazy('monitoring:operator')
 
     def get_context_data(self, **kwargs):
         context = super(UpdateDecryptedEvent, self).get_context_data(**kwargs)
@@ -132,6 +132,8 @@ class UpdateDecryptedEvent(PermissionRequiredMixin, UpdateBreadcrumbMixin, Updat
         
         context['view_name'] = _("Update Event")
         context['history'] = serializers.serialize("python", instance.history.all())
+        self.success_url = self.request.META.get('HTTP_REFERER')
+
 
         return context
     

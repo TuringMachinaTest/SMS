@@ -216,8 +216,7 @@
         // cancel editing of the row of item with field 'ID' = 0
         console.log(args.item.id)
           args.cancel = true;
-        //  window.location.href = 'https://docs.google.com';
-
+          window.location.href = `http://${window.location.host}/events-management/decrypted_events/update/${args.item.id}`
       },
 
       fields: [
@@ -242,9 +241,9 @@
         // cancel editing of the row of item with field 'ID' = 0
         console.log(args.item.id)
           args.cancel = true;
-        //  window.location.href = 'https://docs.google.com';
-
+          window.location.href = `http://${window.location.host}/events-management/decrypted_events/update/${args.item.id}`
       },
+
 
       fields: [
           { name: "id", type: "number", title: "ID", width:15 },
@@ -268,9 +267,9 @@
         // cancel editing of the row of item with field 'ID' = 0
         console.log(args.item.id)
           args.cancel = true;
-        //  window.location.href = 'https://docs.google.com';
-
+          window.location.href = `http://${window.location.host}/events-management/decrypted_events/update/${args.item.id}`
       },
+
 
       fields: [
           { name: "id", type: "number", title: "ID", width:15 },
@@ -294,9 +293,9 @@
         // cancel editing of the row of item with field 'ID' = 0
         console.log(args.item.id)
           args.cancel = true;
-        //  window.location.href = 'https://docs.google.com';
-
+          window.location.href = `http://${window.location.host}/events-management/decrypted_events/update/${args.item.id}`
       },
+
 
       fields: [
           { name: "id", type: "number", title: "ID", width:15 },
@@ -326,7 +325,6 @@
   });
 
   let url = `ws://${window.location.host}/live/events/`
-
   const eventsSocket = new WebSocket(url)
 
   eventsSocket.onmessage = function(e){
@@ -343,14 +341,15 @@
         uncommitedEvents.push(data.message)
         $('#uncommitedEventsGrid').jsGrid("option", "data", uncommitedEvents)
       }
+      else if (data.type == "remove_uncommited_event") {
+        const index = uncommitedEvents.map(x => x.id).indexOf(data.message);
+        uncommitedEvents.splice(index, 1);
+        $('#uncommitedEventsGrid').jsGrid("option", "data", uncommitedEvents)
+      }
       else if(data.type === 'lock_event'){
         let messages = document.getElementById('messages')
         lockedEvents.push(data.message)
         $('#lockedEventsGrid').jsGrid("option", "data", lockedEvents)
-
-        const index = uncommitedEvents.map(x => x.id).indexOf(data.message.id);
-        uncommitedEvents.splice(index, 1);
-        $('#uncommitedEventsGrid').jsGrid("option", "data", uncommitedEvents)
       }
       else if(data.type === 'remove_lock_event'){
         let messages = document.getElementById('messages')
@@ -359,6 +358,32 @@
         lockedEvents.splice(index, 1);
 
         $('#lockedEventsGrid').jsGrid("option", "data", lockedEvents)
+      }
+      else if(data.type === 'pending_event'){
+        let messages = document.getElementById('messages')
+        pendingEvents.push(data.message)
+        $('#pendingEventsGrid').jsGrid("option", "data", pendingEvents)
+      }
+      else if(data.type === 'remove_pending_event'){
+        let messages = document.getElementById('messages')
+
+        const index = pendingEvents.map(x => x.id).indexOf(data.message);
+        pendingEvents.splice(index, 1);
+
+        $('#pendingEventsGrid').jsGrid("option", "data", pendingEvents)
+      }
+      else if(data.type === 'follow_event'){
+        let messages = document.getElementById('messages')
+        followEvents.push(data.message)
+        $('#followEventsGrid').jsGrid("option", "data", followEvents)
+      }
+      else if(data.type === 'remove_follow_event'){
+        let messages = document.getElementById('messages')
+
+        const index = followEvents.map(x => x.id).indexOf(data.message);
+        followEvents.splice(index, 1);
+
+        $('#followEventsGrid').jsGrid("option", "data", followEvents)
       }
   }
 </script>
