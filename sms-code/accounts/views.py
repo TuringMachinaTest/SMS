@@ -14,6 +14,8 @@ from django_tables2.export.views import ExportMixin
 from extra_views import CreateWithInlinesView, InlineFormSetFactory, ModelFormSetView, UpdateWithInlinesView
 from view_breadcrumbs import DetailBreadcrumbMixin, ListBreadcrumbMixin, CreateBreadcrumbMixin, UpdateBreadcrumbMixin, DeleteBreadcrumbMixin
 
+from configurations.forms import AlarmCodeInlineFormSet
+
 from .filters import AccountFilter, CityFilter, GroupFilter, InstallationCompanyFilter
 
 from .tables import AccountsTable, CityTable, GroupTable, InstallationCompanyTable
@@ -51,7 +53,7 @@ class CreateAccount(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithIn
     
     model = Account
     form_class = AccountForm
-    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet]
+    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet]
     
     template_name = 'generic/form.html'
     success_url = reverse_lazy('accounts:account_list')

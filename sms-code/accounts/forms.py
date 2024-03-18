@@ -5,8 +5,7 @@ from extra_views import InlineFormSetFactory
 from .models import Account, AccountUser, City, Group, InstallationCompany, Zone
 
 from crispy_formset_modal.helper import ModalEditFormHelper
-from crispy_formset_modal.layout import ModalEditLayout
-from crispy_formset_modal.layout import ModalEditFormsetLayout
+from crispy_formset_modal.layout import ModalEditLayout, ModalEditFormsetLayout
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, Div, Row, Column
@@ -173,6 +172,14 @@ class AccountForm(forms.ModelForm):
                     ),
                 
                 ),
+                                
+                Tab("Alarm Codes",
+                    ModalEditFormsetLayout(
+                        "AlarmCodeInlineFormSet",
+                        list_display=["name", "code", ],
+                    ),
+                ),
+                
                 
                 Tab("Zones",
                     ModalEditFormsetLayout(

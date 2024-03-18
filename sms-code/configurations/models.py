@@ -4,6 +4,7 @@ from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save, pre_save, pre_delete
 from django.core.validators import RegexValidator
+from django.core.validators import MaxValueValidator, MinValueValidator 
 
 from accounts.models import Account
 
@@ -24,10 +25,15 @@ class AlarmCode(models.Model):
     )
     
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    code = models.CharField(max_length=4, validators=[RegexValidator(regex=r"^[ER](\d+)$", message=_('Code does not comply'),)],)
-    name = models.CharField(max_length=30)
+    code = models.CharField(max_length=16, validators=[RegexValidator(regex=r"^[ER](\d+)$", message=_('Code does not comply'),)],)
+    description = models.CharField(max_length=40)
+    
     #0 Zone, 1 User
     type = models.IntegerField(default=0, choices=TYPES)
+
+    # TYPE
+    priority = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(9)])
+    delay = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(99)])
     
     def __str__(self):
             return self.name 
