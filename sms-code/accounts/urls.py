@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import CreateCity, CreateInstallationCompany, DeleteCity, DeleteInstallationCompany, DetailsAccount, DetailsCity, DetailsInstallationCompany, ListAccounts, CreateAccount, ListCities, ListInstallationCompanies, UpdateeAccount, DeleteAccount, UpdateeCity, UpdateeInstallationCompany
+from .views import CreateCity, CreateInstallationCompany, DeleteCity, DeleteInstallationCompany, DetailsAccount, DetailsCity, DetailsInstallationCompany, ListAccounts, CreateAccount, ListCities, ListInstallationCompanies, UpdateeAccount, DeleteAccount, UpdateeCity, UpdateeInstallationCompany, ListGroups, DetailsGroup, CreateGroup, UpdateeGroup, DeleteGroup
 
 urlpatterns = [
     path('accounts/list', ListAccounts.as_view(), name='account_list'),
@@ -20,4 +20,10 @@ urlpatterns = [
     path('cities/create/', CreateCity.as_view(), name='city_create'),
     path('cities/update/<int:pk>', UpdateeCity.as_view(), name='city_update'),
     path('cities/view/<int:pk>', DeleteCity.as_view(), name='city_delete'),
+    
+    path('groups/list', ListGroups.as_view(), name='group_list'),
+    path('groups/details/<int:pk>', DetailsGroup.as_view(), name='group_detail'),
+    path('groups/create/', CreateGroup.as_view(), name='group_create'),
+    path('groups/update/<int:pk>', UpdateeGroup.as_view(), name='group_update'),
+    path('groups/view/<int:pk>', DeleteGroup.as_view(), name='group_delete'),
 ]

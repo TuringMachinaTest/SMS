@@ -2,7 +2,7 @@ from .utils import get_partitions_choices
 from django import forms
 from extra_views import InlineFormSetFactory
 
-from .models import Account, AccountUser, City, InstallationCompany, Zone
+from .models import Account, AccountUser, City, Group, InstallationCompany, Zone
 
 from crispy_formset_modal.helper import ModalEditFormHelper
 from crispy_formset_modal.layout import ModalEditLayout
@@ -32,7 +32,25 @@ class CityForm(forms.ModelForm):
         else:            
             for field in self.fields:
                 self.fields[field].disabled = True
-                
+
+
+class GroupForm(forms.ModelForm):
+
+    class Meta:
+        model = Group
+        fields = '__all__'
+        
+    def __init__(self, details=False, *args, **kwargs):
+        super().__init__(*args, **kwargs)        
+        
+        self.helper = FormHelper()
+
+        if not details:
+            self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+        else:            
+            for field in self.fields:
+                self.fields[field].disabled = True             
+
                 
 class InstallationCompanyForm(forms.ModelForm):
 
@@ -188,7 +206,12 @@ class AccountForm(forms.ModelForm):
                     Row(
                        Column("installation_note"), 
                     )
-                )
+                ),
+                Tab("Groups",
+                    Row(
+                        Column("groups")
+                    ),
+                ),
             ),
         )
         

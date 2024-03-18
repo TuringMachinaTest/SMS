@@ -43,6 +43,7 @@ def event_listener(device_no):
     if end_line == "<CR>":
         end_line = b'\x0d'
             
+    last_event = ""
     while True:  
         
         if cache.get("devices:kill-device:" + device.name) == "true":
@@ -54,6 +55,7 @@ def event_listener(device_no):
         
         try:
             data = serial_port.read_until(end_line)
+            #check event integrity
         except:
             return
         

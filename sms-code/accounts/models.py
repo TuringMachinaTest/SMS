@@ -11,13 +11,25 @@ from simple_history.models import HistoricalRecords
 
 class City(models.Model):
     class Meta:
-        verbose_name_plural = "Cities"
+        verbose_name = _("Group")
+        verbose_name_plural = _("Cities")
 
     name = models.CharField(max_length=30)
     def __str__(self):
         return self.name 
     
     
+class Group(models.Model):
+    class Meta:
+        verbose_name = _("Group")
+        verbose_name_plural = _("Groups")
+
+    name = models.CharField(max_length=30)
+    
+    def __str__(self):
+        return self.name 
+    
+     
 class InstallationCompany(models.Model):
     
     class Meta:
@@ -85,6 +97,9 @@ class Account(models.Model):
     installation_note = models.TextField(max_length=120, blank=True)
     receiver_phone_number = models.CharField(max_length=20, blank=True)
     transmitter_phone_number = models.CharField(max_length=20, blank=True)
+
+    # Groups
+    groups = models.ManyToManyField(Group, blank=True, related_name="accounts")
 
     # Accounts Control
     created_at = models.DateTimeField(auto_now_add=True)

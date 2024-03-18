@@ -1,6 +1,6 @@
 import django_tables2 as tables
 
-from .models import Account, City, InstallationCompany
+from .models import Account, City, Group, InstallationCompany
 
 
 class AccountsTable(tables.Table):
@@ -56,5 +56,24 @@ class CityTable(tables.Table):
     })
     
     delete = tables.LinkColumn('accounts:city_delete',text="Delete", args=[tables.A('id')], attrs={
+            'a': {'class': 'btn btn-danger'},
+    })
+    
+    
+class GroupTable(tables.Table):
+    class Meta:
+        model = Group
+        template_name = "django_tables2/bootstrap4-responsive.html"
+        fields = ("name",)
+        
+    view = tables.LinkColumn('accounts:Group_detail',text="View", args=[tables.A('id')], attrs={
+            'a': {'class': 'btn btn-info'},
+    })
+    
+    edit = tables.LinkColumn('accounts:Group_update',text="Edit", args=[tables.A('id')], attrs={
+            'a': {'class': 'btn btn-warning'},
+    })
+    
+    delete = tables.LinkColumn('accounts:Group_delete',text="Delete", args=[tables.A('id')], attrs={
             'a': {'class': 'btn btn-danger'},
     })

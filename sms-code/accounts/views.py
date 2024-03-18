@@ -14,12 +14,12 @@ from django_tables2.export.views import ExportMixin
 from extra_views import CreateWithInlinesView, InlineFormSetFactory, ModelFormSetView, UpdateWithInlinesView
 from view_breadcrumbs import DetailBreadcrumbMixin, ListBreadcrumbMixin, CreateBreadcrumbMixin, UpdateBreadcrumbMixin, DeleteBreadcrumbMixin
 
-from .filters import AccountFilter, CityFilter, InstallationCompanyFilter
+from .filters import AccountFilter, CityFilter, GroupFilter, InstallationCompanyFilter
 
-from .tables import AccountsTable, CityTable, InstallationCompanyTable
+from .tables import AccountsTable, CityTable, GroupTable, InstallationCompanyTable
 
-from .forms import AccountForm, AccountUserForm, AccountUserInlineFormSet, CityForm, InstallationCompanyForm, ZoneInlineFormSet
-from .models import Account, AccountUser, City, InstallationCompany
+from .forms import AccountForm, AccountUserForm, AccountUserInlineFormSet, CityForm, GroupForm, InstallationCompanyForm, ZoneInlineFormSet
+from .models import Account, AccountUser, City, Group, InstallationCompany
 
 from django.utils.translation import gettext as _
 
@@ -337,3 +337,106 @@ class DeleteCity(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
     template_name = 'generic/confirm-delete.html'
 
     success_url = reverse_lazy("city_list")
+    
+    
+class ListGroups(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, SingleTableMixin, FilterView):
+    
+    permission_required = 'accounts.view_account'
+    
+    model = Group
+    table_class = GroupTable 
+    paginator_class = LazyPaginator
+    
+    filterset_class = GroupFilter
+
+    template_name = 'generic/list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ListGroups, self).get_context_data(**kwargs)
+        
+        context['add_url'] = reverse_lazy('accounts:group_create')
+        context['export_url'] = reverse_lazy('accounts:group_list') + "?_export=csv"
+        context['view_name'] = _("Cities")
+
+        return context    
+
+
+class CreateGroup(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateView):
+        
+    permission_required = 'accounts.add_account'
+    
+    model = Group
+    form_class = GroupForm
+
+    template_name = 'generic/form.html'
+    success_url = reverse_lazy('accounts:group_list')
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateGroup, self).get_context_data(**kwargs)
+        
+        context['view_name'] = _("Create Group")
+
+        return context
+
+
+class DetailsGroup(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateView):
+    
+    permission_required = 'accounts.view_account'
+    
+    model = Group
+    form_class = GroupForm
+    
+    template_name = 'generic/form.html'
+
+    def get_form_kwargs(self):
+        # Get the default form kwargs
+        kwargs = super().get_form_kwargs()
+                
+        # Add any additional parameters you want to pass to the form
+        kwargs['details'] = True
+        
+        return kwargs
+    
+    def get_context_data(self, **kwargs):
+        context = super(DetailsGroup, self).get_context_data(**kwargs)
+        
+        context['details'] = True
+        context['view_name'] = _("Group Details")
+
+        return context
+        
+    def get_queryset(self):
+        # Customize the queryset as needed (e.g., filter by user, etc.)
+        return Group.objects.filter(pk=self.kwargs["pk"])
+    
+
+class UpdateeGroup(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateView):
+    
+    permission_required = 'accounts.view_account'
+    
+    model = Group
+    form_class = GroupForm
+    
+    template_name = 'generic/form.html'
+    success_url = reverse_lazy('accounts:group_list')
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateeGroup, self).get_context_data(**kwargs)
+        
+        context['view_name'] = _("Update Group")
+
+        return context
+    
+    def get_queryset(self):
+        # Customize the queryset as needed (e.g., filter by user, etc.)
+        return Group.objects.filter(pk=self.kwargs["pk"])
+    
+    
+class DeleteGroup(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
+    
+    permission_required = 'accounts.delete_account'
+    
+    model = Group
+    template_name = 'generic/confirm-delete.html'
+
+    success_url = reverse_lazy("Group_list")

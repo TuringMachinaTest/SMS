@@ -1,6 +1,6 @@
 import django_filters
 
-from .models import Account, City, InstallationCompany
+from .models import Account, City, Group, InstallationCompany
 
 
 class AccountFilter(django_filters.FilterSet):
@@ -18,4 +18,10 @@ class InstallationCompanyFilter(django_filters.FilterSet):
 class CityFilter(django_filters.FilterSet):
     class Meta:
         model = City
+        fields = {'name':["contains"]}
+        
+        
+class GroupFilter(django_filters.FilterSet):
+    class Meta:
+        model = Group
         fields = {'name':["contains"]}
