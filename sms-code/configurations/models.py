@@ -32,8 +32,8 @@ class AlarmCode(models.Model):
     type = models.IntegerField(default=0, choices=TYPES)
 
     # TYPE
-    priority = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(9)])
-    delay = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(99)])
+    #priority = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(9)])
+    #delay = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(99)])
     
     def __str__(self):
             return self.name 

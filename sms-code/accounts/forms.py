@@ -176,7 +176,7 @@ class AccountForm(forms.ModelForm):
                 Tab("Alarm Codes",
                     ModalEditFormsetLayout(
                         "AlarmCodeInlineFormSet",
-                        list_display=["name", "code", ],
+                        list_display=["code", "description" ],
                     ),
                 ),
                 
@@ -262,7 +262,8 @@ class AccountUserForm(forms.ModelForm):
         
         self.helper = ModalEditFormHelper()
         self.helper.layout = ModalEditLayout(
-                Fieldset("Information",
+            TabHolder(
+                Tab("Information",
                     Row(
                         Column('partition',),
                     ),
@@ -285,7 +286,7 @@ class AccountUserForm(forms.ModelForm):
                         Column('phone_number3', css_class="col-6"),
                     ),
                 ),
-                Fieldset("Control",
+                Tab("Control",
                     Row(
                         Column('holiday_begins'),
                         Column('holiday_ends'),
@@ -309,7 +310,8 @@ class AccountUserForm(forms.ModelForm):
                     Row(
                         Column('authorized_days_wed', css_class="col-6"),
                     ),
-                )
+                ),
+            ),
         )
         
         self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id))
