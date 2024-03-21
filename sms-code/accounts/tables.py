@@ -66,14 +66,14 @@ class GroupTable(tables.Table):
         template_name = "django_tables2/bootstrap4-responsive.html"
         fields = ("name",)
         
-    view = tables.LinkColumn('accounts:Group_detail',text="View", args=[tables.A('id')], attrs={
+    view = tables.LinkColumn('accounts:group_detail',text="View", args=[tables.A('id')], attrs={
             'a': {'class': 'btn btn-info'},
     })
     
-    edit = tables.LinkColumn('accounts:Group_update',text="Edit", args=[tables.A('id')], attrs={
+    edit = tables.LinkColumn('accounts:group_update',text="Edit", args=[tables.A('id')], attrs={
             'a': {'class': 'btn btn-warning'},
     })
     
-    delete = tables.LinkColumn('accounts:Group_delete',text="Delete", args=[tables.A('id')], attrs={
+    delete = tables.LinkColumn('accounts:group_delete',text="Delete", args=[tables.A('id')], attrs={
             'a': {'class': 'btn btn-danger'},
     })

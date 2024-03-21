@@ -221,11 +221,12 @@
       },
 
       fields: [
-          { name: "id", type: "number", title: "ID", width:15 },
-          { name: "raw_event.data", type: "text", width: 150 },
-          { name: "device.name", type: "text", width: 150 },
-          { name: "device.com", type: "text", width: 150 },
-          { name: "created_at", type: "datetime", width: 150, sorting: true }
+        { name: "id", type: "number", title: "ID", width: 50 },
+        { name: "raw_event", type: "text", title: "Raw Event", width: 50 },
+        { name: "account.id", type: "text", title: "Account ID", width: 50 },
+        { name: "account.name", type: "text", title: "Account Name", width: 100 },
+        { name: "alarmcode.description", type: "text", title: "Alarm Code", width: 100},
+        { name: "created_at", type: "datetime", title: "Timestamp", sorting: true }
       ]
     });
 
@@ -248,11 +249,12 @@
 
 
       fields: [
-          { name: "id", type: "number", title: "ID", width:15 },
-          { name: "raw_event.data", type: "text", width: 150 },
-          { name: "device.name", type: "text", width: 150 },
-          { name: "device.com", type: "text", width: 150 },
-          { name: "created_at", type: "datetime", width: 150, sorting: true }
+        { name: "id", type: "number", title: "ID", width: 50 },
+        { name: "raw_event", type: "text", title: "Raw Event", width: 50 },
+        { name: "account.id", type: "text", title: "Account ID", width: 50 },
+        { name: "account.name", type: "text", title: "Account Name", width: 100 },
+        { name: "alarmcode.description", type: "text", title: "Alarm Code", width: 100},
+        { name: "created_at", type: "datetime", title: "Timestamp", sorting: true }
       ]
     });
     
@@ -273,13 +275,13 @@
           window.location.href = `http://${window.location.host}/events-management/decrypted_events/update/${args.item.id}`
       },
 
-
       fields: [
-          { name: "id", type: "number", title: "ID", width:15 },
-          { name: "raw_event.data", type: "text", width: 150 },
-          { name: "device.name", type: "text", width: 150 },
-          { name: "device.com", type: "text", width: 150 },
-          { name: "created_at", type: "datetime", width: 150, sorting: true }
+        { name: "id", type: "number", title: "ID", width: 50 },
+        { name: "raw_event", type: "text", title: "Raw Event", width: 50 },
+        { name: "account.id", type: "text", title: "Account ID", width: 50 },
+        { name: "account.name", type: "text", title: "Account Name", width: 100 },
+        { name: "alarmcode.description", type: "text", title: "Alarm Code", width: 100},
+        { name: "created_at", type: "datetime", title: "Timestamp", sorting: true }
       ]
     });
     
@@ -302,11 +304,12 @@
 
 
       fields: [
-          { name: "id", type: "number", title: "ID", width:15 },
-          { name: "raw_event.data", type: "text", width: 150 },
-          { name: "device.name", type: "text", width: 150 },
-          { name: "device.com", type: "text", width: 150 },
-          { name: "created_at", type: "datetime", width: 150, sorting: true }
+        { name: "id", type: "number", title: "ID", width: 50 },
+        { name: "raw_event", type: "text", title: "Raw Event", width: 50 },
+        { name: "account.id", type: "text", title: "Account ID", width: 50 },
+        { name: "account.name", type: "text", title: "Account Name", width: 100 },
+        { name: "alarmcode.description", type: "text", title: "Alarm Code", width: 100},
+        { name: "created_at", type: "datetime", title: "Timestamp", sorting: true }
       ]
     });
 
@@ -320,10 +323,10 @@
       data: rawEvents,
 
       fields: [
-          { name: "data", type: "text", width: 150 },
-          { name: "device.name", type: "text", width: 150 },
-          { name: "device.com", type: "text", width: 150 },
-          { name: "created_at", type: "datetime", width: 150 }
+        { name: "data", type: "text", title: "Data", width: 150 },
+        { name: "device.name", type: "text", title: "Device Name", width: 150 },
+        { name: "device.com", type: "text", title: "Com", width: 150 },
+        { name: "created_at", type: "datetime", title: "Timestamp", width: 150 }
       ]
     });
 

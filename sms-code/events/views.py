@@ -9,6 +9,7 @@ from django_filters.views import FilterView
 from braces.views import PermissionRequiredMixin
 from django.core import serializers
 
+from accounts.forms import AccountForm
 from events.forms import DecryptedEventForm
 from events.serializers import DecryptedEventSerializer
 
@@ -100,6 +101,8 @@ class DetailsDecryptedEvent(PermissionRequiredMixin, DetailBreadcrumbMixin, Upda
     
     def get_context_data(self, **kwargs):
         context = super(DetailsDecryptedEvent, self).get_context_data(**kwargs)
+        
+        context['account'] = self.get_queryset().first().account
         
         context['details'] = True
         context['view_name'] = _("View Event")

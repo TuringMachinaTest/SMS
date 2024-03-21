@@ -1,0 +1,22 @@
+{% load static %}
+{% load i18n %}
+
+<div class="col-md-2">
+    <!-- general form elements -->
+    <!-- general form elements disabled -->
+    <form method="post">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">{% trans "Raw Event" %}<h3>
+        </div>
+
+
+        <!-- /.card-header -->
+        <div class="card-body">
+
+          <a href={% url 'events:rawevent_detail' object.raw_event %}>{{ object.raw_event }}</a>
+    
+        </div>
+      </div>
+    </form>
+  </div>

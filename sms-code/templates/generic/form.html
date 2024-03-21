@@ -10,6 +10,17 @@
   <section class="content">
     <div class="container-fluid">
 
+
+      <div class="row">
+        {% if object.raw_event %}
+          {% include "cards/raw-event-card.html" %}
+        {%endif%}
+        {% if object.account %}
+          {% include "cards/account-card.html" %}
+        {%endif%}
+      </div>
+
+
       <div class="row">
         <!-- left column -->
         <div class="col-md-12">
