@@ -3,7 +3,7 @@ import re
 from serial import Serial
 from django.core.cache import cache
 
-from accounts.models import Account
+from accounts.models import Account, AccountUser, Zone
 from configurations.models import AlarmCode, Device
 from events.models import DecryptedEvent, RawEvent
 from events.serializers import DecryptedEventSerializer, RawEventSerializer
@@ -107,22 +107,22 @@ def dycrypt_events():
             event.line_no = line_no
             
             event.account = Account.objects.filter(pk=account_no).first()
-                
-            if event.account:
-                event.alarm_code = AlarmCode.objects.filter(code=alarm_code, account=event.account.id).first()
-            else:
-                success = False
-                
+
             if partition >= 0 and partition <= 10:
                 event.partition  = partition
             else:
                 success = False
-                        
+                
+            if event.account:
+                event.alarm_code = AlarmCode.objects.filter(code=alarm_code, partition=event.partition, account=event.account.id).first()
+            else:
+                success = False
+                    
             if event.alarm_code and event.account:
-                if  event.alarm_code.type == 0:
-                    event.zone = AlarmCode.objects.filter(code=zone, account=event.account.id).first()
-                elif event.alarm_code.type == 1:
-                    event.user = AlarmCode.objects.filter(code=zone, account=event.account.id).first()
+                if  event.alarm_code.decryption_type == 0:
+                    event.zone = Zone.objects.filter(code=zone, partition=event.partition, account=event.account.id).first()
+                elif event.alarm_code.decryption_type == 1:
+                    event.user = AccountUser.objects.filter(code=zone, partition=event.partition, account=event.account.id).first()
             else:
                 success = False
                                 

@@ -6,6 +6,8 @@ from crispy_formset_modal.helper import ModalEditFormHelper
 from crispy_formset_modal.layout import ModalEditLayout, ModalEditFormsetLayout
 from crispy_forms.bootstrap import TabHolder, Tab
 
+from accounts.utils import get_partitions_choices
+
 from .models import AlarmCode, Device
 
 
@@ -39,10 +41,23 @@ class AlarmCodeForm(forms.ModelForm):
         self.helper = ModalEditFormHelper()
         self.helper.layout = ModalEditLayout(
             TabHolder(
-                Tab('Test 1', Column("code")),
-                Tab('Test 2', Column("description")),
+                Tab('Test 1', 
+                    Row(
+                        Column("partition"),
+                    ),
+                    Row(
+                        Column("code", css_class="col-4"),
+                        Column("description", css_class="col-8")
+                    ),
+                    Row(
+                      Column("decryption_type")  
+                    ),
+                ),
+                Tab('Test 2', ),
             )
         )
+        
+        self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id))
                 
         # Disable submit button for non-admin users
         if not details:
