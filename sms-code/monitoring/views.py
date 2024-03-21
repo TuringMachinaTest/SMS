@@ -8,16 +8,7 @@ from events.models import DecryptedEvent, RawEvent
 from events.serializers import DecryptedEventSerializer, RawEventSerializer
 
 
-# Create your views here.
-
-def lobby(request):
-    return render(request, 'events/lobby.html')
-
-# For each album object, tracks should be fetched from database
-#print(AlbumSerializer(qs, many=True).data)
-
-
-def index(request):
+def operator(request):
     
     uncommited_events = DecryptedEvent.objects.filter(status=0).order_by('id')
     uncommited_events = DecryptedEventSerializer(uncommited_events, many=True).data

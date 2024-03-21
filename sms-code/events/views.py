@@ -17,7 +17,7 @@ from .models import DecryptedEvent, RawEvent
 
 from .tables import DecryptedEventTable, RawEventTable
 
-from .filter import DecryptedEventFilter, RawEventFilter
+from .filters import DecryptedEventFilter, RawEventFilter
 
 from django.utils.translation import gettext as _
 class ListRawEvents(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, SingleTableMixin, FilterView):

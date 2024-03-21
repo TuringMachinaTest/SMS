@@ -3,12 +3,9 @@
 
 from django.urls import path
 
-from .views import lobby, index
+from .views import operator
 
 
-urlpatterns = [    
-
-    path('lobby', lobby),
-    
-    path('operator', index, name='operator')
+urlpatterns = [        
+    path('', operator, name='operator')
 ]

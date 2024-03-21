@@ -7,7 +7,7 @@ class RawEventTable(tables.Table):
     class Meta:
         model = RawEvent
         template_name = "django_tables2/bootstrap4-responsive.html"
-        fields = ("data", "device.name", "device.com", "created_at")
+        fields = ("id", "data", "device.name", "device.com", "created_at")
    
         
 class DecryptedEventTable(tables.Table):
