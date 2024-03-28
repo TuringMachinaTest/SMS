@@ -127,11 +127,11 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DB_ENGINE   = os.getenv('DB_ENGINE'   , "psqlextra.backend")
-DB_USERNAME = os.getenv('DB_USERNAME' , "sms")
-DB_PASS     = os.getenv('DB_PASS'     , "sms")
+DB_USERNAME = os.getenv('DB_USERNAME' , "postgres")
+DB_PASS     = os.getenv('DB_PASS'     , "postgres")
 DB_HOST     = os.getenv('DB_HOST'     , "localhost")
 DB_PORT     = os.getenv('DB_PORT'     , "5432")
-DB_NAME     = os.getenv('DB_NAME'     , "sms")
+DB_NAME     = os.getenv('DB_NAME'     , "test")
 
 if DB_ENGINE and DB_NAME and DB_USERNAME:
     DATABASES = { 
