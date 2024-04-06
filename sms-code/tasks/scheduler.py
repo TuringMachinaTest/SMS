@@ -21,14 +21,14 @@ def add_jobs():
 
 
 def kill(signal, frame):
-    scheduler.shutdown(wait=False)
+    # scheduler.shutdown(wait=False)
     cache.set("devices:kill-device", "all")
     sys.exit(0) 
 
 def start():
     add_jobs()
     # scheduler = BackgroundScheduler()    
-    scheduler.start()
+    # scheduler.start()
     cache.delete("devices:kill-device")
 
     

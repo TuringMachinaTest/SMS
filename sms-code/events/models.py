@@ -68,6 +68,8 @@ class DecryptedEvent(PostgresPartitionedModel):
     locked_at = models.DateTimeField(null=True, blank=True)
     locked_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True, db_index=True)
     
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    
     history = HistoricalRecords()
 
     def save(self, *args, **kwargs):

@@ -8,7 +8,11 @@ class RawEventTable(tables.Table):
         model = RawEvent
         template_name = "django_tables2/bootstrap4-responsive.html"
         fields = ("id", "data", "device.name", "device.com", "created_at")
-   
+        
+    view = tables.LinkColumn('events:rawevent_detail',text="View", args=[tables.A('id')], attrs={
+            'a': {'class': 'btn btn-info'},
+    })
+        
         
 class DecryptedEventTable(tables.Table):
     class Meta:

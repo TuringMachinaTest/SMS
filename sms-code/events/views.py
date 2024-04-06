@@ -10,7 +10,7 @@ from braces.views import PermissionRequiredMixin
 from django.core import serializers
 
 from accounts.forms import AccountForm
-from events.forms import DecryptedEventForm
+from events.forms import DecryptedEventForm, RawEventForm
 from events.serializers import DecryptedEventSerializer
 
 from .models import DecryptedEvent, RawEvent
@@ -39,6 +39,37 @@ class ListRawEvents(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, S
         context['view_name'] = _("Raw Events")
 
         return context   
+
+
+class DetailsRawEvent(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateView):
+    
+    permission_required = 'accounts.view_account'
+    
+    model = RawEvent
+    form_class = RawEventForm
+    
+    template_name = 'generic/form.html'
+
+    def get_form_kwargs(self):
+        # Get the default form kwargs
+        kwargs = super().get_form_kwargs()
+                
+        # Add any additional parameters you want to pass to the form
+        kwargs['details'] = True
+        
+        return kwargs
+    
+    def get_context_data(self, **kwargs):
+        context = super(DetailsRawEvent, self).get_context_data(**kwargs)
+                
+        context['details'] = True
+        context['view_name'] = _("View Event")
+
+        return context
+        
+    def get_queryset(self):
+        # Customize the queryset as needed (e.g., filter by user, etc.)
+        return RawEvent.objects.filter(pk=self.kwargs["pk"])
 
 
 class ListDecryptedEvents(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, SingleTableMixin, FilterView):
@@ -96,13 +127,12 @@ class DetailsDecryptedEvent(PermissionRequiredMixin, DetailBreadcrumbMixin, Upda
                 
         # Add any additional parameters you want to pass to the form
         kwargs['details'] = True
-        
+        kwargs['account_id'] = self.get_queryset().first().account.id
+
         return kwargs
     
     def get_context_data(self, **kwargs):
         context = super(DetailsDecryptedEvent, self).get_context_data(**kwargs)
-        
-        context['account'] = self.get_queryset().first().account
         
         context['details'] = True
         context['view_name'] = _("View Event")

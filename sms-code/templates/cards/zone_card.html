@@ -1,0 +1,22 @@
+{% load static %}
+{% load i18n %}
+
+<div class="col-md-2">
+    <!-- general form elements -->
+    <!-- general form elements disabled -->
+    <form method="post">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">{% trans "Zone" %}<h3>
+        </div>
+
+
+        <!-- /.card-header -->
+        <div class="card-body">
+
+          <a>{{ object.zone.code }}: {{ object.zone }}</a>
+    
+        </div>
+      </div>
+    </form>
+  </div>

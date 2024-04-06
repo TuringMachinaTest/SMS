@@ -129,7 +129,7 @@ class DeleteAccount(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
     permission_required = 'accounts.delete_account'
     
     model = Account
-    template_name = 'generic/confirm-delete.html'
+    template_name = 'generic/confirm_delete.html'
 
     success_url = reverse_lazy("account_list")
     
@@ -233,7 +233,7 @@ class DeleteInstallationCompany(PermissionRequiredMixin, DeleteBreadcrumbMixin, 
     permission_required = 'accounts.delete_account'
     
     model = InstallationCompany
-    template_name = 'generic/confirm-delete.html'
+    template_name = 'generic/confirm_delete.html'
 
     success_url = reverse_lazy("installationcompany_list")
     
@@ -336,7 +336,7 @@ class DeleteCity(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
     permission_required = 'accounts.delete_account'
     
     model = City
-    template_name = 'generic/confirm-delete.html'
+    template_name = 'generic/confirm_delete.html'
 
     success_url = reverse_lazy("city_list")
     
@@ -439,6 +439,6 @@ class DeleteGroup(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
     permission_required = 'accounts.delete_account'
     
     model = Group
-    template_name = 'generic/confirm-delete.html'
+    template_name = 'generic/confirm_delete.html'
 
     success_url = reverse_lazy("Group_list")

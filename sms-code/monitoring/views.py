@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 from django.forms.models import model_to_dict
@@ -7,7 +8,7 @@ from django.core import serializers
 from events.models import DecryptedEvent, RawEvent
 from events.serializers import DecryptedEventSerializer, RawEventSerializer
 
-
+@login_required
 def operator(request):
     
     uncommited_events = DecryptedEvent.objects.filter(status=0).order_by('id')

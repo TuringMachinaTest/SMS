@@ -114,6 +114,6 @@ class DeleteDevice(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
     permission_required = 'accounts.delete_account'
     
     model = Device
-    template_name = 'generic/confirm-delete.html'
+    template_name = 'generic/confirm_delete.html'
 
     success_url = reverse_lazy("device_list")

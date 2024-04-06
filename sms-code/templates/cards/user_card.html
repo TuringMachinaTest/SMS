@@ -1,0 +1,22 @@
+{% load static %}
+{% load i18n %}
+
+<div class="col-md-2">
+    <!-- general form elements -->
+    <!-- general form elements disabled -->
+    <form method="post">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">{% trans "Account User" %}<h3>
+        </div>
+
+
+        <!-- /.card-header -->
+        <div class="card-body">
+
+          <a>{{ object.user.code }}: {{ object.user }}</a>
+    
+        </div>
+      </div>
+    </form>
+  </div>

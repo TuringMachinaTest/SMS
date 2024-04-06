@@ -13,10 +13,16 @@
 
       <div class="row">
         {% if object.raw_event %}
-          {% include "cards/raw-event-card.html" %}
+          {% include "cards/rawevent_card.html" %}
         {%endif%}
         {% if object.account %}
-          {% include "cards/account-card.html" %}
+          {% include "cards/account_card.html" %}
+        {%endif%}
+        {% if object.zone %}
+          {% include "cards/zone_card.html" %}
+        {%endif%}
+        {% if object.user %}
+          {% include "cards/user_card.html" %}
         {%endif%}
       </div>
 

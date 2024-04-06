@@ -22,7 +22,7 @@ def event_listener(device_no):
     end_line = device.end_line
     
     try:
-        serial_port = Serial(device.com, device.baud_rate, timeout=1)
+        serial_port = Serial(device.com, device.baud_rate, timeout=10, exclusive=True)
 
         if not serial_port.is_open:
             serial_port.close()
@@ -57,7 +57,8 @@ def event_listener(device_no):
             data = serial_port.read_until(end_line)
             #check event integrity
         except:
-            return
+            break
+        #    return
         
         # TODO: Check SUM
         if data:
@@ -73,7 +74,7 @@ def event_listener(device_no):
 
 def dycrypt_events():
     
-    for raw_event in RawEvent.objects.filter(decrypted=False)[0:100]:
+    for raw_event in RawEvent.objects.filter(decrypted=False).order_by('id')[0:100]:
         
         if raw_event.device.type == "mcdi":
             (success, receiveer_no, line_no, account_no, alarm_code, partition, zone) = decrypt_event_mcdi(raw_event.data)
