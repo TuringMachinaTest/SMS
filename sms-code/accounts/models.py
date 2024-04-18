@@ -11,7 +11,7 @@ from simple_history.models import HistoricalRecords
 
 class City(models.Model):
     class Meta:
-        verbose_name = _("Group")
+        verbose_name = _("City")
         verbose_name_plural = _("Cities")
 
     name = models.CharField(max_length=30)
@@ -33,8 +33,9 @@ class Group(models.Model):
 class InstallationCompany(models.Model):
     
     class Meta:
-        verbose_name = _("Installation Companies")
-    
+        verbose_name = _("Installation Company")
+        verbose_name_plural = _("Installation Companies")
+            
     name = models.CharField(max_length=30, blank=True, verbose_name = _("Company Name"))
     phone_number1 = modelfields.PhoneNumberField(region="SY", max_length=20, blank=True, verbose_name=_("Phone Number 1"))
     phone_number2 = modelfields.PhoneNumberField(region="SY", max_length=20, blank=True, verbose_name=_("Phone Number 2"))
@@ -43,6 +44,11 @@ class InstallationCompany(models.Model):
     
     
 class Account(models.Model):
+    
+    class Meta:
+        verbose_name = _("Account")
+        verbose_name_plural = _("Accounts")
+    
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=40)
 
@@ -109,7 +115,7 @@ class Account(models.Model):
     history = HistoricalRecords()
     
     def __str__(self):
-        return self.name 
+        return str(self.id) + " : " + self.name 
     
 
 class AccountUser(models.Model):
@@ -117,7 +123,9 @@ class AccountUser(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['account', 'partition', 'code'], name='accounts.accountuser.unique_id')
         ]
-
+        verbose_name = _("Account User")
+        verbose_name_plural = _("Account Users")
+        
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     partition = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])
 
@@ -164,6 +172,9 @@ class Zone(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['account', 'partition', 'code'], name='accounts.zone.unique_id')
         ]
+
+        verbose_name = _("Zone")
+        verbose_name_plural = _("Zones")
     
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     partition = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])

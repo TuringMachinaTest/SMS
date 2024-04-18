@@ -1,6 +1,7 @@
 from django import forms
 from extra_views import InlineFormSetFactory
 
+from accounts.models import Account
 from accounts.utils import get_partitions_choices
 
 from .models import DecryptedEvent, RawEvent
@@ -19,15 +20,26 @@ from phonenumber_field import formfields, widgets
 
 class DecryptedEventForm(forms.ModelForm):
 
+    account = forms.ModelChoiceField(
+        queryset=Account.objects.all(),
+        widget=s2forms.ModelSelect2Widget(
+            model=Account,
+            search_fields=['id__icontains', 'name__icontains'],
+        )
+    )
+        
     class Meta:
         model = DecryptedEvent
         fields = '__all__'
         
-    def __init__(self, details=False, account_id = -1,  *args, **kwargs):
+    def __init__(self, details=False, *args, **kwargs):
         super().__init__(*args, **kwargs)        
         
         self.helper = FormHelper()
         self.helper.layout = Layout(
+            Row(
+                Column('account'),
+            ),
             Row(
                 Column('protocole'),
                 Column('receiveer_no'),
@@ -41,7 +53,10 @@ class DecryptedEventForm(forms.ModelForm):
             )
         )
         
-        self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id))
+        if 'account' in self.data:
+            self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(self.data['account']))
+        else:
+            self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(-1))
 
         if not details:
             self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))

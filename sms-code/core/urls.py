@@ -22,6 +22,7 @@ urlpatterns = [
     path('accounts-management/', include(('accounts.urls', 'accounts'), namespace="accounts")),
     path('events-management/', include(('events.urls', 'events'), namespace="events")),
     path('configurations/', include(('configurations.urls', 'configurations'), namespace="configurations")),
+    path('support/', include(('support.urls', 'support'), namespace="support")),
 
     path("", include(('monitoring.urls', 'monitoring'), namespace="monitoring")),
     

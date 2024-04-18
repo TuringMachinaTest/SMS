@@ -87,6 +87,8 @@ class ListDecryptedEvents(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMi
     def get_context_data(self, **kwargs):
         context = super(ListDecryptedEvents, self).get_context_data(**kwargs)
         
+        context['add_url'] = reverse_lazy('events:decryptedevent_create')
+        
         context['export_url'] = reverse_lazy('events:decryptedevent_list') + "?_export=csv"
         context['view_name'] = _("Raw Events")
 
@@ -107,11 +109,17 @@ class CreateDecryptedEvent(PermissionRequiredMixin, CreateBreadcrumbMixin, Creat
         context = super(CreateDecryptedEvent, self).get_context_data(**kwargs)
         
         context['view_name'] = _("Create Custom Event")
-        context['history'] = self.get_queryset().first().history.all()
+        # context['history'] = self.get_queryset().first().history.all()
 
         return context
-   
-   
+    def form_invalid(self, form):
+        
+        context = self.get_context_data(**self.get_form_kwargs())
+        context['form'] = form
+        context['account_id'] = form.data.get('account')
+        
+        return self.render_to_response(context)
+       
 class DetailsDecryptedEvent(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateView):
     
     permission_required = 'accounts.view_account'

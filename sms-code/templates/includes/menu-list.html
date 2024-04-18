@@ -46,7 +46,7 @@
         data-bs-toggle="collapse" data-bs-target="#submenu-{{ app.app_label }}" href="{{ app.url }}">
         <i class="nav-icon {{ app.icon }}"></i>
         <p>
-          {{ app.label|slice:10 }}{% if app.label|length > 10 %}..{% endif %}
+          {{ app.label }}
           <i class="right fas fa-angle-left"></i>
         </p>
       </a>
@@ -164,7 +164,7 @@
           <a href="{% url 'events:decryptedevent_list' %}" class="nav-link {% if '/decrypted_events/' in request.path %}active{% endif %}">
             <i class="nav-icon far fa-circle"></i>
             <p>
-              {% trans 'Events' %}
+              {% trans 'Decrypted Events' %}
             </p>
           </a>
         </li>
@@ -175,6 +175,29 @@
             <i class="nav-icon far fa-circle"></i>
             <p>
               {% trans 'Raw Events' %}
+            </p>
+          </a>
+        </li>
+      </ul>
+    </li>
+    {% endif %}
+
+
+    {% if perms.accounts.view_accounts %}
+    <li class="nav-item {% if '/support/' in request.path %} menu-open {% endif %}">
+      <a href="#" class="nav-link {% if '/support/' in request.path %} active {% endif %}">
+        <i class="nav-icon fas fa-bell"></i>
+        <p>
+          {% trans 'Support' %}
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{% url 'support:serviceorder_list' %}" class="nav-link {% if '/service_orders/' in request.path %}active{% endif %}">
+            <i class="nav-icon far fa-circle"></i>
+            <p>
+              {% trans 'Service Orders' %}
             </p>
           </a>
         </li>

@@ -82,6 +82,7 @@ INSTALLED_APPS = [
     'accounts',
     'configurations',
     'events',
+    'support',
     'tasks',
 
 ]

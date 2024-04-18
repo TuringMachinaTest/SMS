@@ -8,11 +8,15 @@ from django.conf import settings
 
 from psqlextra.types import PostgresPartitioningMethod
 from psqlextra.models import PostgresPartitionedModel
+from django.utils.translation import gettext as _
 
 
 class RawEvent(PostgresPartitionedModel):
     class Meta:
         ordering = ('-id',)
+
+        verbose_name = _("Raw Event")
+        verbose_name_plural = _("Raw Events")
         
     class PartitioningMeta:
         method = PostgresPartitioningMethod.RANGE
@@ -32,6 +36,10 @@ class RawEvent(PostgresPartitionedModel):
 class DecryptedEvent(PostgresPartitionedModel):
     class Meta:
         ordering = ('-id',)
+
+        verbose_name = _("Decrypted Event")
+        verbose_name_plural = _("Decrypted Events")
+
     class PartitioningMeta:
         method = PostgresPartitioningMethod.RANGE
         key = ["created_at"]
@@ -46,9 +54,9 @@ class DecryptedEvent(PostgresPartitionedModel):
     
     raw_event = models.IntegerField()
     
-    protocole = models.IntegerField()
-    receiveer_no = models.IntegerField()
-    line_no = models.IntegerField()
+    protocole = models.IntegerField(default=-1)
+    receiveer_no = models.IntegerField(default=-1)
+    line_no = models.IntegerField(default=-1)
     
     alarm_code = models.ForeignKey(AlarmCode, on_delete=models.PROTECT, null=True, blank=True)
     account = models.ForeignKey(Account, on_delete=models.PROTECT, null=True, blank=True, db_index=True,)
@@ -60,7 +68,7 @@ class DecryptedEvent(PostgresPartitionedModel):
     
     status = models.IntegerField(choices=STATUS_CHOICES, default=0, db_index=True)
     
-    custom = models.BooleanField(default=False)
+    custom = models.BooleanField(default=True)
    
     note = models.TextField(max_length=120, null=True, blank=True)
    

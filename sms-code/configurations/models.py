@@ -19,6 +19,9 @@ class AlarmCode(models.Model):
             models.UniqueConstraint(fields=['account', 'code',], name='configurations.alarmcode.unique_id')
         ]
     
+        verbose_name = _("Alarm Code")
+        verbose_name_plural = _("Alarm Codes")
+        
     TYPES= (
         (0, "Zone"),
         (1, "User")
@@ -43,6 +46,11 @@ class AlarmCode(models.Model):
 
 class Device(models.Model):
 
+    class Meta:
+        verbose_name = _("Device")
+        verbose_name_plural = _("Devices")
+        
+        
     BAUD_RATES = (
         (9600 , "9600"),
         (11440 , "11440"),

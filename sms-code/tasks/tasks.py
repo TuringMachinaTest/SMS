@@ -102,7 +102,7 @@ def dycrypt_events():
             success = False
             
         if success:
-            
+            event.custom = False
             event.protocole = protocole
             event.receiveer_no = receiveer_no
             event.line_no = line_no
