@@ -1,0 +1,1006 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-04-19 13:32+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: accounts/forms.py:104
+msgid "Basic"
+msgstr "الأساسية"
+
+#: accounts/forms.py:131
+msgid "Misc"
+msgstr "متفرقات"
+
+#: accounts/forms.py:152
+msgid "Partitions"
+msgstr ""
+
+#: accounts/forms.py:178 configurations/models.py:23
+msgid "Alarm Codes"
+msgstr "الإنذارات"
+
+#: accounts/forms.py:186 accounts/models.py:182
+msgid "Zones"
+msgstr ""
+
+#: accounts/forms.py:194
+msgid "Users"
+msgstr "المستهلكين"
+
+#: accounts/forms.py:202
+msgid "Installation"
+msgstr "التركيب"
+
+#: accounts/forms.py:219 accounts/models.py:25 accounts/models.py:108
+msgid "Groups"
+msgstr "المجموعات"
+
+#: accounts/forms.py:268
+msgid "Information"
+msgstr "معلومات"
+
+#: accounts/forms.py:291
+msgid "Control"
+msgstr "التحكم"
+
+#: accounts/models.py:14 accounts/models.py:59
+msgid "City"
+msgstr "المدينة"
+
+#: accounts/models.py:15 accounts/views.py:258 accounts/views.py:361
+#: templates/includes/menu-list.html:90
+msgid "Cities"
+msgstr "المدن"
+
+#: accounts/models.py:24
+msgid "Group"
+msgstr "المجموعة"
+
+#: accounts/models.py:36 accounts/models.py:100
+msgid "Installation Company"
+msgstr "شركة التركيب"
+
+#: accounts/models.py:37 accounts/views.py:154
+#: templates/includes/menu-list.html:100
+msgid "Installation Companies"
+msgstr "شركات التركيب"
+
+#: accounts/models.py:39
+msgid "Company Name"
+msgstr "اسم الشركة"
+
+#: accounts/models.py:40 accounts/models.py:65 accounts/models.py:139
+msgid "Phone Number 1"
+msgstr "الرقم الأول"
+
+#: accounts/models.py:41 accounts/models.py:66 accounts/models.py:140
+msgid "Phone Number 2"
+msgstr "الرقم الثاني"
+
+#: accounts/models.py:49 accounts/models.py:129 accounts/models.py:184
+#: configurations/models.py:32 events/models.py:62 support/models.py:24
+#: templates/cards/account_card.html:10
+msgid "Account"
+msgstr "الحساب"
+
+#: accounts/models.py:50 accounts/views.py:45
+#: templates/includes/menu-list.html:111
+msgid "Accounts"
+msgstr "الحسابات"
+
+#: accounts/models.py:52
+msgid "Account ID"
+msgstr "معؤف الحساب"
+
+#: accounts/models.py:53
+msgid "Account Name"
+msgstr "اسم الحساب"
+
+#: accounts/models.py:55
+msgid "Address Line 1"
+msgstr "العنوات الأول"
+
+#: accounts/models.py:56
+msgid "Address Line 2"
+msgstr "العنوات الثاتي"
+
+#: accounts/models.py:57
+msgid "Address Line 3"
+msgstr "العنوان الثالث"
+
+#: accounts/models.py:61
+msgid "Zip Code"
+msgstr ""
+
+#: accounts/models.py:63
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: accounts/models.py:67
+msgid "Whatsapp Number"
+msgstr "ؤقم الواتساب"
+
+#: accounts/models.py:70
+msgid "Security Number"
+msgstr "رقم الحرس"
+
+#: accounts/models.py:72
+msgid "Memo"
+msgstr "ملاحظة"
+
+#: accounts/models.py:74
+msgid "Police Number 1"
+msgstr "رقم الشرطة الأول"
+
+#: accounts/models.py:75
+msgid "Police Number 2"
+msgstr "رقم الشرطة الثاتي"
+
+#: accounts/models.py:76
+msgid "Police Number 3"
+msgstr "رقم الشرطة الثالث"
+
+#: accounts/models.py:78
+msgid "Fire Dept Number 1"
+msgstr "رقم الإطفاء الأول"
+
+#: accounts/models.py:79
+msgid "Fire Dept Number 2"
+msgstr "ؤقم الإطفاء الثاتي"
+
+#: accounts/models.py:80
+msgid "Fire Dept Number 3"
+msgstr "رقم الإطفاء الثالث"
+
+#: accounts/models.py:82
+msgid "Emergency Number 1"
+msgstr "رقم الطوارئ الأول"
+
+#: accounts/models.py:83
+msgid "Emergency Number 2"
+msgstr "رقم الطوارئ الثاتي"
+
+#: accounts/models.py:84
+msgid "Emergency Number 3"
+msgstr "رقم الطوارئ الثالث"
+
+#: accounts/models.py:87
+msgid "Partition Name 0"
+msgstr ""
+
+#: accounts/models.py:88
+msgid "Partition Name 1"
+msgstr ""
+
+#: accounts/models.py:89
+msgid "Partition Name 2"
+msgstr ""
+
+#: accounts/models.py:90
+msgid "Partition Name 3"
+msgstr ""
+
+#: accounts/models.py:91
+msgid "Partition Name 4"
+msgstr ""
+
+#: accounts/models.py:92
+msgid "Partition Name 5"
+msgstr ""
+
+#: accounts/models.py:93
+msgid "Partition Name 6"
+msgstr ""
+
+#: accounts/models.py:94
+msgid "Partition Name 7"
+msgstr ""
+
+#: accounts/models.py:95
+msgid "Partition Name 8"
+msgstr ""
+
+#: accounts/models.py:96
+msgid "Partition Name 9"
+msgstr ""
+
+#: accounts/models.py:97
+msgid "Partition Name 10"
+msgstr ""
+
+#: accounts/models.py:102
+msgid "Installation Date"
+msgstr "تاريخ التركيب"
+
+#: accounts/models.py:103
+msgid "Installation Note"
+msgstr "ملاحظة التركيب"
+
+#: accounts/models.py:104
+msgid "Receiver Phone Number"
+msgstr ""
+
+#: accounts/models.py:105
+msgid "Transmitter Phone Number"
+msgstr ""
+
+#: accounts/models.py:111 accounts/models.py:167 events/models.py:31
+#: events/models.py:75 support/models.py:37
+msgid "Created At"
+msgstr "أنشئ عند"
+
+#: accounts/models.py:112 accounts/models.py:168 events/models.py:79
+#: support/models.py:38
+msgid "Updated At"
+msgstr "حدّث عند"
+
+#: accounts/models.py:113 accounts/models.py:169 support/models.py:40
+msgid "Created By"
+msgstr "أنشئ من"
+
+#: accounts/models.py:115 events/models.py:81
+#: templates/admin/change_form_object_tools.html:5
+#: templates/admin/object_history.html:32
+msgid "History"
+msgstr ""
+
+#: accounts/models.py:126 templates/cards/user_card.html:10
+msgid "Account User"
+msgstr ""
+
+#: accounts/models.py:127
+msgid "Account Users"
+msgstr ""
+
+#: accounts/models.py:130 accounts/models.py:185 configurations/models.py:30
+#: events/models.py:63
+msgid "Partition"
+msgstr ""
+
+#: accounts/models.py:133 accounts/models.py:187 configurations/models.py:71
+msgid "Name"
+msgstr ""
+
+#: accounts/models.py:134 accounts/models.py:188 configurations/models.py:33
+msgid "Code"
+msgstr ""
+
+#: accounts/models.py:136
+msgid "In-Out Codes"
+msgstr ""
+
+#: accounts/models.py:137
+msgid "Password"
+msgstr ""
+
+#: accounts/models.py:141
+msgid "Phone Number 3"
+msgstr ""
+
+#: accounts/models.py:143
+msgid "Title"
+msgstr ""
+
+#: accounts/models.py:145
+msgid "Title 1"
+msgstr ""
+
+#: accounts/models.py:146
+msgid "Title 2"
+msgstr ""
+
+#: accounts/models.py:147
+msgid "Title 3"
+msgstr ""
+
+#: accounts/models.py:151
+msgid "Holiday Begins"
+msgstr ""
+
+#: accounts/models.py:152
+msgid "Holiday Ends"
+msgstr ""
+
+#: accounts/models.py:154
+msgid "Keypad Code"
+msgstr ""
+
+#: accounts/models.py:156
+msgid "Hot User"
+msgstr ""
+
+#: accounts/models.py:158
+msgid "Saturday"
+msgstr ""
+
+#: accounts/models.py:159
+msgid "Sunday"
+msgstr ""
+
+#: accounts/models.py:160
+msgid "Monday"
+msgstr ""
+
+#: accounts/models.py:161
+msgid "Tuesday"
+msgstr ""
+
+#: accounts/models.py:162
+msgid "Wednesday"
+msgstr ""
+
+#: accounts/models.py:163
+msgid "Thursday"
+msgstr ""
+
+#: accounts/models.py:164
+msgid "Friday"
+msgstr ""
+
+#: accounts/models.py:181 events/models.py:64 templates/cards/zone_card.html:10
+msgid "Zone"
+msgstr ""
+
+#: accounts/views.py:64
+msgid "Create Account"
+msgstr ""
+
+#: accounts/views.py:92
+msgid "Accounts Details"
+msgstr ""
+
+#: accounts/views.py:118
+msgid "Update Account"
+msgstr ""
+
+#: accounts/views.py:172
+msgid "Create Installation Company"
+msgstr ""
+
+#: accounts/views.py:190
+msgid "Update Installation Company"
+msgstr ""
+
+#: accounts/views.py:221
+msgid "Installation Company Details"
+msgstr ""
+
+#: accounts/views.py:276
+msgid "Create City"
+msgstr ""
+
+#: accounts/views.py:303
+msgid "City Details"
+msgstr ""
+
+#: accounts/views.py:325
+msgid "Update City"
+msgstr ""
+
+#: accounts/views.py:379
+msgid "Create Group"
+msgstr ""
+
+#: accounts/views.py:406
+msgid "Group Details"
+msgstr ""
+
+#: accounts/views.py:428
+msgid "Update Group"
+msgstr ""
+
+#: configurations/models.py:22 events/models.py:61
+msgid "Alarm Code"
+msgstr ""
+
+#: configurations/models.py:33
+msgid "Code does not comply"
+msgstr ""
+
+#: configurations/models.py:34
+msgid "Description"
+msgstr ""
+
+#: configurations/models.py:37
+msgid "Decryption Type"
+msgstr ""
+
+#: configurations/models.py:50 events/models.py:26
+msgid "Device"
+msgstr ""
+
+#: configurations/models.py:51 templates/includes/menu-list.html:133
+msgid "Devices"
+msgstr ""
+
+#: configurations/models.py:72
+msgid "Type"
+msgstr ""
+
+#: configurations/models.py:74
+msgid "COM"
+msgstr ""
+
+#: configurations/models.py:75
+msgid "Baud Rate"
+msgstr ""
+
+#: configurations/models.py:77
+msgid "End Line"
+msgstr ""
+
+#: configurations/views.py:36 events/models.py:19 events/views.py:39
+#: events/views.py:93 templates/includes/menu-list.html:144
+#: templates/includes/menu-list.html:177
+msgid "Raw Events"
+msgstr ""
+
+#: configurations/views.py:54
+msgid "Create Device"
+msgstr ""
+
+#: configurations/views.py:81
+msgid "Device Details"
+msgstr ""
+
+#: configurations/views.py:103
+msgid "Update Device"
+msgstr ""
+
+#: events/models.py:18 events/models.py:55
+#: templates/cards/rawevent_card.html:10
+msgid "Raw Event"
+msgstr ""
+
+#: events/models.py:28
+msgid "Decrypted"
+msgstr ""
+
+#: events/models.py:29
+msgid "Has Errors"
+msgstr ""
+
+#: events/models.py:40
+msgid "Decrypted Event"
+msgstr ""
+
+#: events/models.py:41 templates/includes/menu-list.html:167
+msgid "Decrypted Events"
+msgstr ""
+
+#: events/models.py:57
+msgid "Protocole"
+msgstr ""
+
+#: events/models.py:58
+msgid "Receiveer No"
+msgstr ""
+
+#: events/models.py:59
+msgid "Line No"
+msgstr ""
+
+#: events/models.py:65 templates/admin/object_history.html:49
+msgid "User"
+msgstr ""
+
+#: events/models.py:67
+msgid "Success"
+msgstr ""
+
+#: events/models.py:69 support/models.py:26
+msgid "Status"
+msgstr ""
+
+#: events/models.py:71
+msgid "Custom"
+msgstr ""
+
+#: events/models.py:73
+msgid "Note"
+msgstr ""
+
+#: events/models.py:76
+msgid "Locked At"
+msgstr ""
+
+#: events/models.py:77
+msgid "Locked By"
+msgstr ""
+
+#: events/views.py:66 events/views.py:146
+msgid "View Event"
+msgstr ""
+
+#: events/views.py:111
+msgid "Create Custom Event"
+msgstr ""
+
+#: events/views.py:190
+msgid "Update Event"
+msgstr ""
+
+#: support/models.py:13 support/views.py:39
+msgid "Service Order"
+msgstr ""
+
+#: support/models.py:14 templates/includes/menu-list.html:200
+msgid "Service Orders"
+msgstr ""
+
+#: support/models.py:17
+msgid "Created"
+msgstr ""
+
+#: support/models.py:18
+msgid "Under Review"
+msgstr ""
+
+#: support/models.py:19
+msgid "Under Processing"
+msgstr ""
+
+#: support/models.py:20
+msgid "Done"
+msgstr ""
+
+#: support/models.py:21
+msgid "Canceled"
+msgstr ""
+
+#: support/models.py:28 templates/admin/includes/object_delete_summary.html:5
+msgid "Summary"
+msgstr ""
+
+#: support/models.py:30
+msgid "Request"
+msgstr ""
+
+#: support/models.py:32
+msgid "Internal Notes"
+msgstr ""
+
+#: support/models.py:34
+msgid "Response"
+msgstr ""
+
+#: support/models.py:39
+msgid "Closed At"
+msgstr ""
+
+#: support/models.py:42
+msgid "Service Order History"
+msgstr ""
+
+#: support/views.py:57
+msgid "Create Service Order"
+msgstr ""
+
+#: support/views.py:84
+msgid "Service Order Details"
+msgstr ""
+
+#: support/views.py:106
+msgid "Update Service Order"
+msgstr ""
+
+#: templates/admin/actions.html:14
+msgid "Run the selected action"
+msgstr ""
+
+#: templates/admin/actions.html:15
+msgid "Go"
+msgstr ""
+
+#: templates/admin/actions.html:25
+msgid "Click here to select the objects across all pages"
+msgstr ""
+
+#: templates/admin/actions.html:25
+#, python-format
+msgid ""
+"\n"
+"                            Select all %(total_count)s %(module_name)s"
+msgstr ""
+
+#: templates/admin/actions.html:28
+msgid "Clear selection"
+msgstr ""
+
+#: templates/admin/auth/user/add_form.html:6
+msgid ""
+"First, enter a username and password. Then, you'll be able to edit more user "
+"options."
+msgstr ""
+
+#: templates/admin/auth/user/add_form.html:8
+msgid "Enter a username and password."
+msgstr ""
+
+#: templates/admin/auth/user/change_password.html:41
+#: templates/registration/password_change_done.html:19
+msgid "Change password"
+msgstr ""
+
+#: templates/admin/auth/user/change_password.html:55
+#, python-format
+msgid ""
+"\n"
+"                            Enter a new password for the user\n"
+"                            <strong>%(username)s</strong>.\n"
+"                        "
+msgstr ""
+
+#: templates/admin/auth/user/change_password.html:91
+#: templates/registration/password_change_form.html:72
+msgid "Change my password"
+msgstr ""
+
+#: templates/admin/auth/user/change_password.html:106
+#: templates/admin/login.html:83
+msgid "Please correct the error below."
+msgstr ""
+
+#: templates/admin/auth/user/change_password.html:108
+#: templates/admin/login.html:85
+#: templates/registration/password_change_form.html:86
+msgid "Please correct the errors below."
+msgstr ""
+
+#: templates/admin/change_form.html:45
+#, python-format
+msgid ""
+"Add\n"
+"                                %(name)s"
+msgstr ""
+
+#: templates/admin/change_form.html:63
+#: templates/admin/change_list_object_tools.html:8
+#, python-format
+msgid "Add %(name)s"
+msgstr ""
+
+#: templates/admin/change_form_object_tools.html:10
+#: templates/admin/edit_inline/stacked.html:32
+#: templates/admin/edit_inline/tabular.html:64
+msgid "View on site"
+msgstr ""
+
+#: templates/admin/change_list.html:111
+msgid "Filter"
+msgstr ""
+
+#: templates/admin/change_list_results.html:18
+msgid "Remove from sorting"
+msgstr ""
+
+#: templates/admin/change_list_results.html:20
+#, python-format
+msgid "Sorting priority: %(priority_number)s"
+msgstr ""
+
+#: templates/admin/change_list_results.html:22
+msgid "Toggle sorting"
+msgstr ""
+
+#: templates/admin/delete_confirmation.html:38
+#: templates/admin/submit_line.html:28
+#: templates/crispy_formset_modal/bootstrap4/modal.html:17
+#: templates/crispy_formset_modal/bootstrap4/table.html:73
+#: templates/crispy_formset_modal/bootstrap5/modal.html:16
+#: templates/crispy_formset_modal/bootstrap5/table.html:73
+#: templates/crispy_formset_modal/bulma/modal.html:15
+#: templates/crispy_formset_modal/bulma/table.html:73
+#: templates/crispy_formset_modal/tailwind/modal.html:18
+#: templates/crispy_formset_modal/tailwind/table.html:81
+msgid "Delete"
+msgstr ""
+
+#: templates/admin/delete_confirmation.html:54
+#, python-format
+msgid ""
+"\n"
+"                                    Deleting the %(object_name)s "
+"'%(escaped_object)s' would result in deleting\n"
+"                                    related objects, but your account "
+"doesn't have permission to delete the\n"
+"                                    following types of objects:\n"
+"                                "
+msgstr ""
+
+#: templates/admin/delete_confirmation.html:72
+#, python-format
+msgid ""
+"\n"
+"                                    Deleting the %(object_name)s ' "
+"%(escaped_object)s' would require deleting\n"
+"                                    the following protected related "
+"objects:\n"
+"                                "
+msgstr ""
+
+#: templates/admin/delete_confirmation.html:89
+#, python-format
+msgid ""
+"\n"
+"                                    Are you sure you want to delete the "
+"%(object_name)s \"%(escaped_object)s\"?\n"
+"                                    All of the following related items will "
+"be deleted:\n"
+"                                "
+msgstr ""
+
+#: templates/admin/delete_confirmation.html:103
+#: templates/admin/delete_selected_confirmation.html:103
+msgid "Objects"
+msgstr ""
+
+#: templates/admin/delete_confirmation.html:124
+#: templates/admin/delete_selected_confirmation.html:122
+msgid "Yes, I'm sure"
+msgstr ""
+
+#: templates/admin/delete_confirmation.html:126
+#: templates/admin/delete_selected_confirmation.html:124
+msgid "No, take me back"
+msgstr ""
+
+#: templates/admin/delete_selected_confirmation.html:38
+msgid "Delete multiple objects"
+msgstr ""
+
+#: templates/admin/delete_selected_confirmation.html:54
+#, python-format
+msgid ""
+"\n"
+"                                        Deleting the selected "
+"%(objects_name)s would result in deleting related\n"
+"                                        objects, but your account doesn't "
+"have permission to delete the following\n"
+"                                        types of objects:\n"
+"                                    "
+msgstr ""
+
+#: templates/admin/delete_selected_confirmation.html:72
+#, python-format
+msgid ""
+"\n"
+"                                        Deleting the selected "
+"%(objects_name)s would require deleting the\n"
+"                                        following protected related "
+"objects:\n"
+"                                    "
+msgstr ""
+
+#: templates/admin/delete_selected_confirmation.html:89
+#, python-format
+msgid ""
+"\n"
+"                                        Are you sure you want to delete the "
+"selected %(objects_name)s? All of the\n"
+"                                        following objects and their related "
+"items will be deleted:\n"
+"                                    "
+msgstr ""
+
+#: templates/admin/edit_inline/stacked.html:29
+#: templates/admin/edit_inline/tabular.html:60
+msgid "Change"
+msgstr ""
+
+#: templates/admin/edit_inline/stacked.html:29
+#: templates/admin/edit_inline/tabular.html:60
+msgid "View"
+msgstr ""
+
+#: templates/admin/edit_inline/tabular.html:37
+msgid "Delete?"
+msgstr ""
+
+#: templates/admin/filter.html:5
+#, python-format
+msgid " By %(filter_title)s "
+msgstr ""
+
+#: templates/admin/invalid_setup.html:31 templates/admin/invalid_setup.html:52
+msgid ""
+"Something's wrong with your database installation. Make sure the appropriate "
+"database tables have been created, and make sure the database is readable by "
+"the appropriate user."
+msgstr ""
+
+#: templates/admin/object_history.html:50
+msgid "Action"
+msgstr ""
+
+#: templates/admin/object_history.html:51
+msgid "Date/time"
+msgstr ""
+
+#: templates/admin/object_history.html:67
+msgid ""
+"This object doesn't have a change history. It probably wasn't added via this "
+"admin site."
+msgstr ""
+
+#: templates/admin/pagination.html:31 templates/admin/search_form.html:32
+msgid "Show all"
+msgstr ""
+
+#: templates/admin/pagination.html:47 templates/admin/submit_line.html:7
+msgid "Save"
+msgstr ""
+
+#: templates/admin/search_form.html:16
+msgid "Search"
+msgstr ""
+
+#: templates/admin/search_form.html:22
+#, python-format
+msgid ""
+"\n"
+"                                    %(counter)s result\n"
+"                                "
+msgid_plural ""
+"\n"
+"                                    %(counter)s results\n"
+"                                "
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin/search_form.html:28
+#, python-format
+msgid ""
+"\n"
+"                                    %(full_result_count)s total\n"
+"                                "
+msgstr ""
+
+#: templates/admin/submit_line.html:11
+msgid "Save as new"
+msgstr ""
+
+#: templates/admin/submit_line.html:15
+msgid "Save and add another"
+msgstr ""
+
+#: templates/admin/submit_line.html:19
+msgid "Save and continue editing"
+msgstr ""
+
+#: templates/admin/submit_line.html:19
+msgid "Save and view"
+msgstr ""
+
+#: templates/admin/submit_line.html:23
+#: templates/crispy_formset_modal/bootstrap4/modal.html:18
+#: templates/crispy_formset_modal/bootstrap5/modal.html:17
+#: templates/crispy_formset_modal/bulma/modal.html:16
+#: templates/crispy_formset_modal/tailwind/modal.html:19
+msgid "Close"
+msgstr ""
+
+#: templates/crispy_formset_modal/bootstrap4/edit_button.html:4
+#: templates/crispy_formset_modal/bootstrap4/modal.html:7
+#: templates/crispy_formset_modal/bootstrap5/edit_button.html:4
+#: templates/crispy_formset_modal/bootstrap5/modal.html:7
+#: templates/crispy_formset_modal/bulma/edit_button.html:4
+#: templates/crispy_formset_modal/bulma/modal.html:6
+#: templates/crispy_formset_modal/tailwind/edit_button.html:4
+#: templates/crispy_formset_modal/tailwind/modal.html:7
+msgid "Edit"
+msgstr ""
+
+#: templates/crispy_formset_modal/bootstrap4/table.html:53
+#: templates/crispy_formset_modal/bootstrap5/table.html:53
+#: templates/crispy_formset_modal/bulma/table.html:53
+#: templates/crispy_formset_modal/tailwind/table.html:58
+msgid "No data"
+msgstr ""
+
+#: templates/crispy_formset_modal/bootstrap4/table.html:72
+#: templates/crispy_formset_modal/bootstrap5/table.html:72
+#: templates/crispy_formset_modal/bulma/table.html:72
+#: templates/crispy_formset_modal/tailwind/table.html:80
+#: templates/generic/list.html:19
+msgid "Add"
+msgstr ""
+
+#: templates/django_tables2/bootstrap.html:66
+#: templates/django_tables2/bootstrap4.html:66
+#: templates/django_tables2/bootstrap5.html:66
+#: templates/django_tables2/table.html:64
+msgid "previous"
+msgstr ""
+
+#: templates/django_tables2/bootstrap.html:91
+#: templates/django_tables2/bootstrap4.html:86
+#: templates/django_tables2/bootstrap5.html:86
+#: templates/django_tables2/table.html:88
+msgid "next"
+msgstr ""
+
+#: templates/generic/form.html:38
+msgid "Card"
+msgstr ""
+
+#: templates/generic/list.html:20
+msgid "Export"
+msgstr ""
+
+#: templates/includes/menu-list.html:13
+msgid "Monitoring"
+msgstr ""
+
+#: templates/includes/menu-list.html:21
+msgid "Operator"
+msgstr ""
+
+#: templates/includes/menu-list.html:81
+msgid "Accounts Management"
+msgstr ""
+
+#: templates/includes/menu-list.html:124
+msgid "Configurations"
+msgstr ""
+
+#: templates/includes/menu-list.html:158
+msgid "Events Management"
+msgstr ""
+
+#: templates/includes/menu-list.html:191
+msgid "Support"
+msgstr ""
+
+#: templates/registration/logged_out.html:14
+msgid "Log in"
+msgstr ""
+
+#: templates/registration/logged_out.html:15
+#: templates/registration/logged_out.html:32
+msgid "Thanks for spending some quality time with the Web site today."
+msgstr ""
+
+#: templates/registration/logged_out.html:19
+msgid "Log in again"
+msgstr ""
+
+#: templates/registration/password_change_done.html:16
+msgid "Documentation"
+msgstr ""
+
+#: templates/registration/password_change_done.html:20
+msgid "Log out"
+msgstr ""
+
+#: templates/registration/password_change_done.html:37
+#: templates/registration/password_change_form.html:26
+msgid "Password change"
+msgstr ""
+
+#: templates/registration/password_change_done.html:51
+#: templates/registration/password_change_done.html:65
+msgid "Your password was changed."
+msgstr ""
+
+#: templates/registration/password_change_form.html:41
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""

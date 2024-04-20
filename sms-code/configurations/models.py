@@ -21,20 +21,31 @@ class AlarmCode(models.Model):
     
         verbose_name = _("Alarm Code")
         verbose_name_plural = _("Alarm Codes")
+    
+    ALARM_TYPES = (
+        (0, _("None")),
+        (1, _("Auto Log")),
+        (2, _("Auto Test")),
+        (3, _("Gaurd Round")),
+        (4, _("Opening")),
+        (5, _("Closing")),
+    )
         
-    TYPES= (
-        (0, "Zone"),
-        (1, "User")
+    DECRYPTION_TYPES= (
+        (0, _("Zone")),
+        (1, _("User"))
     )
     
-    partition = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])
+    partition = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)], verbose_name=_("Partition"))
 
-    account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    code = models.CharField(max_length=16, validators=[RegexValidator(regex=r"^[ER](\d+)$", message=_('Code does not comply'),)],)
-    description = models.CharField(max_length=40)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, verbose_name=_("Account"))
+    code = models.CharField(max_length=16, validators=[RegexValidator(regex=r"^[ER](\d+)$", message=_('Code does not comply'),)], verbose_name=_("Code"))
+    description = models.CharField(max_length=40, verbose_name=_("Description"))
     
+    alarm_type = models.IntegerField(default=0, choices=ALARM_TYPES, verbose_name=_("Alarm Type"))
+
     #0 Zone, 1 User
-    decryption_type = models.IntegerField(default=0, choices=TYPES)
+    decryption_type = models.IntegerField(default=0, choices=DECRYPTION_TYPES, verbose_name=_("Decryption Type"))
 
     # TYPE
     #priority = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(9)])
@@ -68,13 +79,13 @@ class Device(models.Model):
         ("<DC4>", "<DC4>")
     )
     
-    name = models.CharField(max_length=30, unique=True)
-    type = models.CharField(max_length=10, choices=TYPES)
+    name = models.CharField(max_length=30, unique=True, verbose_name=_("Name"))
+    type = models.CharField(max_length=10, choices=TYPES, verbose_name=_("Type"))
 
-    com = models.CharField(max_length=30, unique=True, choices=get_ports)
-    baud_rate = models.IntegerField(default=9600, choices=BAUD_RATES)
+    com = models.CharField(max_length=30, unique=True, choices=get_ports, verbose_name=_("COM"))
+    baud_rate = models.IntegerField(default=9600, choices=BAUD_RATES, verbose_name=_("Baud Rate"))
 
-    end_line = models.CharField(max_length=10, choices=END_LINES)
+    end_line = models.CharField(max_length=10, choices=END_LINES, verbose_name=_("End Line"))
 
     def __str__(self):
             return self.name

@@ -23,12 +23,12 @@ class RawEvent(PostgresPartitionedModel):
         key = ["created_at"]
     
     data = models.TextField()
-    device = models.ForeignKey(Device, on_delete=models.PROTECT)
+    device = models.ForeignKey(Device, on_delete=models.PROTECT, verbose_name=_("Device"))
     
-    decrypted = models.BooleanField(default=False, db_index=True)
-    has_errors = models.BooleanField(default=False, db_index=True)
+    decrypted = models.BooleanField(default=False, db_index=True, verbose_name=_("Decrypted"))
+    has_errors = models.BooleanField(default=False, db_index=True, verbose_name=_("Has Errors"))
     
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
     
     def __str__(self):
             return self.data 
@@ -52,33 +52,33 @@ class DecryptedEvent(PostgresPartitionedModel):
         (3, "Follow")
     )
     
-    raw_event = models.IntegerField()
+    raw_event = models.IntegerField(verbose_name=_("Raw Event"))
     
-    protocole = models.IntegerField(default=-1)
-    receiveer_no = models.IntegerField(default=-1)
-    line_no = models.IntegerField(default=-1)
+    protocole = models.IntegerField(default=-1, verbose_name=_("Protocole"))
+    receiveer_no = models.IntegerField(default=-1, verbose_name=_("Receiveer No"))
+    line_no = models.IntegerField(default=-1, verbose_name=_("Line No"))
     
-    alarm_code = models.ForeignKey(AlarmCode, on_delete=models.PROTECT, null=True, blank=True)
-    account = models.ForeignKey(Account, on_delete=models.PROTECT, null=True, blank=True, db_index=True,)
-    partition = models.IntegerField(default=0, db_index=True)
-    zone = models.ForeignKey(Zone, on_delete=models.PROTECT, null=True, blank=True,db_index=True)
-    user = models.ForeignKey(AccountUser, on_delete=models.PROTECT, null=True, blank=True, db_index=True)
+    alarm_code = models.ForeignKey(AlarmCode, on_delete=models.PROTECT, null=True, blank=True, verbose_name=_("Alarm Code"))
+    account = models.ForeignKey(Account, on_delete=models.PROTECT, null=True, blank=True, db_index=True, verbose_name=_("Account"))
+    partition = models.IntegerField(default=0, db_index=True, verbose_name=_("Partition"))
+    zone = models.ForeignKey(Zone, on_delete=models.PROTECT, null=True, blank=True,db_index=True, verbose_name=_("Zone"))
+    user = models.ForeignKey(AccountUser, on_delete=models.PROTECT, null=True, blank=True, db_index=True, verbose_name=_("User"))
     
-    success = models.BooleanField(default=False, db_index=True)
+    success = models.BooleanField(default=False, db_index=True, verbose_name=_("Success"))
     
-    status = models.IntegerField(choices=STATUS_CHOICES, default=0, db_index=True)
+    status = models.IntegerField(choices=STATUS_CHOICES, default=0, db_index=True, verbose_name=_("Status"))
     
-    custom = models.BooleanField(default=True)
+    custom = models.BooleanField(default=True, verbose_name=_("Custom"))
    
-    note = models.TextField(max_length=120, null=True, blank=True)
+    note = models.TextField(max_length=120, null=True, blank=True, verbose_name=_("Note"))
    
-    created_at = models.DateTimeField()
-    locked_at = models.DateTimeField(null=True, blank=True)
-    locked_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True, db_index=True)
+    created_at = models.DateTimeField(verbose_name=_("Created At"))
+    locked_at = models.DateTimeField(null=True, blank=True, verbose_name=_("Locked At"))
+    locked_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True, db_index=True, verbose_name=_("Locked By"))
     
-    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True, verbose_name=_("Updated At"))
     
-    history = HistoricalRecords()
+    history = HistoricalRecords(verbose_name=_("History"))
 
     def save(self, *args, **kwargs):
         if self.status != -1:

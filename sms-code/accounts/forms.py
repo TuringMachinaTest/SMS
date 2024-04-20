@@ -14,6 +14,8 @@ from crispy_forms.bootstrap import TabHolder, Tab
 from django_select2 import forms as s2forms
 
 from phonenumber_field import formfields, widgets
+from django.utils.translation import gettext as _
+
 
 class CityForm(forms.ModelForm):
 
@@ -99,7 +101,7 @@ class AccountForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             TabHolder(
-                Tab('Basic',
+                Tab(_('Basic'),
                     Row(
                         Column('id', css_class="col-1"),
                         Column('name', css_class="col-3"), 
@@ -126,7 +128,7 @@ class AccountForm(forms.ModelForm):
                     ),
                     
                 ),
-                Tab('Misc',
+                Tab(_('Misc'),
                     Row(
                         Column('security_number'),
                         Column('memo', css_class="col-8")
@@ -147,7 +149,7 @@ class AccountForm(forms.ModelForm):
                         Column('emergency_number3'), 
                     )
                 ),
-                Tab('Partitions',
+                Tab(_('Partitions'),
                     Row(
                        Column("partition_name0"),
                        Column("partition_name1"),
@@ -173,7 +175,7 @@ class AccountForm(forms.ModelForm):
                 
                 ),
                                 
-                Tab("Alarm Codes",
+                Tab(_("Alarm Codes"),
                     ModalEditFormsetLayout(
                         "AlarmCodeInlineFormSet",
                         list_display=["code", "description" ],
@@ -181,7 +183,7 @@ class AccountForm(forms.ModelForm):
                 ),
                 
                 
-                Tab("Zones",
+                Tab(_("Zones"),
                     ModalEditFormsetLayout(
                         "ZoneInlineFormSet",
                         list_display=["partition", "name", "code", ],
@@ -189,7 +191,7 @@ class AccountForm(forms.ModelForm):
 
                 ),
                 
-                Tab("Users",
+                Tab(_("Users"),
                     ModalEditFormsetLayout(
                         "AccountUserInlineFormSet",
                         list_display=["name", "title", "partition", "phone_number1", "phone_number2", "phone_number3"],
@@ -197,7 +199,7 @@ class AccountForm(forms.ModelForm):
 
                 ),
                 
-                Tab("Installation",
+                Tab(_("Installation"),
                     Row(
                        Column("installation_company"),
                        Column("installation_date"),                  
@@ -214,7 +216,7 @@ class AccountForm(forms.ModelForm):
                        Column("installation_note"), 
                     )
                 ),
-                Tab("Groups",
+                Tab(_("Groups"),
                     Row(
                         Column("groups")
                     ),
@@ -263,7 +265,7 @@ class AccountUserForm(forms.ModelForm):
         self.helper = ModalEditFormHelper()
         self.helper.layout = ModalEditLayout(
             TabHolder(
-                Tab("Information",
+                Tab(_("Information"),
                     Row(
                         Column('partition',),
                     ),
@@ -286,7 +288,7 @@ class AccountUserForm(forms.ModelForm):
                         Column('phone_number3', css_class="col-6"),
                     ),
                 ),
-                Tab("Control",
+                Tab(_("Control"),
                     Row(
                         Column('holiday_begins'),
                         Column('holiday_ends'),
