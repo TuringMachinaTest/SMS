@@ -90,6 +90,13 @@ class AccountForm(forms.ModelForm):
         ],
     ))
     
+    copy_alarm_codes_from = forms.ModelChoiceField(
+        queryset=Account.objects.all(),
+        widget=s2forms.ModelSelect2Widget(
+            model=Account,
+            search_fields=['id__icontains', 'name__icontains'],
+        )
+    )
     
     class Meta:
         model = Account
@@ -181,8 +188,13 @@ class AccountForm(forms.ModelForm):
                         list_display=["code", "description" ],
                     ),
                 ),
-                
-                
+                Tab(_("Copy Alarm Codes"),
+                    Row(
+                        Column("copy_alarm_codes"),
+                        Column("copy_alarm_codes_from"),
+                    ),
+                ),
+                                
                 Tab(_("Zones"),
                     ModalEditFormsetLayout(
                         "ZoneInlineFormSet",

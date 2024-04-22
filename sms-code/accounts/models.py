@@ -8,6 +8,8 @@ from phonenumber_field import modelfields
 from django.utils.translation import gettext as _
 from simple_history.models import HistoricalRecords
 
+import configurations
+
 
 class City(models.Model):
     class Meta:
@@ -96,6 +98,10 @@ class Account(models.Model):
     partition_name9 = models.CharField(max_length=30, blank=True, verbose_name=_("Partition Name 9"))
     partition_name10 = models.CharField(max_length=30, blank=True, verbose_name=_("Partition Name 10"))
     
+    # Alarm Codes
+    copy_alarm_codes = models.BooleanField(default=False, verbose_name=_("Copy Alarm Codes"))
+    copy_alarm_codes_from = models.ForeignKey("self", on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("Copy Alarm Codes From"))
+    
     # Installation
     installation_company = models.ForeignKey(InstallationCompany, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_("Installation Company"))
 
@@ -113,6 +119,25 @@ class Account(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True, verbose_name=_("Created By"))
     
     history = HistoricalRecords(verbose_name=_("History"))
+    
+    def save(self, *args, **kwargs):
+        
+        if self.copy_alarm_codes and self.copy_alarm_codes_from:
+            alarm_codes = configurations.models.AlarmCode.objects.filter(account=self.copy_alarm_codes_from)
+            for alarm_code in alarm_codes:
+                new_alarm_code = configurations.models.AlarmCode()
+                new_alarm_code.account=self,
+                new_alarm_code.code=alarm_code.code,
+                new_alarm_code.description=alarm_code.description
+                new_alarm_code.partition = alarm_code.partition
+                new_alarm_code.alarm_type = alarm_code.alarm_type
+                new_alarm_code.decryption_type = alarm_code.decryption_type
+                new_alarm_code.save()
+                
+            self.copy_alarm_codes = False
+            self.copy_alarm_codes_from = None
+            
+        super().save(*args, **kwargs)
     
     def __str__(self):
         return str(self.id) + " : " + self.name 
