@@ -1,9 +1,9 @@
-import json
+from datetime import datetime, timedelta
 import re
 from serial import Serial
 from django.core.cache import cache
 
-from accounts.models import Account, AccountUser, Zone
+from accounts.models import Account, AccountNote, AccountUser, Zone
 from configurations.models import AlarmCode, Device
 from events.models import DecryptedEvent, RawEvent
 from events.serializers import DecryptedEventSerializer, RawEventSerializer
@@ -72,9 +72,10 @@ def event_listener(device_no):
             #print(data.decode())
             send_message('events', 'send_raw_event', RawEventSerializer(event).data )
 
+
 def dycrypt_events():
     
-    for raw_event in RawEvent.objects.filter(decrypted=False).order_by('id')[0:100]:
+    for raw_event in RawEvent.objects.filter(decrypted=False).order_by('id')[:100]:
         
         if raw_event.device.type == "mcdi":
             (success, receiveer_no, line_no, account_no, alarm_code, partition, zone) = decrypt_event_mcdi(raw_event.data)
@@ -138,3 +139,24 @@ def dycrypt_events():
         raw_event.has_errors = not success
         raw_event.save()
         
+
+def pending_events_timer():
+    for event in DecryptedEvent.objects.filter(status=2).filter(timer=True).order_by('id')[:100]:
+        if event.updated_at + timedelta(minutes=event.timer_interval_minnutes, hours=event.timer_interval_hours) > datetime.now() :
+            event.status = 0
+            event.save()
+            send_message('events', 'send_uncommited_event', DecryptedEventSerializer(event).data )
+        
+        
+def follow_events_timer():
+    for event in DecryptedEvent.objects.filter(status=3).filter(timer=True).order_by('id')[:100]:
+        if event.updated_at + timedelta(minutes=event.timer_interval_minnutes, hours=event.timer_interval_hours) > datetime.now() :
+            event.status = 0
+            event.save()
+            send_message('events', 'send_uncommited_event', DecryptedEventSerializer(event).data )
+        
+        
+def account_notes_timer():
+    for note in AccountNote.objects.filter(timer=True).order_by('id')[:100]:
+        if note.updated_at + timedelta(minutes=note.timer_interval_minutes, hours=note.timer_interval_hours) > datetime.now() :
+            note.delete()

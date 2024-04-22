@@ -116,7 +116,29 @@ class Account(models.Model):
     
     def __str__(self):
         return str(self.id) + " : " + self.name 
+ 
+ 
+class AccountNote(models.Model):
     
+    class Meta:
+        verbose_name = _("Account Note")
+        verbose_name_plural = _("Account Notes")
+    
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, verbose_name=_("Account"))
+
+    note = models.TextField(max_length=120, null=True, blank=True, verbose_name=_("Note"))
+    timer = models.BooleanField(default=False, db_index=True, verbose_name=_("Timer"))
+    timer_interval_minutes = models.IntegerField(default=0, verbose_name=_("Minutes"))
+    timer_interval_hours = models.IntegerField(default=0, verbose_name=_("Hours"))
+
+    
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True, verbose_name=_("Created By"))
+
+    def __str__(self):
+        return self.note    
+
 
 class AccountUser(models.Model):
     class Meta:

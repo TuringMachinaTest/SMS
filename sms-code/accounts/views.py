@@ -20,7 +20,7 @@ from .filters import AccountFilter, CityFilter, GroupFilter, InstallationCompany
 
 from .tables import AccountsTable, CityTable, GroupTable, InstallationCompanyTable
 
-from .forms import AccountForm, AccountUserForm, AccountUserInlineFormSet, CityForm, GroupForm, InstallationCompanyForm, ZoneInlineFormSet
+from .forms import AccountForm, AccountNoteInlineFormSet, AccountUserForm, AccountUserInlineFormSet, CityForm, GroupForm, InstallationCompanyForm, ZoneInlineFormSet
 from .models import Account, AccountUser, City, Group, InstallationCompany
 
 from django.utils.translation import gettext as _
@@ -53,7 +53,7 @@ class CreateAccount(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithIn
     
     model = Account
     form_class = AccountForm
-    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet]
+    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet]
     
     template_name = 'generic/form.html'
     success_url = reverse_lazy('accounts:account_list')
@@ -72,7 +72,7 @@ class DetailsAccount(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateWithI
     
     model = Account
     form_class = AccountForm
-    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet]
+    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet]
 
     template_name = 'generic/form.html'
     
@@ -105,7 +105,7 @@ class UpdateeAccount(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateWithI
     
     model = Account
     form_class = AccountForm
-    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet]
+    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet]
     
     formset_kwargs = {'form_kwargs': {'test': False}}
 

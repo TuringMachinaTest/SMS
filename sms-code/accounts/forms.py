@@ -2,7 +2,7 @@ from .utils import get_partitions_choices
 from django import forms
 from extra_views import InlineFormSetFactory
 
-from .models import Account, AccountUser, City, Group, InstallationCompany, Zone
+from .models import Account, AccountNote, AccountUser, City, Group, InstallationCompany, Zone
 
 from crispy_formset_modal.helper import ModalEditFormHelper
 from crispy_formset_modal.layout import ModalEditLayout, ModalEditFormsetLayout
@@ -221,6 +221,13 @@ class AccountForm(forms.ModelForm):
                         Column("groups")
                     ),
                 ),
+                
+                Tab(_("Notes"),
+                    ModalEditFormsetLayout(
+                        "AccountNoteInlineFormSet",
+                        list_display=["note", "timer"],
+                    ),
+                ),
             ),
         )
         
@@ -387,6 +394,51 @@ class ZoneInlineFormSet(InlineFormSetFactory):
         kwargs['form_kwargs'] = {}
         if kwargs['instance']:
             kwargs['form_kwargs']['account_id'] = kwargs['instance'].id 
+        kwargs['form_kwargs']['details'] = True
+                
+        return kwargs
+    
+    
+class AccountNoteForm(forms.ModelForm):    
+    class Meta:
+        model = AccountNote
+        fields = '__all__' 
+    
+    def __init__(self, details = False, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.helper = ModalEditFormHelper()
+        self.helper.layout = ModalEditLayout(
+            Row(
+                Column("note")
+            ),
+            Row(
+                Column("timer", css_class="col-2"),
+                Column("timer_interval_minutes", css_class="col-5"),
+                Column("timer_interval_hours", css_class="col-5"),
+            )
+        )
+                
+        # Disable submit button for non-admin users
+        if not details:
+            for field in self.fields:
+                self.fields[field].disabled = True             
+
+
+class AccountNoteInlineFormSet(InlineFormSetFactory):
+   
+    model = AccountNote
+    form_class = AccountNoteForm
+    factory_kwargs = {"extra": 0}
+    
+    def get_formset_kwargs(self):
+        kwargs = super(AccountNoteInlineFormSet, self).get_formset_kwargs()
+
+        #self.formset_kwargs = { 'form_kwargs' : { 'account_id' : kwargs['instance'].id}}
+        # Add any additional parameters you want to pass to the form
+        #print(kwargs)
+        
+        kwargs['form_kwargs'] = {}
         kwargs['form_kwargs']['details'] = True
                 
         return kwargs

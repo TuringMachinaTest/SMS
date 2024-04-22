@@ -17,6 +17,8 @@ from crispy_forms.bootstrap import TabHolder, Tab
 from django_select2 import forms as s2forms
 
 from phonenumber_field import formfields, widgets
+from django.utils.translation import gettext as _
+
 
 class DecryptedEventForm(forms.ModelForm):
 
@@ -37,19 +39,41 @@ class DecryptedEventForm(forms.ModelForm):
         
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            Row(
-                Column('account'),
-            ),
-            Row(
-                Column('protocole'),
-                Column('receiveer_no'),
-                Column('line_no'),  
-                Column('partition'),              
-            ),
-            Row(
-                Column('alarm_code', css_class="col-3"),
-                Column('status', css_class="col-3"),
-                Column('note'),
+            TabHolder(
+                Tab(_('Event'),
+                    Row(
+                        Column('account'),
+                    ),
+                    Row(
+                        Column('protocole'),
+                        Column('receiveer_no'),
+                        Column('line_no'),  
+                        Column('partition'),              
+                    ),
+                    Row(
+                        Column('alarm_code', css_class="col-3"),
+                        Column(
+                            Row(
+                                Column('status', css_class="col-12")
+                            ),
+                            Row(
+                                Column('timer'),
+                                Column('timer_interval_minnutes'),
+                                Column('timer_interval_hours'),
+                            ),
+                        css_class="col-3"),
+                        Column('note'),
+                    ),
+                ),
+                Tab(_('Account Note'),
+
+                    Row(
+                        Column('account_note_timer', css_class="col-1"),
+                        Column('note_timer_interval_minnutes', css_class="col-1"),
+                        Column('note_timer_interval_hours', css_class="col-1"),
+                        Column('account_note'),
+                    ),
+                ),
             )
         )
         

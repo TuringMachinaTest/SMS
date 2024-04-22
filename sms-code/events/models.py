@@ -1,6 +1,6 @@
 from django.db import models
 
-from accounts.models import Account, AccountUser, Zone
+from accounts.models import Account, AccountNote, AccountUser, Zone
 from configurations.models import AlarmCode, Device
 from simple_history.models import HistoricalRecords
 
@@ -71,6 +71,15 @@ class DecryptedEvent(PostgresPartitionedModel):
     custom = models.BooleanField(default=True, verbose_name=_("Custom"))
    
     note = models.TextField(max_length=120, null=True, blank=True, verbose_name=_("Note"))
+        
+    timer = models.BooleanField(default=False, db_index=True, verbose_name=_("Timer"))
+    timer_interval_minnutes = models.IntegerField(default=0, verbose_name=_("Minutes"))
+    timer_interval_hours = models.IntegerField(default=0, verbose_name=_("Hours"))
+
+    account_note = models.TextField(max_length=120, null=True, blank=True, verbose_name=_("Account Note"))
+    account_note_timer = models.BooleanField(default=False, verbose_name=_("Timer"))
+    note_timer_interval_minnutes = models.IntegerField(default=0, verbose_name=_("Minutes"))
+    note_timer_interval_hours = models.IntegerField(default=0, verbose_name=_("Hours"))
    
     created_at = models.DateTimeField(verbose_name=_("Created At"))
     locked_at = models.DateTimeField(null=True, blank=True, verbose_name=_("Locked At"))
@@ -83,5 +92,15 @@ class DecryptedEvent(PostgresPartitionedModel):
     def save(self, *args, **kwargs):
         if self.status != -1:
             self.locked_at = None
+            
+        if self.account_note != "":
+            account_note = AccountNote(
+                account=self.account, 
+                note=self.account_note, 
+                note_timer=self.account_note_timer, 
+                note_timer_interval_minnutes=self.note_timer_interval_minnutes, 
+                note_timer_interval_hours=self.note_timer_interval_hours
+            )
+            account_note.save()
                         
         super().save(*args, **kwargs)
