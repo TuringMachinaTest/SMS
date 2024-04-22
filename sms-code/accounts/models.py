@@ -126,9 +126,9 @@ class Account(models.Model):
             alarm_codes = configurations.models.AlarmCode.objects.filter(account=self.copy_alarm_codes_from)
             for alarm_code in alarm_codes:
                 new_alarm_code = configurations.models.AlarmCode()
-                new_alarm_code.account=self,
-                new_alarm_code.code=alarm_code.code,
-                new_alarm_code.description=alarm_code.description
+                new_alarm_code.account = self,
+                new_alarm_code.code = alarm_code.code,
+                new_alarm_code.description = alarm_code.description
                 new_alarm_code.partition = alarm_code.partition
                 new_alarm_code.alarm_type = alarm_code.alarm_type
                 new_alarm_code.decryption_type = alarm_code.decryption_type
