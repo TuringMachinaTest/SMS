@@ -228,6 +228,13 @@ class AccountForm(forms.ModelForm):
                         list_display=["note", "timer"],
                     ),
                 ),
+                
+                Tab(_("Service Orders"),
+                    ModalEditFormsetLayout(
+                        "ServiceOrderInlineFormSet",
+                        list_display=["summary", "status"],
+                    ),
+                ),
             ),
         )
         

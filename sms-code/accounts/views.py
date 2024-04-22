@@ -15,6 +15,7 @@ from extra_views import CreateWithInlinesView, InlineFormSetFactory, ModelFormSe
 from view_breadcrumbs import DetailBreadcrumbMixin, ListBreadcrumbMixin, CreateBreadcrumbMixin, UpdateBreadcrumbMixin, DeleteBreadcrumbMixin
 
 from configurations.forms import AlarmCodeInlineFormSet
+from support.forms import ServiceOrderInlineFormSet
 
 from .filters import AccountFilter, CityFilter, GroupFilter, InstallationCompanyFilter
 
@@ -53,7 +54,7 @@ class CreateAccount(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithIn
     
     model = Account
     form_class = AccountForm
-    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet]
+    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ServiceOrderInlineFormSet]
     
     template_name = 'generic/form.html'
     success_url = reverse_lazy('accounts:account_list')
@@ -72,7 +73,7 @@ class DetailsAccount(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateWithI
     
     model = Account
     form_class = AccountForm
-    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet]
+    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ServiceOrderInlineFormSet]
 
     template_name = 'generic/form.html'
     
@@ -105,7 +106,7 @@ class UpdateeAccount(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateWithI
     
     model = Account
     form_class = AccountForm
-    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet]
+    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ServiceOrderInlineFormSet]
     
     formset_kwargs = {'form_kwargs': {'test': False}}
 
