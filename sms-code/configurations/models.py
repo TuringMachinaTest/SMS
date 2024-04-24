@@ -26,7 +26,7 @@ class AlarmCode(models.Model):
         (0, _("None")),
         (1, _("Auto Log")),
         (2, _("Auto Test")),
-        (3, _("Gaurd Round")),
+        #(3, _("Gaurd Round")),
         (4, _("Opening")),
         (5, _("Closing")),
     )
@@ -36,18 +36,24 @@ class AlarmCode(models.Model):
         (1, _("User"))
     )
     
-    partition = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)], verbose_name=_("Partition"))
+    partition = models.IntegerField(default=0, db_index=True, validators=[MinValueValidator(0), MaxValueValidator(10)], verbose_name=_("Partition"))
 
-    account = models.ForeignKey(Account, on_delete=models.CASCADE, verbose_name=_("Account"))
-    code = models.CharField(max_length=16, validators=[RegexValidator(regex=r"^[ER](\d+)$", message=_('Code does not comply'),)], verbose_name=_("Code"))
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, db_index=True, verbose_name=_("Account"))
+    code = models.CharField(max_length=16, db_index=True, validators=[RegexValidator(regex=r"^[ER](\d+)$", message=_('Code does not comply'),)], verbose_name=_("Code"))
     description = models.CharField(max_length=40, verbose_name=_("Description"))
     
-    alarm_type = models.IntegerField(default=0, choices=ALARM_TYPES, verbose_name=_("Alarm Type"))
-
     #0 Zone, 1 User
     decryption_type = models.IntegerField(default=0, choices=DECRYPTION_TYPES, verbose_name=_("Decryption Type"))
 
     # TYPE
+    alarm_type = models.IntegerField(default=0, choices=ALARM_TYPES, verbose_name=_("Alarm Type"))
+
+    return_delay = models.IntegerField(default=0, verbose_name=_("Delay"))
+
+    is_periodic = models.BooleanField(default=False, verbose_name=_("Scheduled"))
+    periodic_interval_minutes = models.IntegerField(default=0, verbose_name=_("Minutes"))
+    periodic_interval_hours = models.IntegerField(default=0, verbose_name=_("Hours"))
+    
     #priority = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(9)])
     #delay = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(99)])
     

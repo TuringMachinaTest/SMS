@@ -58,7 +58,7 @@ class DecryptedEvent(PostgresPartitionedModel):
     receiveer_no = models.IntegerField(default=-1, verbose_name=_("Receiveer No"))
     line_no = models.IntegerField(default=-1, verbose_name=_("Line No"))
     
-    alarm_code = models.ForeignKey(AlarmCode, on_delete=models.PROTECT, null=True, blank=True, verbose_name=_("Alarm Code"))
+    alarm_code = models.ForeignKey(AlarmCode, on_delete=models.PROTECT, db_index=True, null=True, blank=True, verbose_name=_("Alarm Code"))
     account = models.ForeignKey(Account, on_delete=models.PROTECT, null=True, blank=True, db_index=True, verbose_name=_("Account"))
     partition = models.IntegerField(default=0, db_index=True, verbose_name=_("Partition"))
     zone = models.ForeignKey(Zone, on_delete=models.PROTECT, null=True, blank=True,db_index=True, verbose_name=_("Zone"))
@@ -80,7 +80,11 @@ class DecryptedEvent(PostgresPartitionedModel):
     account_note_timer = models.BooleanField(default=False, verbose_name=_("Timer"))
     note_timer_interval_minnutes = models.IntegerField(default=0, verbose_name=_("Minutes"))
     note_timer_interval_hours = models.IntegerField(default=0, verbose_name=_("Hours"))
-   
+    
+    has_return = models.BooleanField(default=False, db_index=True, verbose_name=_("Has Return"))
+
+    is_last_periodic_event = models.BooleanField(default=False, db_index=True, verbose_name=_("Is Last Periodic Event"))
+    
     created_at = models.DateTimeField(verbose_name=_("Created At"))
     locked_at = models.DateTimeField(null=True, blank=True, verbose_name=_("Locked At"))
     locked_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True, db_index=True, verbose_name=_("Locked By"))
@@ -102,5 +106,21 @@ class DecryptedEvent(PostgresPartitionedModel):
                 note_timer_interval_hours=self.note_timer_interval_hours
             )
             account_note.save()
-                        
+            
+        if self._state.adding is True and self.alarm_code and self.account and self.partition and self.alarm_code.code[0] == "R":
+            related_code = self.alarm_code.code.replace("R", "E")
+            related_alarm_code = AlarmCode.objects.filter(account=self.account, partition=self.partition, code=related_code).first()
+            if related_alarm_code:
+                related_event = DecryptedEvent.objects.filter(has_return=False, account=self.account, partition=self.partition, alarm_code=related_alarm_code).first()
+                if related_event:
+                    related_event.has_return = True
+                    related_event.save()
+                    self.has_return = True
+                    
+        if self._state.adding is True and self.alarm_code and self.alarm_code.is_periodic and self.partition:
+            last_periodic_event = DecryptedEvent.objects.filter(account=self.account, partition=self.partition, alarm_code=self.alarm_code, is_last_periodic_event=True).first()
+            if last_periodic_event:
+                last_periodic_event.is_last_periodic_event = False
+                last_periodic_event.save()
+                                           
         super().save(*args, **kwargs)
