@@ -8,7 +8,7 @@ from crispy_forms.bootstrap import TabHolder, Tab
 
 from accounts.utils import get_partitions_choices
 
-from .models import AlarmCode, Device
+from .models import AlarmCode, Device, Schedule
 
 
 class DeviceForm(forms.ModelForm):
@@ -73,6 +73,39 @@ class AlarmCodeInlineFormSet(InlineFormSetFactory):
     
     def get_formset_kwargs(self):
         kwargs = super(AlarmCodeInlineFormSet, self).get_formset_kwargs()
+
+        #self.formset_kwargs = { 'form_kwargs' : { 'account_id' : kwargs['instance'].id}}
+        # Add any additional parameters you want to pass to the form
+        #print(kwargs)
+        
+        kwargs['form_kwargs'] = {}
+        if kwargs['instance']:
+            kwargs['form_kwargs']['account_id'] = kwargs['instance'].id 
+        kwargs['form_kwargs']['details'] = True
+                
+        return kwargs
+    
+    
+class ScheduleForm(forms.Form):
+    
+    class Meta:
+        model = Schedule
+        fields = '__all__'
+        
+    def __init__(self, details = False, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.helper = ModalEditFormHelper()
+        
+
+class ScheduleInlineFormSet(InlineFormSetFactory):
+   
+    model = Schedule
+    form_class = ScheduleForm
+    factory_kwargs = {"extra": 0}
+    
+    def get_formset_kwargs(self):
+        kwargs = super(ScheduleInlineFormSet, self).get_formset_kwargs()
 
         #self.formset_kwargs = { 'form_kwargs' : { 'account_id' : kwargs['instance'].id}}
         # Add any additional parameters you want to pass to the form

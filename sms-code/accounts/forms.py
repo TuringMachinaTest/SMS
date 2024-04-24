@@ -194,6 +194,13 @@ class AccountForm(forms.ModelForm):
                         Column("copy_alarm_codes_from"),
                     ),
                 ),
+                
+                Tab(_("Schedules"),
+                    ModalEditFormsetLayout(
+                        "ScheduleInlineFormSet",
+                        # list_display=[],
+                    ),
+                ),
                                 
                 Tab(_("Zones"),
                     ModalEditFormsetLayout(

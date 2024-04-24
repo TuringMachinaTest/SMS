@@ -1,7 +1,7 @@
 from django.db import models
 
 from accounts.models import Account, AccountNote, AccountUser, Zone
-from configurations.models import AlarmCode, Device
+from configurations.models import AlarmCode, Device, Schedule
 from simple_history.models import HistoricalRecords
 
 from django.conf import settings
@@ -84,6 +84,8 @@ class DecryptedEvent(PostgresPartitionedModel):
     has_return = models.BooleanField(default=False, db_index=True, verbose_name=_("Has Return"))
 
     is_last_periodic_event = models.BooleanField(default=False, db_index=True, verbose_name=_("Is Last Periodic Event"))
+
+    is_out_of_schedule = models.BooleanField(default=False, db_index=True, verbose_name=_("Is Out Of Schedule"))
     
     created_at = models.DateTimeField(verbose_name=_("Created At"))
     locked_at = models.DateTimeField(null=True, blank=True, verbose_name=_("Locked At"))
@@ -122,5 +124,32 @@ class DecryptedEvent(PostgresPartitionedModel):
             if last_periodic_event:
                 last_periodic_event.is_last_periodic_event = False
                 last_periodic_event.save()
-                                           
+        
+        # Opening Time
+        if self._state.adding is True and self.alarm_code and self.alarm_code.alarm_type == 4 and self.partition:
+            schedule = Schedule.objects.filter(account=self.account, partition=self.partition).first()
+            if schedule:
+                day_of_the_week = self.created_at.weekday()
+                if not schedule.get_is_open(day_of_the_week):
+                    self.is_out_of_schedule = True
+                else:
+                    opening_time_from, opening_time_to = schedule.get_opening_time(day_of_the_week)
+                    if opening_time_from and opening_time_to:
+                        if self.created_at.time() < opening_time_from and self.created_at.time() > opening_time_to:
+                            self.is_out_of_schedule = True
+        
+        # Closing Time
+        if self._state.adding is True and self.alarm_code and self.alarm_code.alarm_type == 5 and self.partition:
+            schedule = Schedule.objects.filter(account=self.account, partition=self.partition).first()
+            if schedule:
+                day_of_the_week = self.created_at.weekday()
+                if not schedule.get_is_open(day_of_the_week):
+                    self.is_out_of_schedule = True
+                else:
+                    closing_time_from, closing_time_to = schedule.get_closing_time(day_of_the_week)
+                    if closing_time_from and closing_time_to:
+                        if self.created_at.time() < closing_time_from and self.created_at.time() > closing_time_to:
+                            self.is_out_of_schedule = True
+                
+                   
         super().save(*args, **kwargs)

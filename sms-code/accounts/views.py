@@ -14,7 +14,7 @@ from django_tables2.export.views import ExportMixin
 from extra_views import CreateWithInlinesView, InlineFormSetFactory, ModelFormSetView, UpdateWithInlinesView
 from view_breadcrumbs import DetailBreadcrumbMixin, ListBreadcrumbMixin, CreateBreadcrumbMixin, UpdateBreadcrumbMixin, DeleteBreadcrumbMixin
 
-from configurations.forms import AlarmCodeInlineFormSet
+from configurations.forms import AlarmCodeInlineFormSet, ScheduleInlineFormSet
 from support.forms import ServiceOrderInlineFormSet
 
 from .filters import AccountFilter, CityFilter, GroupFilter, InstallationCompanyFilter
@@ -54,7 +54,7 @@ class CreateAccount(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithIn
     
     model = Account
     form_class = AccountForm
-    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ServiceOrderInlineFormSet]
+    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ServiceOrderInlineFormSet, ScheduleInlineFormSet]
     
     template_name = 'generic/form.html'
     success_url = reverse_lazy('accounts:account_list')
@@ -73,7 +73,7 @@ class DetailsAccount(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateWithI
     
     model = Account
     form_class = AccountForm
-    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ServiceOrderInlineFormSet]
+    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ServiceOrderInlineFormSet, ScheduleInlineFormSet]
 
     template_name = 'generic/form.html'
     
@@ -106,7 +106,7 @@ class UpdateeAccount(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateWithI
     
     model = Account
     form_class = AccountForm
-    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ServiceOrderInlineFormSet]
+    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ServiceOrderInlineFormSet, ScheduleInlineFormSet]
     
     formset_kwargs = {'form_kwargs': {'test': False}}
 
