@@ -7,6 +7,7 @@ from crispy_formset_modal.layout import ModalEditLayout, ModalEditFormsetLayout
 from crispy_forms.bootstrap import TabHolder, Tab
 
 from accounts.utils import get_partitions_choices
+from configurations.utils import get_action_choices
 
 from .models import AlarmCode, Device, Schedule
 
@@ -58,7 +59,30 @@ class AlarmCodeForm(forms.ModelForm):
         )
         
         self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id))
-                
+        
+        self.fields['action_101'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_102'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_103'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_104'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_105'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_106'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_107'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_108'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_109'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_110'] = forms.ChoiceField(choices=get_action_choices(account_id))
+
+        self.fields['action_201'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_202'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_203'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_204'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_205'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_206'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_207'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_208'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_209'] = forms.ChoiceField(choices=get_action_choices(account_id))
+        self.fields['action_210'] = forms.ChoiceField(choices=get_action_choices(account_id))
+
+
         # Disable submit button for non-admin users
         if not details:
             for field in self.fields:

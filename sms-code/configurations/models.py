@@ -55,6 +55,28 @@ class AlarmCode(models.Model):
     periodic_interval_minutes = models.IntegerField(default=0, verbose_name=_("Minutes"))
     periodic_interval_hours = models.IntegerField(default=0, verbose_name=_("Hours"))
     
+    action_101 = models.IntegerField(default=0, verbose_name=_("Action 1"))
+    action_102 = models.IntegerField(default=0, verbose_name=_("Action 1"))
+    action_103 = models.IntegerField(default=0, verbose_name=_("Action 1"))
+    action_104 = models.IntegerField(default=0, verbose_name=_("Action 1"))
+    action_105 = models.IntegerField(default=0, verbose_name=_("Action 1"))
+    action_106 = models.IntegerField(default=0, verbose_name=_("Action 1"))
+    action_107 = models.IntegerField(default=0, verbose_name=_("Action 1"))
+    action_108 = models.IntegerField(default=0, verbose_name=_("Action 1"))
+    action_109 = models.IntegerField(default=0, verbose_name=_("Action 1"))
+    action_110 = models.IntegerField(default=0, verbose_name=_("Action 1"))
+    
+    
+    action_201 = models.IntegerField(default=0, verbose_name=_("Action 2"))
+    action_202 = models.IntegerField(default=0, verbose_name=_("Action 2"))
+    action_203 = models.IntegerField(default=0, verbose_name=_("Action 2"))
+    action_204 = models.IntegerField(default=0, verbose_name=_("Action 2"))
+    action_205 = models.IntegerField(default=0, verbose_name=_("Action 2"))
+    action_206 = models.IntegerField(default=0, verbose_name=_("Action 2"))
+    action_207 = models.IntegerField(default=0, verbose_name=_("Action 2"))
+    action_208 = models.IntegerField(default=0, verbose_name=_("Action 2"))
+    action_209 = models.IntegerField(default=0, verbose_name=_("Action 2"))
+    action_210 = models.IntegerField(default=0, verbose_name=_("Action 2"))
     #priority = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(9)])
     #delay = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(99)])
     
