@@ -23,11 +23,19 @@ def operator(request):
     locked_events = DecryptedEvent.objects.filter(status=-1).order_by('id')
     locked_events = DecryptedEventSerializer(locked_events, many=True).data
     
+    delayed_events = DecryptedEvent.objects.filter(status=4, handled_return_delay=False).order_by('id')
+    delayed_events = DecryptedEventSerializer(delayed_events, manay=True).data
+    
+    delayed_periodic_events = DecryptedEvent.objects.filter(status=5, handled_periodic_delay=False).order_by('id')
+    delayed_periodic_events = DecryptedEventSerializer(delayed_periodic_events, many=True).data
+    
     return render(request, 'monitoring/index.html', 
                 {
                     'uncommited_events': json.dumps(uncommited_events),
                     'follow_events': json.dumps(follow_events),
                     'pending_events': json.dumps(pending_events),
                     'locked_events': json.dumps(locked_events),
+                    'delayed_events': json.dumps(delayed_events),
+                    'delayed_periodic_events': json.dumps(delayed_periodic_events)
                 }
             )

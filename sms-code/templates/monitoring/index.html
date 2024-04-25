@@ -1,5 +1,7 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% load i18n %}
+
 {% block title %} jsGrid {% endblock title %}
 {% block extrastyle %}
 <!-- jsGrid -->
@@ -12,69 +14,6 @@
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-info">
-            <div class="inner">
-              <h3>150</h3>
-
-              <p>New Orders</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-success">
-            <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-              <p>Bounce Rate</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-warning">
-            <div class="inner">
-              <h3>44</h3>
-
-              <p>User Registrations</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-danger">
-            <div class="inner">
-              <h3>65</h3>
-
-              <p>Unique Visitors</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
       <!-- /.row -->
       <!-- Main row -->
       <div class="row">
@@ -86,7 +25,7 @@
             <div class="card-header">
               <h3 class="card-title">
                 <i class="ion ion-clipboard mr-1"></i>
-                Uncommited Events
+                {% trans "Uncommited Events" %}
               </h3>
             </div>
             <!-- /.card-header -->
@@ -99,6 +38,7 @@
             <div class="card-footer clearfix">
             </div>
           </div>
+
           <!-- /.card -->
           <div class="row">
             <!-- Follow Up Events -->
@@ -106,7 +46,47 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <i class="ion ion-clipboard mr-1"></i>
-                  Follow Up Events
+                  {% trans "Delayed Event" %}
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="card-body">
+                  <div id="delayedEventsGrid"></div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+              </div>
+            </div>
+            <!-- Pending Events -->
+            <div class="card col-lg-6">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="ion ion-clipboard mr-1"></i>
+                  {% trans "Delayed Periodic Event" %}
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="card-body">
+                  <div id="delayedPeriodicEventsGrid"></div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+              </div>
+            </div>
+          </div>
+
+          <!-- /.card -->
+          <div class="row">
+            <!-- Follow Up Events -->
+            <div class="card col-lg-6">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="ion ion-clipboard mr-1"></i>
+                  {% trans "Follow Up Events" %}
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -124,7 +104,7 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <i class="ion ion-clipboard mr-1"></i>
-                  Pending Events
+                  {% trans "Pending Events" %}
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -145,7 +125,7 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <i class="ion ion-clipboard mr-1"></i>
-                  Locked Events
+                  {% trans "Locked Events" %}
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -164,7 +144,7 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <i class="ion ion-clipboard mr-1"></i>
-                  Raw Events
+                  {% trans "Raw Events" %}
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -199,6 +179,8 @@
   let followEvents = {{ follow_events|safe }};
   let pendingEvents = {{ pending_events|safe }};
   let lockedEvents = {{ locked_events|safe }};
+  let delayedEvents = {{ delayed_events|safe }};
+  let delayedPeriodicEvents = {{ delayed_periodic_events|safe }};
   let rawEvents = [];
 
   $(function () {
@@ -212,6 +194,60 @@
       editing: true,
 
       data: uncommitedEvents,
+
+      onItemEditing: function(args) {
+        // cancel editing of the row of item with field 'ID' = 0
+        console.log(args.item.id)
+          args.cancel = true;
+          window.location.href = `http://${window.location.host}/events-management/decrypted_events/update/${args.item.id}`
+      },
+
+      fields: [
+        { name: "id", type: "number", title: "ID", width: 50 },
+        { name: "raw_event", type: "text", title: "Raw Event", width: 50 },
+        { name: "account.id", type: "text", title: "Account ID", width: 50 },
+        { name: "account.name", type: "text", title: "Account Name", width: 100 },
+        { name: "alarmcode.description", type: "text", title: "Alarm Code", width: 100},
+        { name: "created_at", type: "datetime", title: "Timestamp", sorting: true }
+      ]
+    });
+
+    $("#delayedEventsGrid").jsGrid({
+      width: "100%",
+      height: "600px",
+
+      sorting: true,
+      paging: true,
+      editing: true,
+
+      data: delayedEvents,
+
+      onItemEditing: function(args) {
+        // cancel editing of the row of item with field 'ID' = 0
+        console.log(args.item.id)
+          args.cancel = true;
+          window.location.href = `http://${window.location.host}/events-management/decrypted_events/update/${args.item.id}`
+      },
+
+      fields: [
+        { name: "id", type: "number", title: "ID", width: 50 },
+        { name: "raw_event", type: "text", title: "Raw Event", width: 50 },
+        { name: "account.id", type: "text", title: "Account ID", width: 50 },
+        { name: "account.name", type: "text", title: "Account Name", width: 100 },
+        { name: "alarmcode.description", type: "text", title: "Alarm Code", width: 100},
+        { name: "created_at", type: "datetime", title: "Timestamp", sorting: true }
+      ]
+    });
+
+    $("#delayedPeriodicEventsGrid").jsGrid({
+      width: "100%",
+      height: "600px",
+
+      sorting: true,
+      paging: true,
+      editing: true,
+
+      data: delayedPeriodicEvents,
 
       onItemEditing: function(args) {
         // cancel editing of the row of item with field 'ID' = 0

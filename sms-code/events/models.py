@@ -45,11 +45,13 @@ class DecryptedEvent(PostgresPartitionedModel):
         key = ["created_at"]
         
     STATUS_CHOICES = (
-        (-1,"locked"),
-        (0,"Not Saved"),
-        (1,"Saved"),
-        (2,"Pending"),
-        (3, "Follow")
+        (-1, _("locked")),
+        (0, _("Not Saved")),
+        (1, _("Saved")),
+        (2, _("Pending")),
+        (3, _("Follow")),
+        (4, _("Delayed Return")),
+        (5, _("Delayed Periodic"))
     )
     
     raw_event = models.IntegerField(verbose_name=_("Raw Event"))
@@ -82,8 +84,12 @@ class DecryptedEvent(PostgresPartitionedModel):
     note_timer_interval_hours = models.IntegerField(default=0, verbose_name=_("Hours"))
     
     has_return = models.BooleanField(default=False, db_index=True, verbose_name=_("Has Return"))
+    delayed_return = models.BooleanField(default=False, db_index=True, verbose_name=_("Delayed Return"))
+    handled_return_delay = models.BooleanField(default=False, db_index=True, verbose_name=_("Handled Return Delay"))
 
     is_last_periodic_event = models.BooleanField(default=False, db_index=True, verbose_name=_("Is Last Periodic Event"))
+    delayed_periodic = models.BooleanField(default=False, db_index=True, verbose_name=_("Delayed Periodic"))
+    handled_periodic_delay = models.BooleanField(default=False, db_index=True, verbose_name=_("Handled Periodic Delay"))
 
     is_out_of_schedule = models.BooleanField(default=False, db_index=True, verbose_name=_("Is Out Of Schedule"))
     

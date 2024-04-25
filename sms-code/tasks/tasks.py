@@ -151,8 +151,7 @@ def pending_events_timer():
     for event in DecryptedEvent.objects.filter(status=2, timer=True).order_by('id')[:100]:
         if event.updated_at + timedelta(minutes=event.timer_interval_minnutes, hours=event.timer_interval_hours) > datetime.now() :
             event.status = 0
-            event.save()
-            send_message('events', 'send_uncommited_event', DecryptedEventSerializer(event).data )
+            event.save()        
         
         
 def follow_events_timer():
@@ -160,8 +159,7 @@ def follow_events_timer():
         if event.updated_at + timedelta(minutes=event.timer_interval_minnutes, hours=event.timer_interval_hours) > datetime.now() :
             event.status = 0
             event.save()
-            send_message('events', 'send_uncommited_event', DecryptedEventSerializer(event).data )
-        
+                    
         
 def account_notes_timer():
     for note in AccountNote.objects.filter(timer=True).order_by('id')[:100]:
@@ -170,14 +168,16 @@ def account_notes_timer():
             
             
 def check_delayed_events():
-    for event in DecryptedEvent.objects.filter(has_return=False).order_by('id')[:100]:
-        if event.created_at + timedelta(minutes=event.alarm_code.return_delay) > datetime.now() :
-            pass
-            # TODO: send delayed event message to user
+    for event in DecryptedEvent.objects.filter(has_return=False, delayed_return=False, handled_return_delay=False).order_by('id')[:100]:
+        if event.created_at + timedelta(minutes=event.alarm_code.return_delay) > datetime.now():
+            event.status = 4
+            event.delayed_return = True
+            event.save()
             
             
 def check_periodic_events():
-    for event in DecryptedEvent.objects.filter(is_last_periodic_event=True).order_by('id')[:100]:
-        if event.created_at + timedelta(minutes=event.alarm_code.periodic_interval_minutes, hours=event.alarm_code.periodic_interval_hours) > datetime.now() :
-            pass
-            # TODO: send delayed periodic event message to user
+    for event in DecryptedEvent.objects.filter(is_last_periodic_event=True, delayed_periodic=False, handled_periodic_delay=False).order_by('id')[:100]:
+        if event.created_at + timedelta(minutes=event.alarm_code.periodic_interval_minutes, hours=event.alarm_code.periodic_interval_hours) > datetime.now():
+            event.status = 5
+            event.delayed_periodic = True
+            event.save()

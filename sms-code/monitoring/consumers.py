@@ -90,3 +90,35 @@ class EventConsumer(WebsocketConsumer):
             'type':'remove_follow_event',
             'message':message
         }))
+        
+    def send_delayed_event(self, event):
+        message = event['message']
+
+        self.send(text_data=json.dumps({
+            'type':'send_delayed_event',
+            'message':message
+        }))
+
+    def remove_delayed_event(self, event):
+        message = event['message']
+
+        self.send(text_data=json.dumps({
+            'type':'remove_delayed_event',
+            'message':message
+        }))
+                
+    def send_delayed_periodic_event(self, event):
+        message = event['message']
+
+        self.send(text_data=json.dumps({
+            'type':'send_delayed_periodic_event',
+            'message':message
+        }))
+        
+    def remove_delayed_periodic_event(self, event):
+        message = event['message']
+
+        self.send(text_data=json.dumps({
+            'type':'remove_delayed_periodic_event',
+            'message':message
+        }))

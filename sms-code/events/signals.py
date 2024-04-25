@@ -24,7 +24,11 @@ def update_event_status(sender, instance, **kwargs):
             send_message('events', 'remove_pending_event', instance.id )
         elif old_instance.status == 3:
             send_message('events', 'remove_follow_event', instance.id )       
-        
+        elif old_instance.status == 4:
+            send_message('events', 'remove_delayed_event', instance.id ) 
+        elif old_instance.status == 5:
+            send_message('events', 'remove_delayed_periodic_event', instance.id ) 
+               
         # New Value
         if instance.status == -1: 
             send_message('events', 'send_lock_event', DecryptedEventSerializer(instance).data )
@@ -34,5 +38,8 @@ def update_event_status(sender, instance, **kwargs):
             send_message('events', 'send_pending_event', DecryptedEventSerializer(instance).data )
         elif instance.status == 3:
             send_message('events', 'send_follow_event', DecryptedEventSerializer(instance).data )
-            
+        elif instance.status == 4:
+            send_message('events', 'send_delayed_event', DecryptedEventSerializer(instance).data )
+        elif instance.status == 5:
+            send_message('events', 'send_delayed_periodic_event', DecryptedEventSerializer(instance).data )            
        # elif old_instance.status == 
