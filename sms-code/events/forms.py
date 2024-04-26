@@ -3,6 +3,7 @@ from extra_views import InlineFormSetFactory
 
 from accounts.models import Account
 from accounts.utils import get_partitions_choices
+from configurations.models import AlarmCode
 
 from .models import DecryptedEvent, RawEvent
 
@@ -29,7 +30,15 @@ class DecryptedEventForm(forms.ModelForm):
             search_fields=['id__icontains', 'name__icontains'],
         )
     )
-        
+
+    alarm_code = forms.ModelChoiceField(
+        queryset=AlarmCode.objects.all(),
+        widget=s2forms.ModelSelect2Widget(
+            model=AlarmCode,
+            search_fields=['code__icontains', 'description_icontains'],
+        )
+    )
+      
     class Meta:
         model = DecryptedEvent
         fields = '__all__'
@@ -51,7 +60,18 @@ class DecryptedEventForm(forms.ModelForm):
                         Column('partition'),              
                     ),
                     Row(
-                        Column('alarm_code', css_class="col-3"),
+                        Column(
+                            Row(
+                                Column('alarm_code')
+                            ),
+                            Row(
+                                Column('handled_return_delay')
+                            ),
+                            Row(
+                                Column('handled_periodic_delay')
+                            ),
+                            css_class="col-3"
+                        ),
                         Column(
                             Row(
                                 Column('status', css_class="col-12")

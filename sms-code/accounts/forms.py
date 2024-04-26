@@ -198,7 +198,7 @@ class AccountForm(forms.ModelForm):
                 Tab(_("Schedules"),
                     ModalEditFormsetLayout(
                         "ScheduleInlineFormSet",
-                        # list_display=[],
+                        list_display=["partition", "is_open_saturday", "is_open_sunday", "is_open_monday", "is_open_tuesday", "is_open_wednesday", "is_open_thursday", "is_open_friday"],
                     ),
                 ),
                                 

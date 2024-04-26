@@ -8,6 +8,7 @@ from view_breadcrumbs import DetailBreadcrumbMixin, ListBreadcrumbMixin, CreateB
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
+from django.core import serializers
 
 from django_filters.views import FilterView
 from django_tables2 import LazyPaginator, SingleTableMixin, SingleTableView
@@ -102,8 +103,11 @@ class UpdateeServiceOrder(PermissionRequiredMixin, UpdateBreadcrumbMixin, Update
 
     def get_context_data(self, **kwargs):
         context = super(UpdateeServiceOrder, self).get_context_data(**kwargs)
-        
+
+        instance = self.get_queryset().first()
+
         context['view_name'] = _("Update Service Order")
+        context['history'] = serializers.serialize("python", instance.history.all())
 
         return context
     

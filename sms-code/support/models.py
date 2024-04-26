@@ -41,3 +41,9 @@ class ServiceOrder(models.Model):
     
     history = HistoricalRecords(verbose_name=_("Service Order History"))
 
+
+    def save(self, *args, **kwargs):
+        if self.status == 3 or self.status == -1:
+            self.closed_at = self.updated_at
+            
+        super().save(*args, **kwargs)

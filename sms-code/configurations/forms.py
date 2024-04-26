@@ -10,6 +10,7 @@ from accounts.utils import get_partitions_choices
 from configurations.utils import get_action_choices
 
 from .models import AlarmCode, Device, Schedule
+from django.utils.translation import gettext as _
 
 
 class DeviceForm(forms.ModelForm):
@@ -110,17 +111,94 @@ class AlarmCodeInlineFormSet(InlineFormSetFactory):
         return kwargs
     
     
-class ScheduleForm(forms.Form):
+class ScheduleForm(forms.ModelForm):
+
+    opening_saturday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
+    closing_saturday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
+
+    opening_sunday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
+    closing_sunday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
+
+    opening_monday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
+    closing_monday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
+
+    opening_tuesday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
+    closing_tuesday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
+
+    opening_wednesday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
+    closing_wednesday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
+
+    opening_thursday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
+    closing_thursday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
+
+    opening_friday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
+    closing_friday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
     
     class Meta:
         model = Schedule
         fields = '__all__'
         
-    def __init__(self, details = False, *args, **kwargs):
+    def __init__(self, details = False, account_id=-1, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
         self.helper = ModalEditFormHelper()
+        self.helper.layout = ModalEditLayout(
+            Row(
+                Column("partition", css_class="col-4"),
+            ),
+            Row(
+                Column("is_open_saturday", css_class="col-2"),
+                Column("opening_saturday", css_class="col-3"),
+                Column("delay_opning_saturday", css_class="col-2"),
+                Column("closing_saturday", css_class="col-3"),
+                Column("delay_closing_saturday", css_class="col-2"),
+            ),
+            Row(
+                Column("is_open_sunday", css_class="col-2"),
+                Column("opening_sunday", css_class="col-3"),
+                Column("delay_opning_sunday", css_class="col-2"),
+                Column("closing_sunday", css_class="col-3"),
+                Column("delay_closing_sunday", css_class="col-2"),
+            ),
+            Row(
+                Column("is_open_monday", css_class="col-2"),
+                Column("opening_monday", css_class="col-3"),
+                Column("delay_opning_monday", css_class="col-2"),
+                Column("closing_monday", css_class="col-3"),
+                Column("delay_closing_monday", css_class="col-2"),
+            ),
+            Row(
+                Column("is_open_tuesday", css_class="col-2"),
+                Column("opening_tuesday", css_class="col-3"),
+                Column("delay_opning_tuesday", css_class="col-2"),
+                Column("closing_tuesday", css_class="col-3"),
+                Column("delay_closing_tuesday", css_class="col-2"),
+            ),
+            Row(
+                Column("is_open_wednesday", css_class="col-2"),
+                Column("opening_wednesday", css_class="col-3"),
+                Column("delay_opning_wednesday", css_class="col-2"),
+                Column("closing_wednesday", css_class="col-3"),
+                Column("delay_closing_wednesday", css_class="col-2"),
+            ),
+            Row(
+                Column("is_open_thursday", css_class="col-2"),
+                Column("opening_thursday", css_class="col-3"),
+                Column("delay_opning_thursday", css_class="col-2"),
+                Column("closing_thursday", css_class="col-3"),
+                Column("delay_closing_thursday", css_class="col-2"),
+            ),
+            Row(
+                Column("is_open_friday", css_class="col-2"),
+                Column("opening_friday", css_class="col-3"),
+                Column("delay_opning_friday", css_class="col-2"),
+                Column("closing_friday", css_class="col-3"),
+                Column("delay_closing_friday", css_class="col-2"),
+            ),
+        )
         
+        self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id))
+
 
 class ScheduleInlineFormSet(InlineFormSetFactory):
    

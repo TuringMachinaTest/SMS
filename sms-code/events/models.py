@@ -66,7 +66,7 @@ class DecryptedEvent(PostgresPartitionedModel):
     zone = models.ForeignKey(Zone, on_delete=models.PROTECT, null=True, blank=True,db_index=True, verbose_name=_("Zone"))
     user = models.ForeignKey(AccountUser, on_delete=models.PROTECT, null=True, blank=True, db_index=True, verbose_name=_("User"))
     
-    success = models.BooleanField(default=False, db_index=True, verbose_name=_("Success"))
+    success = models.BooleanField(default=True, db_index=True, verbose_name=_("Success"))
     
     status = models.IntegerField(choices=STATUS_CHOICES, default=0, db_index=True, verbose_name=_("Status"))
     

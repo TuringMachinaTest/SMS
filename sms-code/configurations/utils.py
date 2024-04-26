@@ -18,7 +18,7 @@ def get_action_choices(account_id = -1):
         return ()
     else:
         account = Account.objects.get(pk=account_id)
-        account_users = AccountUser.objects.get(account=account)
+        account_users = AccountUser.objects.filter(account=account)
 
         results = (
             (-10, _("Police Number 1") + ": " + account.police_number1),

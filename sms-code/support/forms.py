@@ -8,6 +8,7 @@ from support.models import ServiceOrder
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, Div, Row, Column
 from django_select2 import forms as s2forms
+from crispy_formset_modal.layout import ModalEditLayout, ModalEditFormsetLayout
 
 
 class ServiceOrderForm(forms.ModelForm):
@@ -24,16 +25,51 @@ class ServiceOrderForm(forms.ModelForm):
     
     class Meta:
         model = ServiceOrder
-        fields = ('account', 'status' , 'summary', 'request', 'internal_notes', 'closed_at', )
+        fields = '__all__'
         
-    def __init__(self, details=False, *args, **kwargs):
+    def __init__(self, details=False, formset=False, *args, **kwargs):
         super().__init__(*args, **kwargs)        
         
         self.helper = FormHelper()
+        self.helper.layout = ModalEditLayout(
+            Row(
+                Column("account"),
+            ),
+            Row(
+                Column("status"),
+            ),
+            Row(
+                Column("summary"),
+            ),
+            Row(
+                Column("Request"),
+            ),
+            Row(
+                Column("internal_notes"),
+            ),
+            Row(
+                Column("response"),
+            ),
+            Row(
+                Column("closed_at"),
+            ),
+            Row(
+                Column("created_at"),
+            ),
+            Row(
+                Column("updated_at"),
+            ),
+            Row(
+                Column("created_by"),
+            )
+        )
 
-        if not details:
+        self.fields["closed_at"].disabled = True
+        self.fields["created_by"].disabled = True
+
+        if not details and not formset:
             self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
-        else:            
+        elif details:            
             for field in self.fields:
                 self.fields[field].disabled = True   
 
@@ -52,6 +88,8 @@ class ServiceOrderInlineFormSet(InlineFormSetFactory):
         #print(kwargs)
         
         kwargs['form_kwargs'] = {}
-        kwargs['form_kwargs']['details'] = True
+        kwargs['form_kwargs']['details'] = False
+        kwargs['form_kwargs']['formset'] = True
+
                 
         return kwargs

@@ -84,6 +84,7 @@ def dycrypt_events():
             (success, protocole, receiveer_no, line_no, account_no, alarm_code, partition, zone) = decrypt_event_surgard(raw_event.data)
             
         event = DecryptedEvent()
+        event.success = False
         event.raw_event = raw_event.id
         
         #success = success and receiveer_no is int and line_no is int and account_no is int and partition is int and zone is int
@@ -162,7 +163,7 @@ def follow_events_timer():
                     
         
 def account_notes_timer():
-    for note in AccountNote.objects.filter(timer=True).order_by('id')[:100]:
+    for note in AccountNote.objects.filter(timer=True).order_by('id')[:10000]:
         if note.updated_at + timedelta(minutes=note.timer_interval_minutes, hours=note.timer_interval_hours) > datetime.now() :
             note.delete()
             
