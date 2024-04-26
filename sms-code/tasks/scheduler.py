@@ -8,7 +8,7 @@ from django.utils.autoreload import file_changed
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from .tasks import dycrypt_events, event_listener, pending_events_timer, follow_events_timer, account_notes_timer
+from .tasks import check_delayed_periodic_events, check_delayed_return_events, dycrypt_events, event_listener, pending_events_timer, follow_events_timer, account_notes_timer
 
 
 scheduler = BackgroundScheduler()
@@ -22,6 +22,9 @@ def add_jobs():
     scheduler.add_job(pending_events_timer, 'interval', seconds=60, args=[], max_instances=1)
     scheduler.add_job(follow_events_timer, 'interval', seconds=60, args=[], max_instances=1)
     scheduler.add_job(account_notes_timer, 'interval', seconds=60, args=[], max_instances=1)
+    
+    scheduler.add_job(check_delayed_return_events, 'interval', seconds=60, args=[], max_instances=1)
+    scheduler.add_job(check_delayed_periodic_events, 'interval', seconds=60, args=[], max_instances=1)
 
 def kill(signal, frame):
     # scheduler.shutdown(wait=False)

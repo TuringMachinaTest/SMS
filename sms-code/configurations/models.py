@@ -17,7 +17,7 @@ from .utils import get_ports
 class AlarmCode(models.Model):
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['account', 'code',], name='configurations.alarmcode.unique_id')
+            models.UniqueConstraint(fields=['account', 'partition', 'code',], name='configurations.alarmcode.unique_id')
         ]
     
         verbose_name = _("Alarm Code")
@@ -86,6 +86,11 @@ class AlarmCode(models.Model):
 
 class Schedule(models.Model):
     class Meta:
+        
+        constraints = [
+            models.UniqueConstraint(fields=['account', 'partition'], name='configurations.schedule.unique_id')
+       ]
+                
         verbose_name = _("Schedule")
         verbose_name_plural = _("Schedules")
         

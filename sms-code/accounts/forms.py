@@ -82,7 +82,7 @@ class AccountForm(forms.ModelForm):
         search_fields = [
             "name__icontains",
         ],
-    ))
+    ), label=_("City"))
     
     installation_company = forms.ModelChoiceField(queryset=InstallationCompany.objects.all(), required=False, widget=s2forms.ModelSelect2Widget(
         search_fields = [
@@ -125,12 +125,12 @@ class AccountForm(forms.ModelForm):
                         
                     ),
                     Row(
-                        Column('whatsapp_number'),
+                        Column('phone_number2'),
                         Column('address_line3', css_class="col-8"),
                     ),
                     
                     Row(
-                        Column('phone_number2'),
+                        Column('whatsapp_number'),
                         Column(css_class="col-8"),
                     ),
                     

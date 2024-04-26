@@ -21,6 +21,7 @@ def get_action_choices(account_id = -1):
         account_users = AccountUser.objects.filter(account=account)
 
         results = (
+            (-1, _("None")),
             (-10, _("Police Number 1") + ": " + account.police_number1),
             (-11, _("Police Number 2") + ": " + account.police_number2),
             (-12, _("Police Number 3") + ": " + account.police_number3),
