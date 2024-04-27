@@ -185,7 +185,7 @@ class AccountForm(forms.ModelForm):
                 Tab(_("Alarm Codes"),
                     ModalEditFormsetLayout(
                         "AlarmCodeInlineFormSet",
-                        list_display=["code", "description" ],
+                        list_display=["partition", "code", "description" ],
                     ),
                 ),
                 Tab(_("Copy Alarm Codes"),
@@ -297,54 +297,52 @@ class AccountUserForm(forms.ModelForm):
         
         self.helper = ModalEditFormHelper()
         self.helper.layout = ModalEditLayout(
-            TabHolder(
-                Tab(_("Information"),
-                    Row(
-                        Column('partition',),
-                    ),
-                    Row(
-                        Column('code', css_class="col-4"),
-                        Column('name', css_class="col-8"),
-                    ),
-                    Row(
-                        Column('in_out_codes'),
-                        Column('password'), 
-                    ),
-                    Row(
-                        Column('phone_number1'),
-                        Column('title'), 
-                    ),
-                    Row(
-                        Column('phone_number2', css_class="col-6"),
-                    ),
-                    Row(
-                        Column('phone_number3', css_class="col-6"),
-                    ),
+            Fieldset(_("Information"),
+                Row(
+                    Column('partition',),
                 ),
-                Tab(_("Control"),
-                    Row(
-                        Column('holiday_begins'),
-                        Column('holiday_ends'),
-                    ),            
-                    Row(
-                        Column('keypad_code'),
-                        Column('hot_user'),
-                    ),
-                    Row(
-                        Column('authorized_days_sun'),
-                        Column('authorized_days_thu'),
-                    ),
-                    Row(
-                        Column('authorized_days_mon'),
-                        Column('authorized_days_fri'),
-                    ),
-                   Row(
-                        Column('authorized_days_tue'),
-                        Column('authorized_days_sat'),
-                    ),
-                    Row(
-                        Column('authorized_days_wed', css_class="col-6"),
-                    ),
+                Row(
+                    Column('code', css_class="col-4"),
+                    Column('name', css_class="col-8"),
+                ),
+                Row(
+                    Column('in_out_codes'),
+                    Column('password'), 
+                ),
+                Row(
+                    Column('phone_number1'),
+                    Column('title'), 
+                ),
+                Row(
+                    Column('phone_number2', css_class="col-6"),
+                ),
+                Row(
+                    Column('phone_number3', css_class="col-6"),
+                ),
+            ),
+            Fieldset(_("Control"),
+                Row(
+                    Column('holiday_begins'),
+                    Column('holiday_ends'),
+                ),            
+                Row(
+                    Column('keypad_code'),
+                    Column('hot_user'),
+                ),
+                Row(
+                    Column('authorized_days_sun'),
+                    Column('authorized_days_thu'),
+                ),
+                Row(
+                    Column('authorized_days_mon'),
+                    Column('authorized_days_fri'),
+                ),
+                Row(
+                    Column('authorized_days_tue'),
+                    Column('authorized_days_sat'),
+                ),
+                Row(
+                    Column('authorized_days_wed', css_class="col-6"),
                 ),
             ),
         )

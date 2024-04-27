@@ -1,6 +1,6 @@
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit, Div, Row, Column
+from crispy_forms.layout import Layout, Fieldset, Submit, Div, Row, Column, HTML
 from extra_views import InlineFormSetFactory
 from crispy_formset_modal.helper import ModalEditFormHelper
 from crispy_formset_modal.layout import ModalEditLayout, ModalEditFormsetLayout
@@ -42,123 +42,121 @@ class AlarmCodeForm(forms.ModelForm):
         
         self.helper = ModalEditFormHelper()
         self.helper.layout = ModalEditLayout(
-            TabHolder(
-                Tab(_("Configurations"), 
-                    Row(
-                        Column("partition"),
-                    ),
-                    Row(
-                        Column("code", css_class="col-4"),
-                        Column("description", css_class="col-8")
-                    ),
-                    Row(
-                      Column("alarm_type")  
-                    ),
-                    Row(
-                      Column("decryption_type")  
-                    ),
-                    Row(
-                      Column("return_delay")  
-                    ),
-                    Row(
-                        Column("is_periodic")
-                    ),
-                    Row(
-                        Column("periodic_interval_hours"),
-                        Column("periodic_interval_minutes")
-                    )
+            Fieldset(_("Configurations"),
+                Row(
+                    Column("partition"),
                 ),
-                Tab(_("First Action"),
-                    Row(
-                        Column("action_101"),
-                    ),
-                    Row(
-                        Column("action_102"),
-                    ),
-                    Row(
-                        Column("action_103"),
-                    ),
-                    Row(
-                        Column("action_104"),
-                    ),
-                    Row(
-                        Column("action_105"),
-                    ),
-                    Row(
-                        Column("action_106"),
-                    ),
-                    Row(
-                        Column("action_107"),
-                    ),
-                    Row(
-                        Column("action_108"),
-                    ),
-                    Row(
-                        Column("action_109"),
-                    ),
-                    Row(
-                        Column("action_110"),
-                    ),
+                Row(
+                    Column("code", css_class="col-4"),
+                    Column("description", css_class="col-8")
                 ),
-                
-                Tab(_("Second Action"),
-                    Row(
-                        Column("action_201"),
-                    ),
-                    Row(
-                        Column("action_202"),
-                    ),
-                    Row(
-                        Column("action_203"),
-                    ),
-                    Row(
-                        Column("action_204"),
-                    ),
-                    Row(
-                        Column("action_205"),
-                    ),
-                    Row(
-                        Column("action_206"),
-                    ),
-                    Row(
-                        Column("action_207"),
-                    ),
-                    Row(
-                        Column("action_208"),
-                    ),
-                    Row(
-                        Column("action_209"),
-                    ),
-                    Row(
-                        Column("action_210"),
-                    ),
+                Row(
+                    Column("alarm_type")  
                 ),
-            )
+                Row(
+                    Column("decryption_type")  
+                ),
+                Row(
+                    Column("return_delay")  
+                ),
+                Row(
+                    Column("is_periodic")
+                ),
+                Row(
+                    Column("periodic_interval_hours"),
+                    Column("periodic_interval_minutes")
+                ),
+            ),
+            Fieldset(_("First Action"),
+                Row(
+                    Column("action_101"),
+                ),
+                Row(
+                    Column("action_102"),
+                ),
+                Row(
+                    Column("action_103"),
+                ),
+                Row(
+                    Column("action_104"),
+                ),
+                Row(
+                    Column("action_105"),
+                ),
+                Row(
+                    Column("action_106"),
+                ),
+                Row(
+                    Column("action_107"),
+                ),
+                Row(
+                    Column("action_108"),
+                ),
+                Row(
+                    Column("action_109"),
+                ),
+                Row(
+                    Column("action_110"),
+                ),
+            ),
+            Fieldset(_("Second Action"),
+                Row(
+                    Column("action_201"),
+                ),
+                Row(
+                    Column("action_202"),
+                ),
+                Row(
+                    Column("action_203"),
+                ),
+                Row(
+                    Column("action_204"),
+                ),
+                Row(
+                    Column("action_205"),
+                ),
+                Row(
+                    Column("action_206"),
+                ),
+                Row(
+                    Column("action_207"),
+                ),
+                Row(
+                    Column("action_208"),
+                ),
+                Row(
+                    Column("action_209"),
+                ),
+                Row(
+                    Column("action_210"),
+                ),
+            ),
+            
         )
         
-        self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id))
+        self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id), label=_("Partition"))
         
-        self.fields['action_101'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 1"))
-        self.fields['action_102'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 2"))
-        self.fields['action_103'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 3"))
-        self.fields['action_104'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 4"))
-        self.fields['action_105'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 5"))
-        self.fields['action_106'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 6"))
-        self.fields['action_107'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 7"))
-        self.fields['action_108'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 8"))
-        self.fields['action_109'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 9"))
-        self.fields['action_110'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 10"))
+        self.fields['action_101'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_102'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_103'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_104'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_105'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_106'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_107'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_108'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_109'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_110'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
 
-        self.fields['action_201'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 1"))
-        self.fields['action_202'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 2"))
-        self.fields['action_203'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 3"))
-        self.fields['action_204'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 4"))
-        self.fields['action_205'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 5"))
-        self.fields['action_206'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 6"))
-        self.fields['action_207'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 7"))
-        self.fields['action_208'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 8"))
-        self.fields['action_209'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 9"))
-        self.fields['action_210'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_("Action 10"))
+        self.fields['action_201'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_202'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_203'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_204'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_205'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_206'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_207'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_208'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_209'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
+        self.fields['action_210'] = forms.ChoiceField(choices=get_action_choices(account_id), label=_(""))
 
 
         # Disable submit button for non-admin users
