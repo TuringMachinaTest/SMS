@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-27 08:41+0300\n"
+"POT-Creation-Date: 2024-04-27 09:57+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr "الإنذارات"
 msgid "Schedules"
 msgstr "الجداول"
 
-#: accounts/forms.py:205 accounts/models.py:229
+#: accounts/forms.py:205 accounts/models.py:228
 msgid "Zones"
 msgstr "المناطق"
 
@@ -74,11 +74,11 @@ msgstr "الملاحظات"
 msgid "Service Orders"
 msgstr ""
 
-#: accounts/forms.py:301
+#: accounts/forms.py:300
 msgid "Information"
 msgstr "معلومات"
 
-#: accounts/forms.py:324
+#: accounts/forms.py:326
 msgid "Control"
 msgstr "التحكم"
 
@@ -113,7 +113,7 @@ msgid "Phone Number 2"
 msgstr "الرقم الثاني"
 
 #: accounts/models.py:51 accounts/models.py:152 accounts/models.py:176
-#: accounts/models.py:231 configurations/models.py:42
+#: accounts/models.py:230 configurations/models.py:42
 #: configurations/models.py:97 events/models.py:64 support/models.py:24
 #: templates/cards/account_card.html:10
 msgid "Account"
@@ -260,23 +260,23 @@ msgstr "ملاحظة التركيب"
 
 #: accounts/models.py:110
 msgid "Receiver Phone Number"
-msgstr "ؤقم المستقبل"
+msgstr "رقم المستقبل"
 
 #: accounts/models.py:111
 msgid "Transmitter Phone Number"
-msgstr "ؤقم المرسل"
+msgstr "رقم المرسل"
 
-#: accounts/models.py:117 accounts/models.py:160 accounts/models.py:214
+#: accounts/models.py:117 accounts/models.py:160 accounts/models.py:213
 #: events/models.py:31 events/models.py:96 support/models.py:37
 msgid "Created At"
 msgstr "أنشئ عند"
 
-#: accounts/models.py:118 accounts/models.py:161 accounts/models.py:215
+#: accounts/models.py:118 accounts/models.py:161 accounts/models.py:214
 #: events/models.py:100 support/models.py:38
 msgid "Updated At"
 msgstr "حدّث عند"
 
-#: accounts/models.py:119 accounts/models.py:162 accounts/models.py:216
+#: accounts/models.py:119 accounts/models.py:162 accounts/models.py:215
 #: support/models.py:40
 msgid "Created By"
 msgstr "أنشئ من"
@@ -325,16 +325,16 @@ msgstr "مستهلك"
 msgid "Account Users"
 msgstr "المستهلكين"
 
-#: accounts/models.py:177 accounts/models.py:232 configurations/forms.py:139
+#: accounts/models.py:177 accounts/models.py:231 configurations/forms.py:137
 #: configurations/models.py:40 configurations/models.py:98 events/models.py:65
 msgid "Partition"
 msgstr "القسم"
 
-#: accounts/models.py:180 accounts/models.py:234 configurations/models.py:218
+#: accounts/models.py:180 accounts/models.py:233 configurations/models.py:218
 msgid "Name"
 msgstr "الإسم"
 
-#: accounts/models.py:181 accounts/models.py:235 configurations/models.py:43
+#: accounts/models.py:181 accounts/models.py:234 configurations/models.py:43
 msgid "Code"
 msgstr "الرمز"
 
@@ -348,57 +348,57 @@ msgstr "كلمة المرور"
 
 #: accounts/models.py:188
 msgid "Phone Number 3"
-msgstr "رقم العاتف الثالث"
+msgstr "الرقم الثالث"
 
-#: accounts/models.py:190
+#: accounts/models.py:191 accounts/models.py:192 accounts/models.py:193
 msgid "Title"
 msgstr "التعريف"
 
-#: accounts/models.py:198
+#: accounts/models.py:197
 msgid "Holiday Begins"
 msgstr ""
 
-#: accounts/models.py:199
+#: accounts/models.py:198
 msgid "Holiday Ends"
 msgstr ""
 
-#: accounts/models.py:201
+#: accounts/models.py:200
 msgid "Keypad Code"
 msgstr ""
 
-#: accounts/models.py:203
+#: accounts/models.py:202
 msgid "Hot User"
 msgstr ""
 
-#: accounts/models.py:205 configurations/models.py:100
+#: accounts/models.py:204 configurations/models.py:100
 msgid "Saturday"
 msgstr "السبت"
 
-#: accounts/models.py:206 configurations/models.py:106
+#: accounts/models.py:205 configurations/models.py:106
 msgid "Sunday"
 msgstr "الأحد"
 
-#: accounts/models.py:207 configurations/models.py:112
+#: accounts/models.py:206 configurations/models.py:112
 msgid "Monday"
 msgstr "الاثنين"
 
-#: accounts/models.py:208 configurations/models.py:118
+#: accounts/models.py:207 configurations/models.py:118
 msgid "Tuesday"
 msgstr "الثلاثاء"
 
-#: accounts/models.py:209 configurations/models.py:124
+#: accounts/models.py:208 configurations/models.py:124
 msgid "Wednesday"
 msgstr "الأربعاء"
 
-#: accounts/models.py:210 configurations/models.py:130
+#: accounts/models.py:209 configurations/models.py:130
 msgid "Thursday"
 msgstr "الخميس"
 
-#: accounts/models.py:211 configurations/models.py:136
+#: accounts/models.py:210 configurations/models.py:136
 msgid "Friday"
 msgstr "الجمعة"
 
-#: accounts/models.py:228 configurations/models.py:36 events/models.py:66
+#: accounts/models.py:227 configurations/models.py:36 events/models.py:66
 #: templates/cards/zone_card.html:10
 msgid "Zone"
 msgstr "المنطقة"
@@ -451,72 +451,22 @@ msgstr "تفاصيل المجموعة"
 msgid "Update Group"
 msgstr "تعديل المجموعة"
 
-#: configurations/forms.py:46 templates/includes/menu-list.html:124
+#: configurations/forms.py:45 templates/includes/menu-list.html:124
 msgid "Configurations"
 msgstr "التكوينات"
 
-#: configurations/forms.py:71
+#: configurations/forms.py:70
 msgid "First Action"
 msgstr "الإجراء الأول"
 
-#: configurations/forms.py:104
+#: configurations/forms.py:102
 msgid "Second Action"
 msgstr "الإجراء الثاني"
 
-#: configurations/forms.py:141 configurations/forms.py:152
-#: configurations/models.py:58 configurations/models.py:59
-#: configurations/models.py:60 configurations/models.py:61
-#: configurations/models.py:62 configurations/models.py:63
-#: configurations/models.py:64 configurations/models.py:65
-#: configurations/models.py:66 configurations/models.py:67
-msgid "Action 1"
-msgstr "الإجراء الأول"
-
-#: configurations/forms.py:142 configurations/forms.py:153
-#: configurations/models.py:70 configurations/models.py:71
-#: configurations/models.py:72 configurations/models.py:73
-#: configurations/models.py:74 configurations/models.py:75
-#: configurations/models.py:76 configurations/models.py:77
-#: configurations/models.py:78 configurations/models.py:79
-msgid "Action 2"
-msgstr "الإجراء الثاني"
-
-#: configurations/forms.py:143 configurations/forms.py:154
-msgid "Action 3"
-msgstr "الإجراء الثالث"
-
-#: configurations/forms.py:144 configurations/forms.py:155
-msgid "Action 4"
-msgstr "الإجراء الرابع"
-
-#: configurations/forms.py:145 configurations/forms.py:156
-msgid "Action 5"
-msgstr "الإجراء الخامس"
-
-#: configurations/forms.py:146 configurations/forms.py:157
-msgid "Action 6"
-msgstr "الإجراء السادس"
-
-#: configurations/forms.py:147 configurations/forms.py:158
-msgid "Action 7"
-msgstr "الإجراء السابع"
-
-#: configurations/forms.py:148 configurations/forms.py:159
-msgid "Action 8"
-msgstr "الإجراء الثامن"
-
-#: configurations/forms.py:149 configurations/forms.py:160
-msgid "Action 9"
-msgstr "الإجراء التاسع"
-
-#: configurations/forms.py:150 configurations/forms.py:161
-msgid "Action 10"
-msgstr "الإجراء العاشر"
-
-#: configurations/forms.py:193 configurations/forms.py:196
-#: configurations/forms.py:199 configurations/forms.py:202
-#: configurations/forms.py:205 configurations/forms.py:208
-#: configurations/forms.py:211 configurations/models.py:31
+#: configurations/forms.py:191 configurations/forms.py:194
+#: configurations/forms.py:197 configurations/forms.py:200
+#: configurations/forms.py:203 configurations/forms.py:206
+#: configurations/forms.py:209 configurations/models.py:31
 #: configurations/models.py:101 configurations/models.py:107
 #: configurations/models.py:113 configurations/models.py:119
 #: configurations/models.py:125 configurations/models.py:131
@@ -524,10 +474,10 @@ msgstr "الإجراء العاشر"
 msgid "Opening"
 msgstr "فتح"
 
-#: configurations/forms.py:194 configurations/forms.py:197
-#: configurations/forms.py:200 configurations/forms.py:203
-#: configurations/forms.py:206 configurations/forms.py:209
-#: configurations/forms.py:212 configurations/models.py:32
+#: configurations/forms.py:192 configurations/forms.py:195
+#: configurations/forms.py:198 configurations/forms.py:201
+#: configurations/forms.py:204 configurations/forms.py:207
+#: configurations/forms.py:210 configurations/models.py:32
 #: configurations/models.py:103 configurations/models.py:109
 #: configurations/models.py:115 configurations/models.py:121
 #: configurations/models.py:127 configurations/models.py:133
@@ -588,6 +538,22 @@ msgstr "التأخير"
 #: configurations/models.py:54
 msgid "Scheduled"
 msgstr "مجدول"
+
+#: configurations/models.py:58 configurations/models.py:59
+#: configurations/models.py:60 configurations/models.py:61
+#: configurations/models.py:62 configurations/models.py:63
+#: configurations/models.py:64 configurations/models.py:65
+#: configurations/models.py:66 configurations/models.py:67
+msgid "Action 1"
+msgstr "الإجراء الأول"
+
+#: configurations/models.py:70 configurations/models.py:71
+#: configurations/models.py:72 configurations/models.py:73
+#: configurations/models.py:74 configurations/models.py:75
+#: configurations/models.py:76 configurations/models.py:77
+#: configurations/models.py:78 configurations/models.py:79
+msgid "Action 2"
+msgstr "الإجراء الثاني"
 
 #: configurations/models.py:94
 msgid "Schedule"
@@ -1236,3 +1202,27 @@ msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
+
+#~ msgid "Action 3"
+#~ msgstr "الإجراء الثالث"
+
+#~ msgid "Action 4"
+#~ msgstr "الإجراء الرابع"
+
+#~ msgid "Action 5"
+#~ msgstr "الإجراء الخامس"
+
+#~ msgid "Action 6"
+#~ msgstr "الإجراء السادس"
+
+#~ msgid "Action 7"
+#~ msgstr "الإجراء السابع"
+
+#~ msgid "Action 8"
+#~ msgstr "الإجراء الثامن"
+
+#~ msgid "Action 9"
+#~ msgstr "الإجراء التاسع"
+
+#~ msgid "Action 10"
+#~ msgstr "الإجراء العاشر"

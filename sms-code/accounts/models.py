@@ -187,11 +187,10 @@ class AccountUser(models.Model):
     phone_number2 = models.CharField(max_length=20, blank=True, verbose_name=_("Phone Number 2"))
     phone_number3 = models.CharField(max_length=20, blank=True, verbose_name=_("Phone Number 3"))
     
-    title = models.CharField(max_length=150, blank=True, verbose_name=_("Title"))
     #TODO: Fix titles
-    title1 = models.CharField(max_length=150, blank=True, verbose_name=_("Title 1"))
-    title2 = models.CharField(max_length=150, blank=True, verbose_name=_("Title 2"))
-    title3 = models.CharField(max_length=150, blank=True, verbose_name=_("Title 3"))
+    title1 = models.CharField(max_length=150, blank=True, verbose_name=_("Title"))
+    title2 = models.CharField(max_length=150, blank=True, verbose_name=_("Title"))
+    title3 = models.CharField(max_length=150, blank=True, verbose_name=_("Title"))
 
     # Control
 

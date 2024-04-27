@@ -213,7 +213,7 @@ class AccountForm(forms.ModelForm):
                 Tab(_("Users"),
                     ModalEditFormsetLayout(
                         "AccountUserInlineFormSet",
-                        list_display=["name", "title", "partition", "phone_number1", "phone_number2", "phone_number3"],
+                        list_display=["name", "partition", "title1", "phone_number1", "title2", "phone_number2", "title3", "phone_number3"],
                     ),
 
                 ),
@@ -310,14 +310,16 @@ class AccountUserForm(forms.ModelForm):
                     Column('password'), 
                 ),
                 Row(
-                    Column('phone_number1'),
-                    Column('title'), 
+                    Column('phone_number1', css_class="col-6"),
+                    Column('title1')
                 ),
                 Row(
                     Column('phone_number2', css_class="col-6"),
+                    Column('title2')
                 ),
                 Row(
                     Column('phone_number3', css_class="col-6"),
+                    Column('title3')
                 ),
             ),
             Fieldset(_("Control"),
