@@ -22,22 +22,24 @@ def get_action_choices(account_id = -1):
 
         results = (
             (-1, _("None")),
-            (-10, _("Police Number 1") + ": " + account.police_number1),
-            (-11, _("Police Number 2") + ": " + account.police_number2),
-            (-12, _("Police Number 3") + ": " + account.police_number3),
+            (-10, _("Police Number 1") + ": " + str(account.police_number1)),
+            (-11, _("Police Number 2") + ": " + str(account.police_number2)),
+            (-12, _("Police Number 3") + ": " + str(account.police_number3)),
           
-            (-20, _("Fire Dept Number 1")+ ": " + account.fire_dept_number1),
-            (-21, _("Fire Dept Number 2")+ ": " + account.fire_dept_number2),
-            (-22, _("Fire Dept Number 3")+ ": " + account.fire_dept_number3),
+            (-20, _("Fire Dept Number 1")+ ": " + str(account.fire_dept_number1)),
+            (-21, _("Fire Dept Number 2")+ ": " + str(account.fire_dept_number2)),
+            (-22, _("Fire Dept Number 3")+ ": " + str(account.fire_dept_number3)),
             
-            (-30, _("Emergency Number 1")+ ": " + account.emergency_number1),
-            (-31, _("Emergency Number 2")+ ": " + account.emergency_number2),
-            (-32, _("Emergency Number 3")+ ": " + account.emergency_number3),            
+            (-30, _("Emergency Number 1")+ ": " + str(account.emergency_number1)),
+            (-31, _("Emergency Number 2")+ ": " + str(account.emergency_number2)),
+            (-32, _("Emergency Number 3")+ ": " + str(account.emergency_number3)),            
         )
         
         for account_user in account_users:
-            results += (account_user.id + 1000000, account_user.title1 + ": " + account_user.phone_number1)
-            results += (account_user.id + 2000000, account_user.title2 + ": " + account_user.phone_number2)
-            results += (account_user.id + 3000000, account_user.title3 + ": " + account_user.phone_number3)
+            results += (
+                        (account_user.id + 1000000, account_user.name + " - " + account_user.title1 + ": " + str(account_user.phone_number1)),
+                        (account_user.id + 2000000, account_user.name + " - " + account_user.title2 + ": " + str(account_user.phone_number2)),
+                        (account_user.id + 3000000, account_user.name + " - " + account_user.title3 + ": " + str(account_user.phone_number3)),
+                    )
         
         return results
