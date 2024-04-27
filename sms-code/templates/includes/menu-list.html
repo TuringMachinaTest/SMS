@@ -21,6 +21,7 @@
             <p>{% trans "Operator" %} </p>
           </a>
         </li>
+        <!--
         <li class="nav-item">
           <a href="{% url 'dashboardv2' %}" class="nav-link {% if 'dashboardv2' in segment %} active {% endif %}">
             <i class="far fa-circle nav-icon"></i>
@@ -33,6 +34,7 @@
             <p>Dashboard v3</p>
           </a>
         </li>
+        -->
       </ul>
     </li>
   {% endif %}
@@ -119,7 +121,7 @@
     {% if perms.accounts.view_accounts %}
     <li class="nav-item {% if '/configurations/' in request.path %} menu-open {% endif %}">
       <a href="#" class="nav-link {% if '/configurations/' in request.path %} active {% endif %}">
-        <i class="nav-icon fas fa-bell"></i>
+        <i class="nav-icon fas fa-cog"></i>
         <p>
           {% trans 'Configurations' %}
           <i class="fas fa-angle-left right"></i>
@@ -186,7 +188,7 @@
     {% if perms.accounts.view_accounts %}
     <li class="nav-item {% if '/support/' in request.path %} menu-open {% endif %}">
       <a href="#" class="nav-link {% if '/support/' in request.path %} active {% endif %}">
-        <i class="nav-icon fas fa-bell"></i>
+        <i class="nav-icon fas fa-circle"></i>
         <p>
           {% trans 'Support' %}
           <i class="fas fa-angle-left right"></i>
@@ -791,7 +793,7 @@
         <p>Level 1</p>
       </a>
     </li>
-    -->
+   
     <li class="nav-header">LABELS</li>
     <li class="nav-item">
       <a href="#" class="nav-link">
@@ -811,28 +813,31 @@
         <p>Informational</p>
       </a>
     </li>
+     -->
     {% endif %}
 
     {% if request.user.is_authenticated %}
     <li class="nav-item">
       <a href="{% url 'logout' %}" class="nav-link">
         <i class="fa fa-sign-out-alt nav-icon"></i>
-        <p>Logout</p>
+        <p>{% trans "Logout" %}</p>
       </a>
     </li>
     {% else %}
     <li class="nav-item">
       <a href="{% url 'login' %}" class="nav-link">
         <i class="fa fa-sign-in-alt nav-icon"></i>
-        <p>Login</p>
+        <p>{% trans "Login" %}</p>
       </a>
     </li>
+    <!--
     <li class="nav-item">
       <a href="{% url 'register' %}" class="nav-link">
         <i class="fa fa-user-plus nav-icon"></i>
-        <p>Register</p>
+        <p>{% trans "Operator" %}Register</p>
       </a>
-    </li>        
+    </li>
+    -->        
     {% endif %} 
     
   </ul>

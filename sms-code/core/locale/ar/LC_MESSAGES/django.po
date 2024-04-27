@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-27 10:29+0300\n"
+"POT-Creation-Date: 2024-04-27 17:31+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,9 +19,33 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
+#: accounts/forms.py:76 accounts/models.py:108
+msgid "Installation Date"
+msgstr "تاريخ التركيب"
+
+#: accounts/forms.py:78 accounts/models.py:42 accounts/models.py:67
+#: accounts/models.py:186
+msgid "Phone Number 1"
+msgstr "الرقم الأول"
+
+#: accounts/forms.py:79 accounts/models.py:43 accounts/models.py:68
+#: accounts/models.py:187
+msgid "Phone Number 2"
+msgstr "الرقم الثاني"
+
 #: accounts/forms.py:85 accounts/models.py:16 accounts/models.py:61
 msgid "City"
 msgstr "المدينة"
+
+#: accounts/forms.py:91 accounts/models.py:38 accounts/models.py:106
+msgid "Installation Company"
+msgstr "شركة التركيب"
+
+#: accounts/forms.py:98
+#, fuzzy
+#| msgid "Alarm Codes"
+msgid "Copy Alarm Codes from"
+msgstr "الإنذارات"
 
 #: accounts/forms.py:111
 msgid "Basic"
@@ -69,8 +93,8 @@ msgstr "المجموعات"
 msgid "Notes"
 msgstr "الملاحظات"
 
-#: accounts/forms.py:251 support/models.py:14
-#: templates/includes/menu-list.html:200
+#: accounts/forms.py:251 support/models.py:15
+#: templates/includes/menu-list.html:202
 msgid "Service Orders"
 msgstr "الطلبات"
 
@@ -98,7 +122,7 @@ msgid "Partition"
 msgstr "القسم"
 
 #: accounts/models.py:17 accounts/views.py:259 accounts/views.py:362
-#: templates/includes/menu-list.html:90
+#: templates/includes/menu-list.html:92
 msgid "Cities"
 msgstr "المدن"
 
@@ -106,12 +130,8 @@ msgstr "المدن"
 msgid "Group"
 msgstr "المجموعة"
 
-#: accounts/models.py:38 accounts/models.py:106
-msgid "Installation Company"
-msgstr "شركة التركيب"
-
 #: accounts/models.py:39 accounts/views.py:155
-#: templates/includes/menu-list.html:100
+#: templates/includes/menu-list.html:102
 msgid "Installation Companies"
 msgstr "شركات التركيب"
 
@@ -119,29 +139,21 @@ msgstr "شركات التركيب"
 msgid "Company Name"
 msgstr "اسم الشركة"
 
-#: accounts/models.py:42 accounts/models.py:67 accounts/models.py:186
-msgid "Phone Number 1"
-msgstr "الرقم الأول"
-
-#: accounts/models.py:43 accounts/models.py:68 accounts/models.py:187
-msgid "Phone Number 2"
-msgstr "الرقم الثاني"
-
 #: accounts/models.py:51 accounts/models.py:152 accounts/models.py:176
 #: accounts/models.py:230 configurations/models.py:42
-#: configurations/models.py:97 events/models.py:64 support/models.py:24
+#: configurations/models.py:97 events/models.py:64 support/models.py:25
 #: templates/cards/account_card.html:10
 msgid "Account"
 msgstr "الحساب"
 
 #: accounts/models.py:52 accounts/views.py:46
-#: templates/includes/menu-list.html:111
+#: templates/includes/menu-list.html:113
 msgid "Accounts"
 msgstr "الحسابات"
 
 #: accounts/models.py:54
 msgid "Account ID"
-msgstr "معؤف الحساب"
+msgstr "معرف الحساب"
 
 #: accounts/models.py:55
 msgid "Account Name"
@@ -265,10 +277,6 @@ msgstr "القسم العاشر"
 msgid "Copy Alarm Codes From"
 msgstr "الإنذارات"
 
-#: accounts/models.py:108
-msgid "Installation Date"
-msgstr "تاريخ التركيب"
-
 #: accounts/models.py:109
 msgid "Installation Note"
 msgstr "ملاحظة التركيب"
@@ -282,17 +290,17 @@ msgid "Transmitter Phone Number"
 msgstr "رقم المرسل"
 
 #: accounts/models.py:117 accounts/models.py:160 accounts/models.py:213
-#: events/models.py:31 events/models.py:96 support/models.py:37
+#: events/models.py:31 events/models.py:96 support/models.py:38
 msgid "Created At"
 msgstr "أنشئ عند"
 
 #: accounts/models.py:118 accounts/models.py:161 accounts/models.py:214
-#: events/models.py:100 support/models.py:38
+#: events/models.py:100 support/models.py:39
 msgid "Updated At"
 msgstr "حدّث عند"
 
 #: accounts/models.py:119 accounts/models.py:162 accounts/models.py:215
-#: support/models.py:40
+#: support/models.py:41
 msgid "Created By"
 msgstr "أنشئ من"
 
@@ -405,6 +413,43 @@ msgstr "الجمعة"
 msgid "Zone"
 msgstr "المنطقة"
 
+#: accounts/tables.py:13 accounts/tables.py:32 accounts/tables.py:51
+#: accounts/tables.py:70 configurations/tables.py:13 events/tables.py:13
+#: events/tables.py:24 support/tables.py:13
+#: templates/admin/edit_inline/stacked.html:29
+#: templates/admin/edit_inline/tabular.html:60
+msgid "View"
+msgstr "تصفح"
+
+#: accounts/tables.py:17 accounts/tables.py:36 accounts/tables.py:55
+#: accounts/tables.py:74 configurations/tables.py:17 events/tables.py:28
+#: support/tables.py:17
+#: templates/crispy_formset_modal/bootstrap4/edit_button.html:4
+#: templates/crispy_formset_modal/bootstrap4/modal.html:7
+#: templates/crispy_formset_modal/bootstrap5/edit_button.html:4
+#: templates/crispy_formset_modal/bootstrap5/modal.html:7
+#: templates/crispy_formset_modal/bulma/edit_button.html:4
+#: templates/crispy_formset_modal/bulma/modal.html:6
+#: templates/crispy_formset_modal/tailwind/edit_button.html:4
+#: templates/crispy_formset_modal/tailwind/modal.html:7
+msgid "Edit"
+msgstr "تعديل"
+
+#: accounts/tables.py:21 accounts/tables.py:40 accounts/tables.py:59
+#: accounts/tables.py:78 configurations/tables.py:21 support/tables.py:21
+#: templates/admin/delete_confirmation.html:38
+#: templates/admin/submit_line.html:28
+#: templates/crispy_formset_modal/bootstrap4/modal.html:17
+#: templates/crispy_formset_modal/bootstrap4/table.html:73
+#: templates/crispy_formset_modal/bootstrap5/modal.html:16
+#: templates/crispy_formset_modal/bootstrap5/table.html:73
+#: templates/crispy_formset_modal/bulma/modal.html:15
+#: templates/crispy_formset_modal/bulma/table.html:73
+#: templates/crispy_formset_modal/tailwind/modal.html:18
+#: templates/crispy_formset_modal/tailwind/table.html:81
+msgid "Delete"
+msgstr "حذف"
+
 #: accounts/views.py:65
 msgid "Create Account"
 msgstr "إنشاء حساب"
@@ -453,9 +498,9 @@ msgstr "تفاصيل المجموعة"
 msgid "Update Group"
 msgstr "تعديل المجموعة"
 
-#: configurations/forms.py:45 templates/includes/menu-list.html:124
+#: configurations/forms.py:45 templates/includes/menu-list.html:126
 msgid "Configurations"
-msgstr "التكوينات"
+msgstr "الإعدادات"
 
 #: configurations/forms.py:70
 msgid "First Action"
@@ -565,7 +610,7 @@ msgstr "الجدول"
 msgid "Device"
 msgstr "الجهاز"
 
-#: configurations/models.py:198 templates/includes/menu-list.html:133
+#: configurations/models.py:198 templates/includes/menu-list.html:135
 msgid "Devices"
 msgstr "الأجهزة"
 
@@ -586,8 +631,8 @@ msgid "End Line"
 msgstr ""
 
 #: configurations/views.py:36 events/models.py:19 events/views.py:41
-#: events/views.py:95 templates/includes/menu-list.html:144
-#: templates/includes/menu-list.html:177 templates/monitoring/index.html:147
+#: events/views.py:95 templates/includes/menu-list.html:146
+#: templates/includes/menu-list.html:179 templates/monitoring/index.html:147
 msgid "Raw Events"
 msgstr ""
 
@@ -624,7 +669,7 @@ msgstr ""
 msgid "Decrypted Event"
 msgstr ""
 
-#: events/models.py:41 templates/includes/menu-list.html:167
+#: events/models.py:41 templates/includes/menu-list.html:169
 msgid "Decrypted Events"
 msgstr ""
 
@@ -672,7 +717,7 @@ msgstr ""
 msgid "Success"
 msgstr ""
 
-#: events/models.py:71 support/models.py:26
+#: events/models.py:71 support/models.py:27
 msgid "Status"
 msgstr "الحالة"
 
@@ -720,51 +765,51 @@ msgstr ""
 msgid "Update Event"
 msgstr ""
 
-#: support/models.py:13 support/views.py:40
+#: support/models.py:14 support/views.py:40
 msgid "Service Order"
 msgstr "الطلب"
 
-#: support/models.py:17
+#: support/models.py:18
 msgid "Created"
 msgstr "تم إنشاءه"
 
-#: support/models.py:18
+#: support/models.py:19
 msgid "Under Review"
 msgstr "تحت المراجعة"
 
-#: support/models.py:19
+#: support/models.py:20
 msgid "Under Processing"
 msgstr "تحت التنفيذ"
 
-#: support/models.py:20
+#: support/models.py:21
 msgid "Done"
 msgstr "تم التنفيذ"
 
-#: support/models.py:21
+#: support/models.py:22
 msgid "Canceled"
 msgstr "تم إلغاءه"
 
-#: support/models.py:28 templates/admin/includes/object_delete_summary.html:5
+#: support/models.py:29 templates/admin/includes/object_delete_summary.html:5
 msgid "Summary"
 msgstr "الملخص"
 
-#: support/models.py:30
+#: support/models.py:31
 msgid "Request"
 msgstr "الطلب"
 
-#: support/models.py:32
+#: support/models.py:33
 msgid "Internal Notes"
 msgstr "الملاحظات الداخلية"
 
-#: support/models.py:34
+#: support/models.py:35
 msgid "Response"
 msgstr "الجواب"
 
-#: support/models.py:39
+#: support/models.py:40
 msgid "Closed At"
 msgstr "تم إغلاق الطلب عند"
 
-#: support/models.py:42
+#: support/models.py:43
 msgid "Service Order History"
 msgstr "تاريخ الطلب"
 
@@ -879,19 +924,6 @@ msgstr ""
 msgid "Toggle sorting"
 msgstr ""
 
-#: templates/admin/delete_confirmation.html:38
-#: templates/admin/submit_line.html:28
-#: templates/crispy_formset_modal/bootstrap4/modal.html:17
-#: templates/crispy_formset_modal/bootstrap4/table.html:73
-#: templates/crispy_formset_modal/bootstrap5/modal.html:16
-#: templates/crispy_formset_modal/bootstrap5/table.html:73
-#: templates/crispy_formset_modal/bulma/modal.html:15
-#: templates/crispy_formset_modal/bulma/table.html:73
-#: templates/crispy_formset_modal/tailwind/modal.html:18
-#: templates/crispy_formset_modal/tailwind/table.html:81
-msgid "Delete"
-msgstr ""
-
 #: templates/admin/delete_confirmation.html:54
 #, python-format
 msgid ""
@@ -984,11 +1016,6 @@ msgstr ""
 msgid "Change"
 msgstr ""
 
-#: templates/admin/edit_inline/stacked.html:29
-#: templates/admin/edit_inline/tabular.html:60
-msgid "View"
-msgstr ""
-
 #: templates/admin/edit_inline/tabular.html:37
 msgid "Delete?"
 msgstr ""
@@ -1011,7 +1038,7 @@ msgstr ""
 
 #: templates/admin/object_history.html:51
 msgid "Date/time"
-msgstr ""
+msgstr "التاريخ/الوقت"
 
 #: templates/admin/object_history.html:67
 msgid ""
@@ -1021,15 +1048,15 @@ msgstr ""
 
 #: templates/admin/pagination.html:31 templates/admin/search_form.html:32
 msgid "Show all"
-msgstr ""
+msgstr "إظهار الكل"
 
 #: templates/admin/pagination.html:47 templates/admin/submit_line.html:7
 msgid "Save"
-msgstr ""
+msgstr "حفظ"
 
 #: templates/admin/search_form.html:16
 msgid "Search"
-msgstr ""
+msgstr "بحث"
 
 #: templates/admin/search_form.html:22
 #, python-format
@@ -1054,19 +1081,19 @@ msgstr ""
 
 #: templates/admin/submit_line.html:11
 msgid "Save as new"
-msgstr ""
+msgstr "حفظ كجديد"
 
 #: templates/admin/submit_line.html:15
 msgid "Save and add another"
-msgstr ""
+msgstr "حفظ و إدخال جديد"
 
 #: templates/admin/submit_line.html:19
 msgid "Save and continue editing"
-msgstr ""
+msgstr "حفظ و إكمال التعديل"
 
 #: templates/admin/submit_line.html:19
 msgid "Save and view"
-msgstr ""
+msgstr "حفظ و عرض"
 
 #: templates/admin/submit_line.html:23
 #: templates/crispy_formset_modal/bootstrap4/modal.html:18
@@ -1074,25 +1101,14 @@ msgstr ""
 #: templates/crispy_formset_modal/bulma/modal.html:16
 #: templates/crispy_formset_modal/tailwind/modal.html:19
 msgid "Close"
-msgstr ""
-
-#: templates/crispy_formset_modal/bootstrap4/edit_button.html:4
-#: templates/crispy_formset_modal/bootstrap4/modal.html:7
-#: templates/crispy_formset_modal/bootstrap5/edit_button.html:4
-#: templates/crispy_formset_modal/bootstrap5/modal.html:7
-#: templates/crispy_formset_modal/bulma/edit_button.html:4
-#: templates/crispy_formset_modal/bulma/modal.html:6
-#: templates/crispy_formset_modal/tailwind/edit_button.html:4
-#: templates/crispy_formset_modal/tailwind/modal.html:7
-msgid "Edit"
-msgstr ""
+msgstr "إغلاق"
 
 #: templates/crispy_formset_modal/bootstrap4/table.html:53
 #: templates/crispy_formset_modal/bootstrap5/table.html:53
 #: templates/crispy_formset_modal/bulma/table.html:53
 #: templates/crispy_formset_modal/tailwind/table.html:58
 msgid "No data"
-msgstr ""
+msgstr "لا يوجد محتوى"
 
 #: templates/crispy_formset_modal/bootstrap4/table.html:72
 #: templates/crispy_formset_modal/bootstrap5/table.html:72
@@ -1100,77 +1116,103 @@ msgstr ""
 #: templates/crispy_formset_modal/tailwind/table.html:80
 #: templates/generic/list.html:19
 msgid "Add"
-msgstr ""
+msgstr "إضافة"
 
 #: templates/django_tables2/bootstrap.html:66
 #: templates/django_tables2/bootstrap4.html:66
 #: templates/django_tables2/bootstrap5.html:66
 #: templates/django_tables2/table.html:64
 msgid "previous"
-msgstr ""
+msgstr "السابق"
 
 #: templates/django_tables2/bootstrap.html:91
 #: templates/django_tables2/bootstrap4.html:86
 #: templates/django_tables2/bootstrap5.html:86
 #: templates/django_tables2/table.html:88
 msgid "next"
-msgstr ""
+msgstr "التالي"
 
 #: templates/generic/form.html:38
 msgid "Card"
-msgstr ""
+msgstr "البطاقة"
 
 #: templates/generic/list.html:20
 msgid "Export"
-msgstr ""
+msgstr "تصدير"
 
 #: templates/includes/menu-list.html:13
 msgid "Monitoring"
-msgstr ""
+msgstr "الرصد"
 
-#: templates/includes/menu-list.html:21
+#: templates/includes/menu-list.html:21 templates/includes/menu-list.html:837
 msgid "Operator"
-msgstr ""
+msgstr "المشغل"
 
-#: templates/includes/menu-list.html:81
+#: templates/includes/menu-list.html:83
 msgid "Accounts Management"
-msgstr ""
+msgstr "إدارة الحسابات"
 
-#: templates/includes/menu-list.html:158
+#: templates/includes/menu-list.html:160
 msgid "Events Management"
-msgstr ""
+msgstr "إدارة الأحداث"
 
-#: templates/includes/menu-list.html:191
+#: templates/includes/menu-list.html:193
 msgid "Support"
-msgstr ""
+msgstr "الدعم الفني"
+
+#: templates/includes/menu-list.html:823
+#: templates/includes/navigation-light.html:24
+#: templates/includes/navigation-light.html:31
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+#: templates/includes/menu-list.html:830
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: templates/includes/navigation-dark.html:9
+#: templates/includes/navigation-light.html:11
+msgid "Home"
+msgstr "الرئيسية"
+
+#: templates/includes/navigation-light.html:21
+#: templates/includes/navigation-light.html:28
+#, fuzzy
+#| msgid "Password"
+msgid "Change Password"
+msgstr "كلمة المرور"
+
+#: templates/includes/navigation-light.html:36
+msgid "Sign In"
+msgstr "تسجيل الدخول"
 
 #: templates/monitoring/index.html:28
 msgid "Uncommited Events"
-msgstr ""
+msgstr "الأحداث غير المعالجة"
 
 #: templates/monitoring/index.html:49
 msgid "Delayed Event"
-msgstr ""
+msgstr "الأحداث التي تأخر وصول ردها"
 
 #: templates/monitoring/index.html:67
 msgid "Delayed Periodic Event"
-msgstr ""
+msgstr "الأحداث المجدولة المتأخرة"
 
 #: templates/monitoring/index.html:89
 msgid "Follow Up Events"
-msgstr ""
+msgstr "الأحداث التي تتم متابعتها"
 
 #: templates/monitoring/index.html:107
 msgid "Pending Events"
-msgstr ""
+msgstr "الأحداث المعلقه"
 
 #: templates/monitoring/index.html:128
 msgid "Locked Events"
-msgstr ""
+msgstr "الأحداث المقفولة من قبل المشغل"
 
 #: templates/registration/logged_out.html:14
 msgid "Log in"
-msgstr ""
+msgstr "تسجيل الدخول"
 
 #: templates/registration/logged_out.html:15
 #: templates/registration/logged_out.html:32
@@ -1179,7 +1221,7 @@ msgstr ""
 
 #: templates/registration/logged_out.html:19
 msgid "Log in again"
-msgstr ""
+msgstr "سجل الدخول مرة ثانية"
 
 #: templates/registration/password_change_done.html:16
 msgid "Documentation"
@@ -1187,23 +1229,23 @@ msgstr ""
 
 #: templates/registration/password_change_done.html:20
 msgid "Log out"
-msgstr ""
+msgstr "تسجيل الخروج"
 
 #: templates/registration/password_change_done.html:37
 #: templates/registration/password_change_form.html:26
 msgid "Password change"
-msgstr ""
+msgstr "تغيير كلمة المرور"
 
 #: templates/registration/password_change_done.html:51
 #: templates/registration/password_change_done.html:65
 msgid "Your password was changed."
-msgstr ""
+msgstr "تم تغيير كلمة المرور"
 
 #: templates/registration/password_change_form.html:41
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
-msgstr ""
+msgstr "الرجاء إدخال كلمة السر القديمة و إدخال كلمة السر الجديدة مرتين"
 
 #~ msgid "Action 3"
 #~ msgstr "الإجراء الثالث"
