@@ -320,7 +320,7 @@ msgstr "ملاحظه"
 
 #: accounts/models.py:155 events/models.py:77 events/models.py:82
 msgid "Timer"
-msgstr "موقت"
+msgstr "مؤقت"
 
 #: accounts/models.py:156 configurations/models.py:55 events/models.py:78
 #: events/models.py:83
@@ -563,15 +563,15 @@ msgstr "الجدول"
 
 #: configurations/models.py:197 events/models.py:26
 msgid "Device"
-msgstr ""
+msgstr "الجهاز"
 
 #: configurations/models.py:198 templates/includes/menu-list.html:133
 msgid "Devices"
-msgstr ""
+msgstr "الأجهزة"
 
 #: configurations/models.py:219
 msgid "Type"
-msgstr ""
+msgstr "النوع"
 
 #: configurations/models.py:221
 msgid "COM"
@@ -674,7 +674,7 @@ msgstr ""
 
 #: events/models.py:71 support/models.py:26
 msgid "Status"
-msgstr ""
+msgstr "الحالة"
 
 #: events/models.py:73
 msgid "Custom"
@@ -722,63 +722,63 @@ msgstr ""
 
 #: support/models.py:13 support/views.py:40
 msgid "Service Order"
-msgstr ""
+msgstr "الطلب"
 
 #: support/models.py:17
 msgid "Created"
-msgstr ""
+msgstr "تم إنشاءه"
 
 #: support/models.py:18
 msgid "Under Review"
-msgstr ""
+msgstr "تحت المراجعة"
 
 #: support/models.py:19
 msgid "Under Processing"
-msgstr ""
+msgstr "تحت التنفيذ"
 
 #: support/models.py:20
 msgid "Done"
-msgstr ""
+msgstr "تم التنفيذ"
 
 #: support/models.py:21
 msgid "Canceled"
-msgstr ""
+msgstr "تم إلغاءه"
 
 #: support/models.py:28 templates/admin/includes/object_delete_summary.html:5
 msgid "Summary"
-msgstr ""
+msgstr "الملخص"
 
 #: support/models.py:30
 msgid "Request"
-msgstr ""
+msgstr "الطلب"
 
 #: support/models.py:32
 msgid "Internal Notes"
-msgstr ""
+msgstr "الملاحظات الداخلية"
 
 #: support/models.py:34
 msgid "Response"
-msgstr ""
+msgstr "الجواب"
 
 #: support/models.py:39
 msgid "Closed At"
-msgstr ""
+msgstr "تم إغلاق الطلب عند"
 
 #: support/models.py:42
 msgid "Service Order History"
-msgstr ""
+msgstr "تاريخ الطلب"
 
 #: support/views.py:58
 msgid "Create Service Order"
-msgstr ""
+msgstr "إنشاء ظلب"
 
 #: support/views.py:85
 msgid "Service Order Details"
-msgstr ""
+msgstr "تفاصيل الطلب"
 
 #: support/views.py:109
 msgid "Update Service Order"
-msgstr ""
+msgstr "تعديل الطلب"
 
 #: templates/admin/actions.html:14
 msgid "Run the selected action"

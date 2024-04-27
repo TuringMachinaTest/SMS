@@ -73,10 +73,10 @@ class InstallationCompanyForm(forms.ModelForm):
                 
 class AccountForm(forms.ModelForm):
 
-    installation_date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}), required=False)
+    installation_date = forms.DateField(widget=forms.widgets.DateInput(attrs={'type': 'date'}), required=False, label=_("Installation Date"))
 
-    installation_company_phone_number1 = formfields.PhoneNumberField(region="SY", max_length=20, required=False, widget=widgets.TextInput(attrs={'readonly': 'True'}))
-    installation_company_phone_number2 = formfields.PhoneNumberField(region="SY", max_length=20, required=False, widget=widgets.TextInput(attrs={'readonly': 'True'}))
+    installation_company_phone_number1 = formfields.PhoneNumberField(region="SY", max_length=20, required=False, widget=widgets.TextInput(attrs={'readonly': 'True'}), label=_("Phone Number 1"))
+    installation_company_phone_number2 = formfields.PhoneNumberField(region="SY", max_length=20, required=False, widget=widgets.TextInput(attrs={'readonly': 'True'}), label=_("Phone Number 2"))
     
     city = forms.ModelChoiceField(queryset=City.objects.all(), required=False, widget=s2forms.ModelSelect2Widget(
         search_fields = [
@@ -88,14 +88,14 @@ class AccountForm(forms.ModelForm):
         search_fields = [
             "name__icontains",
         ],
-    ))
+    ), label=_("Installation Company"))
     
     copy_alarm_codes_from = forms.ModelChoiceField(
         queryset=Account.objects.all(),
         widget=s2forms.ModelSelect2Widget(
             model=Account,
             search_fields=['id__icontains', 'name__icontains'],
-        )
+        ), label=_("Copy Alarm Codes from")
     )
     
     class Meta:
