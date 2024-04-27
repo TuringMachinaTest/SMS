@@ -272,7 +272,7 @@ class ScheduleForm(forms.ModelForm):
             ),
         )
         
-        self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id))
+        self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id), label=_("Partition"))
 
 
 class ScheduleInlineFormSet(InlineFormSetFactory):

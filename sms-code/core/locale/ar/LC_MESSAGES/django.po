@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-27 09:57+0300\n"
+"POT-Creation-Date: 2024-04-27 10:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,15 +72,30 @@ msgstr "الملاحظات"
 #: accounts/forms.py:251 support/models.py:14
 #: templates/includes/menu-list.html:200
 msgid "Service Orders"
-msgstr ""
+msgstr "الطلبات"
+
+#: accounts/forms.py:288 accounts/models.py:197
+msgid "Holiday Begins"
+msgstr "بداية العطلة"
+
+#: accounts/forms.py:289 accounts/models.py:198
+msgid "Holiday Ends"
+msgstr "نهاية العطلة"
 
 #: accounts/forms.py:300
 msgid "Information"
 msgstr "معلومات"
 
-#: accounts/forms.py:326
+#: accounts/forms.py:325
 msgid "Control"
 msgstr "التحكم"
+
+#: accounts/forms.py:352 accounts/forms.py:399 accounts/models.py:177
+#: accounts/models.py:231 configurations/forms.py:137
+#: configurations/forms.py:275 configurations/models.py:40
+#: configurations/models.py:98 events/models.py:65
+msgid "Partition"
+msgstr "القسم"
 
 #: accounts/models.py:17 accounts/views.py:259 accounts/views.py:362
 #: templates/includes/menu-list.html:90
@@ -325,11 +340,6 @@ msgstr "مستهلك"
 msgid "Account Users"
 msgstr "المستهلكين"
 
-#: accounts/models.py:177 accounts/models.py:231 configurations/forms.py:137
-#: configurations/models.py:40 configurations/models.py:98 events/models.py:65
-msgid "Partition"
-msgstr "القسم"
-
 #: accounts/models.py:180 accounts/models.py:233 configurations/models.py:218
 msgid "Name"
 msgstr "الإسم"
@@ -353,14 +363,6 @@ msgstr "الرقم الثالث"
 #: accounts/models.py:191 accounts/models.py:192 accounts/models.py:193
 msgid "Title"
 msgstr "التعريف"
-
-#: accounts/models.py:197
-msgid "Holiday Begins"
-msgstr ""
-
-#: accounts/models.py:198
-msgid "Holiday Ends"
-msgstr ""
 
 #: accounts/models.py:200
 msgid "Keypad Code"
