@@ -7,4 +7,4 @@ from support.models import ServiceOrder
 class ServiceOrderFilter(django_filters.FilterSet):
     class Meta:
         model = ServiceOrder
-        fields = {'account':["exact"]}
+        fields = {'account':["exact"], 'status':["exact"]}

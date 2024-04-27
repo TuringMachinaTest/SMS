@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 
 from django.utils.translation import gettext as _
@@ -25,7 +26,7 @@ class ServiceOrder(models.Model):
     
     status = models.IntegerField(choices=STATUS_CHOICES, default=0, db_index=True, verbose_name=_("Status"))
     
-    summary = models.TextField(verbose_name=_("Summary"))
+    summary = models.CharField(max_length=120, verbose_name=_("Summary"))
     
     request = models.TextField(verbose_name=_("Request"))
     
@@ -41,9 +42,21 @@ class ServiceOrder(models.Model):
     
     history = HistoricalRecords(verbose_name=_("Service Order History"))
 
-
     def save(self, *args, **kwargs):
-        if self.status == 3 or self.status == -1:
-            self.closed_at = self.updated_at
-            
+        
+        old_instance = ServiceOrder.objects.filter(pk=self.id).first()
+        
+        if old_instance:
+            if (self.status == 3 or self.status == -1) and (old_instance.status != 0 or old_instance.status != 1 or old_instance.status != 2):
+                self.closed_at = datetime.datetime.now()
+        else:
+            if self.status == 3 or self.status == -1:
+                self.closed_at = datetime.datetime.now()
+
+        if self.status == 0 or self.status == 1 or self.status == 2:
+            self.closed_at = None
+        
         super().save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.summary + " - " + self.account.name

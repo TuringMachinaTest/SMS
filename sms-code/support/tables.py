@@ -7,7 +7,7 @@ class ServiceOrderTable(tables.Table):
     class Meta:
         model = ServiceOrder
         template_name = "django_tables2/bootstrap4-responsive.html"
-        fields = ("account", "summary", "status", "created_at")
+        fields = ("account", "summary", "status", "created_at", "closed_at")
         
     view = tables.LinkColumn('support:serviceorder_detail',text="View", args=[tables.A('id')], attrs={
             'a': {'class': 'btn btn-info'},

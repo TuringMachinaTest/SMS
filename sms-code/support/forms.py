@@ -42,7 +42,7 @@ class ServiceOrderForm(forms.ModelForm):
                 Column("summary"),
             ),
             Row(
-                Column("Request"),
+                Column("request"),
             ),
             Row(
                 Column("internal_notes"),
