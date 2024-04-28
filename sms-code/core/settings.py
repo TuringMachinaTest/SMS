@@ -75,9 +75,7 @@ INSTALLED_APPS = [
     'view_breadcrumbs',
     'rest_framework',
     'report_builder',
-    
-#    'django_celery_beat',
-    
+        
     'home',
     'accounts',
     'configurations',

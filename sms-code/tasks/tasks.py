@@ -150,27 +150,27 @@ def dycrypt_events():
 
 def pending_events_timer():
     for event in DecryptedEvent.objects.filter(status=2, timer=True).order_by('id')[:100]:
-        if event.updated_at + timedelta(minutes=event.timer_interval_minnutes, hours=event.timer_interval_hours) > datetime.now() :
+        if event.updated_at + timedelta(minutes=event.timer_interval_minnutes, hours=event.timer_interval_hours) < datetime.now():
             event.status = 0
             event.save()        
         
         
 def follow_events_timer():
     for event in DecryptedEvent.objects.filter(status=3, timer=True).order_by('id')[:100]:
-        if event.updated_at + timedelta(minutes=event.timer_interval_minnutes, hours=event.timer_interval_hours) > datetime.now() :
+        if event.updated_at + timedelta(minutes=event.timer_interval_minnutes, hours=event.timer_interval_hours) < datetime.now():
             event.status = 0
             event.save()
                     
         
 def account_notes_timer():
     for note in AccountNote.objects.filter(timer=True).order_by('id')[:10000]:
-        if note.updated_at + timedelta(minutes=note.timer_interval_minutes, hours=note.timer_interval_hours) > datetime.now() :
+        if note.updated_at + timedelta(minutes=note.timer_interval_minutes, hours=note.timer_interval_hours) < datetime.now():
             note.delete()
             
             
 def check_delayed_return_events():
     for event in DecryptedEvent.objects.filter(has_return=False, delayed_return=False, handled_return_delay=False).order_by('id')[:100]:
-        if event.created_at + timedelta(minutes=event.alarm_code.return_delay) > datetime.now():
+        if event.created_at + timedelta(minutes=event.alarm_code.return_delay) < datetime.now():
             event.status = 4
             event.delayed_return = True
             event.save()
@@ -178,7 +178,7 @@ def check_delayed_return_events():
             
 def check_delayed_periodic_events():
     for event in DecryptedEvent.objects.filter(is_last_periodic_event=True, delayed_periodic=False, handled_periodic_delay=False).order_by('id')[:100]:
-        if event.created_at + timedelta(minutes=event.alarm_code.periodic_interval_minutes, hours=event.alarm_code.periodic_interval_hours) > datetime.now():
+        if event.created_at + timedelta(minutes=event.alarm_code.periodic_interval_minutes, hours=event.alarm_code.periodic_interval_hours) < datetime.now():
             event.status = 5
             event.delayed_periodic = True
             event.save()

@@ -27,14 +27,13 @@ def add_jobs():
     scheduler.add_job(check_delayed_periodic_events, 'interval', seconds=60, args=[], max_instances=1)
 
 def kill(signal, frame):
-    # scheduler.shutdown(wait=False)
+    scheduler.shutdown(wait=False)
     cache.set("devices:kill-device", "all")
     sys.exit(0) 
 
 def start():
     add_jobs()
-    # scheduler = BackgroundScheduler()    
-    # scheduler.start()
+    scheduler.start()
     cache.delete("devices:kill-device")
 
     
