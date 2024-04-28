@@ -35,15 +35,19 @@ class DecryptedEventForm(forms.ModelForm):
         queryset=AlarmCode.objects.all(),
         widget=s2forms.ModelSelect2Widget(
             model=AlarmCode,
-            search_fields=['code__icontains', 'description_icontains'],
-        )
+            dependent_fields={'account': 'account', 'partition': 'partition'},
+            search_fields=['code__icontains', 'description__icontains'],
+        ),
+        required=False
     )
+    
+    created_at = forms.DateTimeField(required=True, widget=forms.widgets.DateTimeInput(attrs={'type': 'datetime-local'}), label=_("Created At"))
       
     class Meta:
         model = DecryptedEvent
         fields = '__all__'
         
-    def __init__(self, details=False, *args, **kwargs):
+    def __init__(self, details=False, account_id=-1, *args, **kwargs):
         super().__init__(*args, **kwargs)        
         
         self.helper = FormHelper()
@@ -54,9 +58,11 @@ class DecryptedEventForm(forms.ModelForm):
                         Column('account'),
                     ),
                     Row(
-                        Column('protocole'),
-                        Column('receiveer_no'),
-                        Column('line_no'),  
+                        Column('raw_event', css_class="col-1"),
+                        Column('protocole', css_class="col-1"),
+                        Column('receiveer_no', css_class="col-1"),
+                        Column('line_no', css_class="col-1"),
+                        Column('created_at', css_class='col-2'),
                         Column('partition'),              
                     ),
                     Row(
@@ -65,7 +71,13 @@ class DecryptedEventForm(forms.ModelForm):
                                 Column('alarm_code')
                             ),
                             Row(
+                                Column('delayed_return')
+                            ),
+                            Row(
                                 Column('handled_return_delay')
+                            ),
+                            Row(
+                                Column('delayed_periodic')
                             ),
                             Row(
                                 Column('handled_periodic_delay')
@@ -96,14 +108,21 @@ class DecryptedEventForm(forms.ModelForm):
                 ),
             )
         )
-        
-        if 'account' in self.data:
-            self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(self.data['account']))
-        else:
-            self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(-1))
+                
+        self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id), label=_("Partition"))
 
         if not details:
             self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+            self.fields['protocole'].disabled = True
+            self.fields['receiveer_no'].disabled = True
+            self.fields['line_no'].disabled = True
+            self.fields['raw_event'].disabled = True
+            self.fields['delayed_return'].disabled = True
+            self.fields['delayed_periodic'].disabled = True
+            
+            if 'raw_event' in self.data and self.data['raw_event'] != -1:
+                self.fields['created_at'].disabled = True
+
         else:            
             for field in self.fields:
                 self.fields[field].disabled = True

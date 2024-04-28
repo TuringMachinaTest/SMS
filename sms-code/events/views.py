@@ -135,6 +135,10 @@ class DetailsDecryptedEvent(PermissionRequiredMixin, DetailBreadcrumbMixin, Upda
         # Get the default form kwargs
         kwargs = super().get_form_kwargs()
                 
+        instance = self.get_queryset().first()
+
+        kwargs['account_id'] = instance.account.id
+        
         # Add any additional parameters you want to pass to the form
         kwargs['details'] = True
         kwargs['account_id'] = self.get_queryset().first().account.id
@@ -143,7 +147,7 @@ class DetailsDecryptedEvent(PermissionRequiredMixin, DetailBreadcrumbMixin, Upda
     
     def get_context_data(self, **kwargs):
         context = super(DetailsDecryptedEvent, self).get_context_data(**kwargs)
-        
+
         context['details'] = True
         context['view_name'] = _("View Event")
         context['history'] = serializers.serialize("python", self.get_queryset().first().history.all())
@@ -171,6 +175,9 @@ class UpdateDecryptedEvent(PermissionRequiredMixin, UpdateBreadcrumbMixin, Updat
         kwargs = super().get_form_kwargs()
         
         instance = self.get_queryset().first()
+        
+        kwargs['account_id'] = instance.account.id
+        
         if instance.status == -1 and (instance.locked_by == None or instance.locked_by != self.request.user.id) and not self.request.user.is_superuser:
             kwargs['details'] = True        
         # Add any additional parameters you want to pass to the form
@@ -188,6 +195,8 @@ class UpdateDecryptedEvent(PermissionRequiredMixin, UpdateBreadcrumbMixin, Updat
             instance.save()
         elif instance.locked_by == None or instance.locked_by != self.request.user.id:
             context['details'] = True
+
+        context['account_id'] = instance.account.id
 
         context['view_name'] = _("Update Event")
         context['history'] = serializers.serialize("python", instance.history.all())

@@ -12,7 +12,7 @@
 
 
       <div class="row">
-        {% if object.raw_event %}
+        {% if object.raw_event and object.raw_event != -1 %}
           {% include "cards/rawevent_card.html" %}
         {%endif%}
         {% if object.account %}
@@ -57,7 +57,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features & hover style</h3>
+              <h3 class="card-title">{% trans 'History' %}</h3>
             </div>
 
             <!-- /.card-header -->

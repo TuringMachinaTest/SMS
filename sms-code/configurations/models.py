@@ -81,7 +81,7 @@ class AlarmCode(models.Model):
     #delay = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(99)])
     
     def __str__(self):
-            return self.description 
+            return str(self.code) + " : " + self.description 
 
 
 class Schedule(models.Model):

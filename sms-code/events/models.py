@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 from accounts.models import Account, AccountNote, AccountUser, Zone
@@ -54,7 +55,7 @@ class DecryptedEvent(PostgresPartitionedModel):
         (5, _("Delayed Periodic"))
     )
     
-    raw_event = models.IntegerField(verbose_name=_("Raw Event"))
+    raw_event = models.IntegerField(default=-1, verbose_name=_("Raw Event"))
     
     protocole = models.IntegerField(default=-1, verbose_name=_("Protocole"))
     receiveer_no = models.IntegerField(default=-1, verbose_name=_("Receiveer No"))
@@ -156,6 +157,5 @@ class DecryptedEvent(PostgresPartitionedModel):
                     if closing_time_from and closing_time_to:
                         if self.created_at.time() < closing_time_from and self.created_at.time() > closing_time_to:
                             self.is_out_of_schedule = True
-                
-                   
+                                    
         super().save(*args, **kwargs)
