@@ -169,7 +169,7 @@ def account_notes_timer():
             
             
 def check_delayed_return_events():
-    for event in DecryptedEvent.objects.filter(has_return=False, delayed_return=False, handled_return_delay=False).order_by('id')[:100]:
+    for event in DecryptedEvent.objects.filter(has_return=False, handled_return_delay=False).order_by('id')[:100]:
         if event.created_at + timedelta(minutes=event.alarm_code.return_delay) < datetime.now():
             event.status = 4
             event.delayed_return = True
@@ -177,7 +177,7 @@ def check_delayed_return_events():
             
             
 def check_delayed_periodic_events():
-    for event in DecryptedEvent.objects.filter(is_last_periodic_event=True, delayed_periodic=False, handled_periodic_delay=False).order_by('id')[:100]:
+    for event in DecryptedEvent.objects.filter(is_last_periodic_event=True, handled_periodic_delay=False).order_by('id')[:100]:
         if event.created_at + timedelta(minutes=event.alarm_code.periodic_interval_minutes, hours=event.alarm_code.periodic_interval_hours) < datetime.now():
             event.status = 5
             event.delayed_periodic = True

@@ -63,8 +63,8 @@ class AlarmCodeForm(forms.ModelForm):
                     Column("is_periodic")
                 ),
                 Row(
+                    Column("periodic_interval_minutes"),
                     Column("periodic_interval_hours"),
-                    Column("periodic_interval_minutes")
                 ),
             ),
             Fieldset(_("First Action"),

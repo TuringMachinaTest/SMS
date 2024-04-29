@@ -110,30 +110,33 @@ class DecryptedEvent(PostgresPartitionedModel):
             account_note = AccountNote(
                 account=self.account, 
                 note=self.account_note, 
-                note_timer=self.account_note_timer, 
-                note_timer_interval_minnutes=self.note_timer_interval_minnutes, 
-                note_timer_interval_hours=self.note_timer_interval_hours
+                timer=self.account_note_timer, 
+                timer_interval_minutes=self.note_timer_interval_minnutes, 
+                timer_interval_hours=self.note_timer_interval_hours
             )
             account_note.save()
             
-        if self._state.adding is True and self.alarm_code and self.account and self.partition and self.alarm_code.code[0] == "R":
+        if self._state.adding is True and self.alarm_code and self.account and self.partition != -1 and self.alarm_code.code[0] == "R":
             related_code = self.alarm_code.code.replace("R", "E")
             related_alarm_code = AlarmCode.objects.filter(account=self.account, partition=self.partition, code=related_code).first()
             if related_alarm_code:
-                related_event = DecryptedEvent.objects.filter(has_return=False, account=self.account, partition=self.partition, alarm_code=related_alarm_code).first()
+                related_event = DecryptedEvent.objects.filter(has_return=False, delayed_return= False, account=self.account, partition=self.partition, alarm_code=related_alarm_code, zone=self.zone, user=self.user).first()
                 if related_event:
                     related_event.has_return = True
                     related_event.save()
                     self.has_return = True
+                else:
+                    self.delayed_return = True
                     
-        if self._state.adding is True and self.alarm_code and self.alarm_code.is_periodic and self.partition:
-            last_periodic_event = DecryptedEvent.objects.filter(account=self.account, partition=self.partition, alarm_code=self.alarm_code, is_last_periodic_event=True).first()
+        if self._state.adding is True and self.alarm_code and self.alarm_code.is_periodic and self.partition != -1:
+            last_periodic_event = DecryptedEvent.objects.filter(account=self.account, partition=self.partition, alarm_code=self.alarm_code, is_last_periodic_event=True, zone=self.zone, user=self.user).first()
             if last_periodic_event:
                 last_periodic_event.is_last_periodic_event = False
                 last_periodic_event.save()
+            self.is_last_periodic_event = True
         
         # Opening Time
-        if self._state.adding is True and self.alarm_code and self.alarm_code.alarm_type == 4 and self.partition:
+        if self._state.adding is True and self.alarm_code and self.alarm_code.alarm_type == 4 and self.partition != -1:
             schedule = Schedule.objects.filter(account=self.account, partition=self.partition).first()
             if schedule:
                 day_of_the_week = self.created_at.weekday()
@@ -146,7 +149,7 @@ class DecryptedEvent(PostgresPartitionedModel):
                             self.is_out_of_schedule = True
         
         # Closing Time
-        if self._state.adding is True and self.alarm_code and self.alarm_code.alarm_type == 5 and self.partition:
+        if self._state.adding is True and self.alarm_code and self.alarm_code.alarm_type == 5 and self.partition != -1:
             schedule = Schedule.objects.filter(account=self.account, partition=self.partition).first()
             if schedule:
                 day_of_the_week = self.created_at.weekday()

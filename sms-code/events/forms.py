@@ -71,6 +71,9 @@ class DecryptedEventForm(forms.ModelForm):
                                 Column('alarm_code')
                             ),
                             Row(
+                                Column('has_return')
+                            ),
+                            Row(
                                 Column('delayed_return')
                             ),
                             Row(
@@ -109,7 +112,10 @@ class DecryptedEventForm(forms.ModelForm):
             )
         )
                 
-        self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id), label=_("Partition"))
+        if 'account' in self.data:
+            self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(self.data['account']), label=_("Partition"))
+        else:
+            self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id), label=_("Partition"))
 
         if not details:
             self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
@@ -117,6 +123,7 @@ class DecryptedEventForm(forms.ModelForm):
             self.fields['receiveer_no'].disabled = True
             self.fields['line_no'].disabled = True
             self.fields['raw_event'].disabled = True
+            self.fields['has_return'].disabled = True
             self.fields['delayed_return'].disabled = True
             self.fields['delayed_periodic'].disabled = True
             
