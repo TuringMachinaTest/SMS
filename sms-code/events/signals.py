@@ -1,5 +1,7 @@
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
+
+from accounts.models import AccountNote
 
 from .serializers import DecryptedEventSerializer
 
@@ -43,3 +45,27 @@ def update_event_status(sender, instance, **kwargs):
         elif instance.status == 5:
             send_message('events', 'send_delayed_periodic_event', DecryptedEventSerializer(instance).data )            
        # elif old_instance.status == 
+
+
+@receiver(post_save, sender=DecryptedEvent, dispatch_uid="save_account_note")
+def save_account_note(sender, instance, **kwargs):
+    
+    account_note = AccountNote.objects.filter(account=instance.account, decrypted_event=instance.id).first()
+    
+    if account_note and instance.account_note and instance.account_note.strip() != "":
+      account_note.note = instance.account_note
+      account_note.timer=instance.account_note_timer, 
+      account_note.timer_interval_minutes=instance.note_timer_interval_minnutes, 
+      account_note.timer_interval_hours=instance.note_timer_interval_hours
+      account_note.save()  
+    
+    elif instance.account_note and instance.account_note.strip() != "":
+        account_note = AccountNote(
+            account=instance.account,
+            decrypted_event=instance.id, 
+            note=instance.account_note, 
+            timer=instance.account_note_timer, 
+            timer_interval_minutes=instance.note_timer_interval_minnutes, 
+            timer_interval_hours=instance.note_timer_interval_hours
+        )
+        account_note.save()

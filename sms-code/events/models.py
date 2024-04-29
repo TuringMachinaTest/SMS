@@ -71,7 +71,7 @@ class DecryptedEvent(PostgresPartitionedModel):
     
     status = models.IntegerField(choices=STATUS_CHOICES, default=0, db_index=True, verbose_name=_("Status"))
     
-    custom = models.BooleanField(default=True, verbose_name=_("Custom"))
+    #custom = models.BooleanField(default=True, verbose_name=_("Custom"))
    
     note = models.TextField(max_length=120, null=True, blank=True, verbose_name=_("Note"))
         
@@ -105,16 +105,6 @@ class DecryptedEvent(PostgresPartitionedModel):
     def save(self, *args, **kwargs):
         if self.status != -1:
             self.locked_at = None
-            
-        if self.account_note != "":
-            account_note = AccountNote(
-                account=self.account, 
-                note=self.account_note, 
-                timer=self.account_note_timer, 
-                timer_interval_minutes=self.note_timer_interval_minnutes, 
-                timer_interval_hours=self.note_timer_interval_hours
-            )
-            account_note.save()
             
         if self._state.adding is True and self.alarm_code and self.account and self.partition != -1 and self.alarm_code.code[0] == "R":
             related_code = self.alarm_code.code.replace("R", "E")

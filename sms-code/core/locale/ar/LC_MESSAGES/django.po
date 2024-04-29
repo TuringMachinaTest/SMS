@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-27 17:31+0300\n"
+"POT-Creation-Date: 2024-04-29 17:34+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -117,7 +117,8 @@ msgstr "التحكم"
 #: accounts/forms.py:352 accounts/forms.py:399 accounts/models.py:177
 #: accounts/models.py:231 configurations/forms.py:137
 #: configurations/forms.py:275 configurations/models.py:40
-#: configurations/models.py:98 events/models.py:65
+#: configurations/models.py:98 events/forms.py:147 events/forms.py:149
+#: events/models.py:66
 msgid "Partition"
 msgstr "القسم"
 
@@ -141,8 +142,8 @@ msgstr "اسم الشركة"
 
 #: accounts/models.py:51 accounts/models.py:152 accounts/models.py:176
 #: accounts/models.py:230 configurations/models.py:42
-#: configurations/models.py:97 events/models.py:64 support/models.py:25
-#: templates/cards/account_card.html:10
+#: configurations/models.py:97 events/forms.py:32 events/models.py:65
+#: support/models.py:25 templates/cards/account_card.html:10
 msgid "Account"
 msgstr "الحساب"
 
@@ -290,12 +291,13 @@ msgid "Transmitter Phone Number"
 msgstr "رقم المرسل"
 
 #: accounts/models.py:117 accounts/models.py:160 accounts/models.py:213
-#: events/models.py:31 events/models.py:96 support/models.py:38
+#: events/forms.py:70 events/models.py:32 events/models.py:97
+#: support/models.py:38
 msgid "Created At"
 msgstr "أنشئ عند"
 
 #: accounts/models.py:118 accounts/models.py:161 accounts/models.py:214
-#: events/models.py:100 support/models.py:39
+#: events/models.py:101 support/models.py:39
 msgid "Updated At"
 msgstr "حدّث عند"
 
@@ -304,13 +306,13 @@ msgstr "حدّث عند"
 msgid "Created By"
 msgstr "أنشئ من"
 
-#: accounts/models.py:121 events/models.py:102
+#: accounts/models.py:121 events/models.py:103
 #: templates/admin/change_form_object_tools.html:5
-#: templates/admin/object_history.html:32
+#: templates/admin/object_history.html:32 templates/generic/form.html:60
 msgid "History"
 msgstr "التدقيق"
 
-#: accounts/models.py:149 events/forms.py:88 events/models.py:81
+#: accounts/models.py:149 events/forms.py:134 events/models.py:82
 #, fuzzy
 #| msgid "Account Name"
 msgid "Account Note"
@@ -322,25 +324,25 @@ msgstr "اسم الحساب"
 msgid "Account Notes"
 msgstr "اسم الحساب"
 
-#: accounts/models.py:154 events/models.py:75
+#: accounts/models.py:154 events/models.py:76
 msgid "Note"
 msgstr "ملاحظه"
 
-#: accounts/models.py:155 events/models.py:77 events/models.py:82
+#: accounts/models.py:155 events/models.py:78 events/models.py:83
 msgid "Timer"
 msgstr "مؤقت"
 
-#: accounts/models.py:156 configurations/models.py:55 events/models.py:78
-#: events/models.py:83
+#: accounts/models.py:156 configurations/models.py:55 events/models.py:79
+#: events/models.py:84
 msgid "Minutes"
 msgstr "دقيقة"
 
-#: accounts/models.py:157 configurations/models.py:56 events/models.py:79
-#: events/models.py:84
+#: accounts/models.py:157 configurations/models.py:56 events/models.py:80
+#: events/models.py:85
 msgid "Hours"
 msgstr "ساعة"
 
-#: accounts/models.py:173 templates/cards/user_card.html:10
+#: accounts/models.py:173 events/forms.py:66 templates/cards/user_card.html:10
 msgid "Account User"
 msgstr "مستهلك"
 
@@ -408,8 +410,8 @@ msgstr "الخميس"
 msgid "Friday"
 msgstr "الجمعة"
 
-#: accounts/models.py:227 configurations/models.py:36 events/models.py:66
-#: templates/cards/zone_card.html:10
+#: accounts/models.py:227 configurations/models.py:36 events/forms.py:55
+#: events/models.py:67 templates/cards/zone_card.html:10
 msgid "Zone"
 msgstr "المنطقة"
 
@@ -532,7 +534,7 @@ msgstr "فتح"
 msgid "Closing"
 msgstr "إغلاق"
 
-#: configurations/models.py:23 events/models.py:63
+#: configurations/models.py:23 events/forms.py:43 events/models.py:64
 msgid "Alarm Code"
 msgstr "رمز الإنذار"
 
@@ -548,7 +550,7 @@ msgstr "تسجيل تلقائي"
 msgid "Auto Test"
 msgstr "تجربة تلقائية"
 
-#: configurations/models.py:37 events/models.py:67
+#: configurations/models.py:37 events/models.py:68
 #: templates/admin/object_history.html:49
 msgid "User"
 msgstr "المستخدم"
@@ -606,7 +608,7 @@ msgstr "الإجراء الثاني"
 msgid "Schedule"
 msgstr "الجدول"
 
-#: configurations/models.py:197 events/models.py:26
+#: configurations/models.py:197 events/models.py:27
 msgid "Device"
 msgstr "الجهاز"
 
@@ -630,7 +632,7 @@ msgstr ""
 msgid "End Line"
 msgstr ""
 
-#: configurations/views.py:36 events/models.py:19 events/views.py:41
+#: configurations/views.py:36 events/models.py:20 events/views.py:41
 #: events/views.py:95 templates/includes/menu-list.html:146
 #: templates/includes/menu-list.html:179 templates/monitoring/index.html:147
 msgid "Raw Events"
@@ -648,112 +650,108 @@ msgstr ""
 msgid "Update Device"
 msgstr ""
 
-#: events/forms.py:52
+#: events/forms.py:82
 msgid "Event"
 msgstr ""
 
-#: events/models.py:18 events/models.py:57
+#: events/models.py:19 events/models.py:58
 #: templates/cards/rawevent_card.html:10
 msgid "Raw Event"
 msgstr ""
 
-#: events/models.py:28
+#: events/models.py:29
 msgid "Decrypted"
 msgstr ""
 
-#: events/models.py:29
+#: events/models.py:30
 msgid "Has Errors"
 msgstr ""
 
-#: events/models.py:40
+#: events/models.py:41
 msgid "Decrypted Event"
 msgstr ""
 
-#: events/models.py:41 templates/includes/menu-list.html:169
+#: events/models.py:42 templates/includes/menu-list.html:169
 msgid "Decrypted Events"
 msgstr ""
 
-#: events/models.py:48
+#: events/models.py:49
 msgid "locked"
 msgstr ""
 
-#: events/models.py:49
+#: events/models.py:50
 msgid "Not Saved"
 msgstr ""
 
-#: events/models.py:50
+#: events/models.py:51
 msgid "Saved"
 msgstr ""
 
-#: events/models.py:51
+#: events/models.py:52
 msgid "Pending"
 msgstr ""
 
-#: events/models.py:52
+#: events/models.py:53
 msgid "Follow"
 msgstr ""
 
-#: events/models.py:53 events/models.py:87
+#: events/models.py:54 events/models.py:88
 msgid "Delayed Return"
 msgstr ""
 
-#: events/models.py:54 events/models.py:91
+#: events/models.py:55 events/models.py:92
 msgid "Delayed Periodic"
 msgstr ""
 
-#: events/models.py:59
+#: events/models.py:60
 msgid "Protocole"
 msgstr ""
 
-#: events/models.py:60
+#: events/models.py:61
 msgid "Receiveer No"
 msgstr ""
 
-#: events/models.py:61
+#: events/models.py:62
 msgid "Line No"
 msgstr ""
 
-#: events/models.py:69
+#: events/models.py:70
 msgid "Success"
 msgstr ""
 
-#: events/models.py:71 support/models.py:27
+#: events/models.py:72 support/models.py:27
 msgid "Status"
 msgstr "الحالة"
 
-#: events/models.py:73
-msgid "Custom"
-msgstr ""
-
-#: events/models.py:86
+#: events/models.py:87
 msgid "Has Return"
 msgstr ""
 
-#: events/models.py:88
+#: events/models.py:89
 msgid "Handled Return Delay"
 msgstr ""
 
-#: events/models.py:90
+#: events/models.py:91
 msgid "Is Last Periodic Event"
 msgstr ""
 
-#: events/models.py:92
+#: events/models.py:93
 msgid "Handled Periodic Delay"
 msgstr ""
 
-#: events/models.py:94
+#: events/models.py:95
 msgid "Is Out Of Schedule"
 msgstr ""
 
-#: events/models.py:97
+#: events/models.py:98
 msgid "Locked At"
 msgstr ""
 
-#: events/models.py:98
+#: events/models.py:99
 msgid "Locked By"
 msgstr ""
 
-#: events/views.py:68 events/views.py:148
+#: events/views.py:68 events/views.py:152
 msgid "View Event"
 msgstr ""
 
@@ -761,7 +759,7 @@ msgstr ""
 msgid "Create Custom Event"
 msgstr ""
 
-#: events/views.py:192
+#: events/views.py:201
 msgid "Update Event"
 msgstr ""
 
@@ -1209,6 +1207,10 @@ msgstr "الأحداث المعلقه"
 #: templates/monitoring/index.html:128
 msgid "Locked Events"
 msgstr "الأحداث المقفولة من قبل المشغل"
+
+#: templates/monitoring/index.html:206
+msgid "ID"
+msgstr ""
 
 #: templates/registration/logged_out.html:14
 msgid "Log in"

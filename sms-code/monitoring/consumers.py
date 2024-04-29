@@ -95,7 +95,7 @@ class EventConsumer(WebsocketConsumer):
         message = event['message']
 
         self.send(text_data=json.dumps({
-            'type':'send_delayed_event',
+            'type':'delayed_event',
             'message':message
         }))
 
@@ -111,7 +111,7 @@ class EventConsumer(WebsocketConsumer):
         message = event['message']
 
         self.send(text_data=json.dumps({
-            'type':'send_delayed_periodic_event',
+            'type':'delayed_periodic_event',
             'message':message
         }))
         

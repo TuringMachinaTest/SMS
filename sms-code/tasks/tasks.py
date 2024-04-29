@@ -104,7 +104,7 @@ def dycrypt_events():
             success = False
             
         if success:
-            event.custom = False
+            # event.custom = False
             event.protocole = protocole
             event.receiveer_no = receiveer_no
             event.line_no = line_no
@@ -134,14 +134,20 @@ def dycrypt_events():
             event.created_at = raw_event.created_at
 
             # If event.alarm_code.alarm_type is Auto Log
-            if event.alarm_code and event.alarm_code.alarm_type == 1:
+            if event.alarm_code and (event.alarm_code.alarm_type == 1 or event.alarm_code.alarm_type == 2):
                 # Change status to Saved
                 event.status = 1
-                event.save()
+                try:
+                    event.save()
+                except:
+                    pass
             else:
                 # Else Save and Emmit unsaved event message
-                event.save()
-                send_message('events', 'send_uncommited_event', DecryptedEventSerializer(event).data )
+                try:
+                    event.save()
+                    send_message('events', 'send_uncommited_event', DecryptedEventSerializer(event).data )
+                except:
+                    pass
             
         raw_event.decrypted = True
         raw_event.has_errors = not success
@@ -169,7 +175,7 @@ def account_notes_timer():
             
             
 def check_delayed_return_events():
-    for event in DecryptedEvent.objects.filter(has_return=False, handled_return_delay=False).order_by('id')[:100]:
+    for event in DecryptedEvent.objects.filter(has_return=False, handled_return_delay=False).exclude(alarm_code=None).order_by('id')[:100]:
         if event.created_at + timedelta(minutes=event.alarm_code.return_delay) < datetime.now():
             event.status = 4
             event.delayed_return = True
@@ -177,7 +183,7 @@ def check_delayed_return_events():
             
             
 def check_delayed_periodic_events():
-    for event in DecryptedEvent.objects.filter(is_last_periodic_event=True, handled_periodic_delay=False).order_by('id')[:100]:
+    for event in DecryptedEvent.objects.filter(is_last_periodic_event=True, handled_periodic_delay=False).exclude(alarm_code=None).order_by('id')[:100]:
         if event.created_at + timedelta(minutes=event.alarm_code.periodic_interval_minutes, hours=event.alarm_code.periodic_interval_hours) < datetime.now():
             event.status = 5
             event.delayed_periodic = True

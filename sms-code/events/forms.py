@@ -1,7 +1,7 @@
 from django import forms
 from extra_views import InlineFormSetFactory
 
-from accounts.models import Account
+from accounts.models import Account, AccountUser, Zone
 from accounts.utils import get_partitions_choices
 from configurations.models import AlarmCode
 
@@ -28,7 +28,8 @@ class DecryptedEventForm(forms.ModelForm):
         widget=s2forms.ModelSelect2Widget(
             model=Account,
             search_fields=['id__icontains', 'name__icontains'],
-        )
+        ),
+        label=_("Account")
     )
 
     alarm_code = forms.ModelChoiceField(
@@ -38,8 +39,33 @@ class DecryptedEventForm(forms.ModelForm):
             dependent_fields={'account': 'account', 'partition': 'partition'},
             search_fields=['code__icontains', 'description__icontains'],
         ),
-        required=False
+        required=False,
+        label=_("Alarm Code")
     )
+    
+    
+    zone = forms.ModelChoiceField(
+        queryset=Zone.objects.all(),
+        widget=s2forms.ModelSelect2Widget(
+            model=Zone,
+            dependent_fields={'account': 'account', 'partition': 'partition'},
+            search_fields=['code__icontains', 'name__icontains'],
+        ),
+        required=False,
+        label=_("Zone")
+    )
+        
+    user = forms.ModelChoiceField(
+        queryset=AccountUser.objects.all(),
+        widget=s2forms.ModelSelect2Widget(
+            model=AccountUser,
+            dependent_fields={'account': 'account', 'partition': 'partition'},
+            search_fields=['code__icontains', 'name__icontains'],
+        ),
+        required=False,
+        label=_("Account User")
+    )
+    
     
     created_at = forms.DateTimeField(required=True, widget=forms.widgets.DateTimeInput(attrs={'type': 'datetime-local'}), label=_("Created At"))
       
@@ -63,7 +89,9 @@ class DecryptedEventForm(forms.ModelForm):
                         Column('receiveer_no', css_class="col-1"),
                         Column('line_no', css_class="col-1"),
                         Column('created_at', css_class='col-2'),
-                        Column('partition'),              
+                        Column('partition', css_class='clo-2'),
+                        Column('zone', css_class='col-2'),
+                        Column('user', css_class='col-2'),              
                     ),
                     Row(
                         Column(
@@ -78,6 +106,9 @@ class DecryptedEventForm(forms.ModelForm):
                             ),
                             Row(
                                 Column('handled_return_delay')
+                            ),
+                            Row(
+                                Column('is_last_periodic_event')
                             ),
                             Row(
                                 Column('delayed_periodic')
@@ -116,6 +147,11 @@ class DecryptedEventForm(forms.ModelForm):
             self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(self.data['account']), label=_("Partition"))
         else:
             self.fields['partition'] = forms.ChoiceField(choices=get_partitions_choices(account_id), label=_("Partition"))
+            
+        if 'raw_event' in self.data and self.fields['raw_event'] == -1:
+            self.fields['created_at'].disabled = True
+            self.fields['partition'].disabled = True
+            
 
         if not details:
             self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
@@ -125,6 +161,7 @@ class DecryptedEventForm(forms.ModelForm):
             self.fields['raw_event'].disabled = True
             self.fields['has_return'].disabled = True
             self.fields['delayed_return'].disabled = True
+            self.fields['is_last_periodic_event'].disabled = True
             self.fields['delayed_periodic'].disabled = True
             
             if 'raw_event' in self.data and self.data['raw_event'] != -1:

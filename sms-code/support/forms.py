@@ -54,12 +54,6 @@ class ServiceOrderForm(forms.ModelForm):
                 Column("closed_at"),
             ),
             Row(
-                Column("created_at"),
-            ),
-            Row(
-                Column("updated_at"),
-            ),
-            Row(
                 Column("created_by"),
             )
         )

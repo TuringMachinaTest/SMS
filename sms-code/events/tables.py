@@ -19,7 +19,7 @@ class DecryptedEventTable(tables.Table):
     class Meta:
         model = DecryptedEvent
         template_name = "django_tables2/bootstrap4-responsive.html"
-        #fields = ("raw_event", "device.name", "device.com", "created_at")
+        fields = ("id", "raw_event", "partition", "alarm_code", "zone", "user" ,"created_at",  "locked_at", "locked_by" ,)
         
     view = tables.LinkColumn('events:decryptedevent_detail',text=_("View"), args=[tables.A('id')], attrs={
             'a': {'class': 'btn btn-info'},

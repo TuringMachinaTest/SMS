@@ -150,7 +150,8 @@ class AccountNote(models.Model):
         verbose_name_plural = _("Account Notes")
     
     account = models.ForeignKey(Account, on_delete=models.CASCADE, verbose_name=_("Account"))
-
+    decrypted_event = models.PositiveBigIntegerField(default=-1, verbose_name=_("Decrypted Event"))
+    
     note = models.TextField(max_length=120, null=True, blank=True, verbose_name=_("Note"))
     timer = models.BooleanField(default=False, db_index=True, verbose_name=_("Timer"))
     timer_interval_minutes = models.IntegerField(default=0, verbose_name=_("Minutes"))
