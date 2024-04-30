@@ -9,6 +9,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit, Div, Row, Column
 from django_select2 import forms as s2forms
 from crispy_formset_modal.layout import ModalEditLayout, ModalEditFormsetLayout
+from django.utils.translation import gettext as _
 
 
 class ServiceOrderForm(forms.ModelForm):
@@ -53,16 +54,12 @@ class ServiceOrderForm(forms.ModelForm):
             Row(
                 Column("closed_at"),
             ),
-            Row(
-                Column("created_by"),
-            )
         )
 
         self.fields["closed_at"].disabled = True
-        self.fields["created_by"].disabled = True
 
         if not details and not formset:
-            self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+            self.helper.add_input(Submit('submit', _('Submit'), css_class='btn-primary'))
         elif details:            
             for field in self.fields:
                 self.fields[field].disabled = True   

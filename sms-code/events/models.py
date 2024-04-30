@@ -93,6 +93,9 @@ class DecryptedEvent(PostgresPartitionedModel):
     handled_periodic_delay = models.BooleanField(default=False, db_index=True, verbose_name=_("Handled Periodic Delay"))
 
     is_out_of_schedule = models.BooleanField(default=False, db_index=True, verbose_name=_("Is Out Of Schedule"))
+    is_user_out_of_schedule = models.BooleanField(default=False, db_index=True, verbose_name=_("Is User Out Of Schedule"))
+    is_user_holiday = models.BooleanField(default=False, db_index=True, verbose_name=_("Is User Holiday"))
+    handled_out_of_schedule = models.BooleanField(default=False, db_index=True, verbose_name=_("Handled Out Of Schedule"))
     
     created_at = models.DateTimeField(verbose_name=_("Created At"))
     locked_at = models.DateTimeField(null=True, blank=True, verbose_name=_("Locked At"))
@@ -110,7 +113,7 @@ class DecryptedEvent(PostgresPartitionedModel):
             related_code = self.alarm_code.code.replace("R", "E")
             related_alarm_code = AlarmCode.objects.filter(account=self.account, partition=self.partition, code=related_code).first()
             if related_alarm_code:
-                related_event = DecryptedEvent.objects.filter(has_return=False, delayed_return= False, account=self.account, partition=self.partition, alarm_code=related_alarm_code, zone=self.zone, user=self.user).first()
+                related_event = DecryptedEvent.objects.filter(has_return=False, account=self.account, partition=self.partition, alarm_code=related_alarm_code, zone=self.zone, user=self.user).first()
                 if related_event:
                     related_event.has_return = True
                     related_event.save()
@@ -135,9 +138,14 @@ class DecryptedEvent(PostgresPartitionedModel):
                 else:
                     opening_time_from, opening_time_to = schedule.get_opening_time(day_of_the_week)
                     if opening_time_from and opening_time_to:
-                        if self.created_at.time() < opening_time_from and self.created_at.time() > opening_time_to:
+                        if self.created_at.time() < opening_time_from or self.created_at.time() > opening_time_to:
                             self.is_out_of_schedule = True
-        
+                        if self.user:
+                            if not self.user.get_autherized_day(day_of_the_week):
+                                self.is_user_out_of_schedule = True
+                            if self.user.holiday_begins and self.user.holiday_ends and self.created_at.date() >= self.user.holiday_begins and self.created_at.date() <= self.user.holiday_ends:
+                                self.is_user_holiday = True
+                            
         # Closing Time
         if self._state.adding is True and self.alarm_code and self.alarm_code.alarm_type == 5 and self.partition != -1:
             schedule = Schedule.objects.filter(account=self.account, partition=self.partition).first()
@@ -148,7 +156,12 @@ class DecryptedEvent(PostgresPartitionedModel):
                 else:
                     closing_time_from, closing_time_to = schedule.get_closing_time(day_of_the_week)
                     if closing_time_from and closing_time_to:
-                        if self.created_at.time() < closing_time_from and self.created_at.time() > closing_time_to:
+                        if self.created_at.time() < closing_time_from or self.created_at.time() > closing_time_to:
                             self.is_out_of_schedule = True
-                                    
+                        if self.user:
+                            if not self.user.get_autherized_day(day_of_the_week):
+                                self.is_user_out_of_schedule = True
+                            if self.user.holiday_begins and self.user.holiday_ends and self.created_at.date() >= self.user.holiday_begins and self.created_at.date() <= self.user.holiday_ends:
+                                self.is_user_holiday = True
+
         super().save(*args, **kwargs)

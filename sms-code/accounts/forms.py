@@ -29,7 +29,7 @@ class CityForm(forms.ModelForm):
         self.helper = FormHelper()
 
         if not details:
-            self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+            self.helper.add_input(Submit('submit', _('Submit'), css_class='btn-primary'))
         else:            
             for field in self.fields:
                 self.fields[field].disabled = True
@@ -47,7 +47,7 @@ class GroupForm(forms.ModelForm):
         self.helper = FormHelper()
 
         if not details:
-            self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+            self.helper.add_input(Submit('submit', _('Submit'), css_class='btn-primary'))
         else:            
             for field in self.fields:
                 self.fields[field].disabled = True             
@@ -65,7 +65,7 @@ class InstallationCompanyForm(forms.ModelForm):
         self.helper = FormHelper()
 
         if not details:
-            self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+            self.helper.add_input(Submit('submit', _('Submit'), css_class='btn-primary'))
         else:            
             for field in self.fields:
                 self.fields[field].disabled = True
@@ -85,17 +85,21 @@ class AccountForm(forms.ModelForm):
     ), label=_("City"))
     
     installation_company = forms.ModelChoiceField(queryset=InstallationCompany.objects.all(), required=False, widget=s2forms.ModelSelect2Widget(
-        search_fields = [
-            "name__icontains",
-        ],
-    ), label=_("Installation Company"))
+            search_fields = [
+                "name__icontains",
+            ],
+        ), 
+        label=_("Installation Company")
+    )
     
     copy_alarm_codes_from = forms.ModelChoiceField(
         queryset=Account.objects.all(),
         widget=s2forms.ModelSelect2Widget(
             model=Account,
             search_fields=['id__icontains', 'name__icontains'],
-        ), label=_("Copy Alarm Codes from")
+        ),
+        required=False, 
+        label=_("Copy Alarm Codes from")
     )
     
     class Meta:
@@ -235,11 +239,11 @@ class AccountForm(forms.ModelForm):
                        Column("installation_note"), 
                     )
                 ),
-                Tab(_("Groups"),
-                    Row(
-                        Column("groups")
-                    ),
-                ),
+                #Tab(_("Groups"),
+                #    Row(
+                #        Column("groups")
+                #    ),
+                #),
                 
                 Tab(_("Notes"),
                     ModalEditFormsetLayout(
@@ -248,12 +252,12 @@ class AccountForm(forms.ModelForm):
                     ),
                 ),
                 
-                Tab(_("Service Orders"),
-                    ModalEditFormsetLayout(
-                        "ServiceOrderInlineFormSet",
-                        list_display=["summary", "status"],
-                    ),
-                ),
+                #Tab(_("Service Orders"),
+                #    ModalEditFormsetLayout(
+                #        "ServiceOrderInlineFormSet",
+                #        list_display=["summary", "status"],
+                #    ),
+                #),
             ),
         )
         

@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import datetime, timedelta
 from django.utils.translation import gettext as _
 from django.core.cache import cache
 from django.db import models
@@ -34,12 +34,12 @@ class AlarmCode(models.Model):
         
     DECRYPTION_TYPES= (
         (0, _("Zone")),
-        (1, _("User"))
+        (1, _("Account User"))
     )
     
     partition = models.IntegerField(default=0, db_index=True, validators=[MinValueValidator(0), MaxValueValidator(10)], verbose_name=_("Partition"))
 
-    account = models.ForeignKey(Account, on_delete=models.CASCADE, db_index=True, verbose_name=_("Account"))
+    account = models.ForeignKey(Account, on_delete=models.CASCADE, db_index=True, verbose_name=_("Account"), related_name="alarm_codes")
     code = models.CharField(max_length=16, db_index=True, validators=[RegexValidator(regex=r"^[ER](\d+)$", message=_('Code does not comply'),)], verbose_name=_("Code"))
     description = models.CharField(max_length=40, verbose_name=_("Description"))
     
@@ -49,11 +49,13 @@ class AlarmCode(models.Model):
     # TYPE
     alarm_type = models.IntegerField(default=0, choices=ALARM_TYPES, verbose_name=_("Alarm Type"))
 
-    return_delay = models.IntegerField(default=0, verbose_name=_("Delay"))
+    has_return = models.BooleanField(default=False, verbose_name=_("Has Return"))
+    return_delay_minutes = models.PositiveIntegerField(default=0, verbose_name=_("Minutes"))
+    return_delay_hours = models.PositiveIntegerField(default=0, verbose_name=_("Hours"))
 
     is_periodic = models.BooleanField(default=False, verbose_name=_("Scheduled"))
-    periodic_interval_minutes = models.IntegerField(default=0, verbose_name=_("Minutes"))
-    periodic_interval_hours = models.IntegerField(default=0, verbose_name=_("Hours"))
+    periodic_interval_minutes = models.PositiveIntegerField(default=0, verbose_name=_("Minutes"))
+    periodic_interval_hours = models.PositiveIntegerField(default=0, verbose_name=_("Hours"))
     
     action_101 = models.IntegerField(default=0, verbose_name=_("Action 1"))
     action_102 = models.IntegerField(default=0, verbose_name=_("Action 1"))
@@ -141,23 +143,23 @@ class Schedule(models.Model):
 
     def get_opening_time(self, day_of_week):
         if day_of_week == 0:
-            return self.opening_monday - timedelta(minutes=self.delay_opning_monday), self.opening_monday + timedelta(minutes=self.delay_opning_monday)
+            return (datetime.combine(datetime.today(), self.opening_monday) - timedelta(minutes=self.delay_opning_monday)).time(), (datetime.combine(datetime.today(), self.opening_monday) + timedelta(minutes=self.delay_opning_monday)).time()
         elif day_of_week == 1:
-            return self.opening_tuesday - timedelta(minutes=self.delay_opning_tuesday), self.opening_tuesday + timedelta(minutes=self.delay_opning_tuesday)
+            return self.opening_tuesday - timedelta(minutes=self.delay_opning_tuesday).time(), self.opening_tuesday + timedelta(minutes=self.delay_opning_tuesday)
         elif day_of_week == 2:
-            return self.opening_wednesday - timedelta(minutes=self.delay_opning_wednesday), self.opening_wednesday + timedelta(minutes=self.delay_opning_wednesday)
+            return self.opening_wednesday - timedelta(minutes=self.delay_opning_wednesday).time(), self.opening_wednesday + timedelta(minutes=self.delay_opning_wednesday)
         elif day_of_week == 3:
-            return self.opening_thursday - timedelta(minutes=self.delay_opning_thursday), self.opening_thursday + timedelta(minutes=self.delay_opning_thursday)
+            return self.opening_thursday - timedelta(minutes=self.delay_opning_thursday).time(), self.opening_thursday + timedelta(minutes=self.delay_opning_thursday)
         elif day_of_week == 4:
-            return self.opening_friday - timedelta(minutes=self.delay_opning_friday), self.opening_friday + timedelta(minutes=self.delay_opning_friday)
+            return self.opening_friday - timedelta(minutes=self.delay_opning_friday).time(), self.opening_friday + timedelta(minutes=self.delay_opning_friday)
         elif day_of_week == 5:
-            return self.opening_saturday - timedelta(minutes=self.delay_opning_saturday), self.opening_saturday + timedelta(minutes=self.delay_opning_saturday)
+            return self.opening_saturday - timedelta(minutes=self.delay_opning_saturday).time(), self.opening_saturday + timedelta(minutes=self.delay_opning_saturday)
         elif day_of_week == 6:
-            return self.opening_sunday - timedelta(minutes=self.delay_opning_sunday), self.opening_sunday + timedelta(minutes=self.delay_opning_sunday)
+            return self.opening_sunday - timedelta(minutes=self.delay_opning_sunday).time(), self.opening_sunday + timedelta(minutes=self.delay_opning_sunday)
     
     def get_closing_time(self, day_of_week):
         if day_of_week == 0:
-            return self.closing_monday - timedelta(minutes=self.delay_closing_monday), self.closing_monday + timedelta(minutes=self.delay_closing_monday)
+            return (datetime.combine(datetime.today(), self.closing_monday) - timedelta(minutes=self.delay_closing_monday)).time(), (datetime.combine(datetime.today(), self.closing_monday) + timedelta(minutes=self.delay_closing_monday)).time()
         elif day_of_week == 1:
             return self.closing_tuesday - timedelta(minutes=self.delay_closing_tuesday), self.closing_tuesday + timedelta(minutes=self.delay_closing_tuesday)
         elif day_of_week == 2:

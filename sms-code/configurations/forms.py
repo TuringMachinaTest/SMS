@@ -25,7 +25,7 @@ class DeviceForm(forms.ModelForm):
         self.helper = FormHelper()
 
         if not details:
-            self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+            self.helper.add_input(Submit('submit', _('Submit'), css_class='btn-primary'))
         else:            
             for field in self.fields:
                 self.fields[field].disabled = True
@@ -57,7 +57,11 @@ class AlarmCodeForm(forms.ModelForm):
                     Column("decryption_type")  
                 ),
                 Row(
-                    Column("return_delay")  
+                    Column("has_return") ,
+                ),
+                Row(
+                    Column("return_delay_minutes") ,
+                    Column("return_delay_hours")  
                 ),
                 Row(
                     Column("is_periodic")
@@ -188,26 +192,26 @@ class AlarmCodeInlineFormSet(InlineFormSetFactory):
     
 class ScheduleForm(forms.ModelForm):
 
-    opening_saturday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
-    closing_saturday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
+    opening_saturday = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
+    closing_saturday = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
 
-    opening_sunday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
-    closing_sunday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
+    opening_sunday = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
+    closing_sunday = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
 
-    opening_monday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
-    closing_monday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
+    opening_monday = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
+    closing_monday = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
 
-    opening_tuesday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
-    closing_tuesday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
+    opening_tuesday = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
+    closing_tuesday = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
 
-    opening_wednesday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
-    closing_wednesday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
+    opening_wednesday = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
+    closing_wednesday = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
 
-    opening_thursday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
-    closing_thursday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
+    opening_thursday = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
+    closing_thursday = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
 
-    opening_friday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
-    closing_friday = forms.DateField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
+    opening_friday = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Opening"))
+    closing_friday = forms.TimeField(widget=forms.widgets.TimeInput(attrs={'type': 'time'}), required=False, label=_("Closing"))
     
     class Meta:
         model = Schedule

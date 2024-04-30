@@ -116,6 +116,18 @@ class DecryptedEventForm(forms.ModelForm):
                             Row(
                                 Column('handled_periodic_delay')
                             ),
+                            Row(
+                                Column('is_out_of_schedule')
+                            ),
+                            Row(
+                                Column('is_user_out_of_schedule')
+                            ),
+                            Row(
+                                Column('is_user_holiday')
+                            ),
+                            Row(
+                                Column('handled_out_of_schedule')
+                            ),
                             css_class="col-3"
                         ),
                         Column(
@@ -154,7 +166,8 @@ class DecryptedEventForm(forms.ModelForm):
             
 
         if not details:
-            self.helper.add_input(Submit('submit', 'Submit', css_class='btn-primary'))
+            self.helper.add_input(Submit('submit', _('Submit'), css_class='btn-primary'))
+
             self.fields['protocole'].disabled = True
             self.fields['receiveer_no'].disabled = True
             self.fields['line_no'].disabled = True
@@ -163,7 +176,10 @@ class DecryptedEventForm(forms.ModelForm):
             self.fields['delayed_return'].disabled = True
             self.fields['is_last_periodic_event'].disabled = True
             self.fields['delayed_periodic'].disabled = True
-            
+            self.fields['is_out_of_schedule'].disabled = True
+            self.fields['is_user_out_of_schedule'].disabled = True
+            self.fields['is_user_holiday'].disabled = True
+
             if 'raw_event' in self.data and self.data['raw_event'] != -1:
                 self.fields['created_at'].disabled = True
 

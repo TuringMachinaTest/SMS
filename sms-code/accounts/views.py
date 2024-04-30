@@ -123,6 +123,8 @@ class UpdateeAccount(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateWithI
     def get_queryset(self):
         # Customize the queryset as needed (e.g., filter by user, etc.)
         return Account.objects.filter(pk=self.kwargs["pk"])
+        
+    
     
     
 class DeleteAccount(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):

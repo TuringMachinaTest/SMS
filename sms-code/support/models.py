@@ -38,7 +38,6 @@ class ServiceOrder(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
     closed_at = models.DateTimeField(blank=True, null=True, verbose_name=_("Closed At"))
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True, verbose_name=_("Created By"))
     
     history = HistoricalRecords(verbose_name=_("Service Order History"))
 

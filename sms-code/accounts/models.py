@@ -51,7 +51,7 @@ class Account(models.Model):
         verbose_name = _("Account")
         verbose_name_plural = _("Accounts")
     
-    id = models.IntegerField(primary_key=True, verbose_name=_("Account ID"))
+    id = models.PositiveIntegerField(primary_key=True, verbose_name=_("Account ID"))
     name = models.CharField(max_length=40, verbose_name=_("Account Name"))
 
     address_line1 = models.CharField(max_length=30, blank=True, verbose_name=_("Address Line 1"))
@@ -125,17 +125,24 @@ class Account(models.Model):
         if self.copy_alarm_codes and self.copy_alarm_codes_from:
             alarm_codes = configurations.models.AlarmCode.objects.filter(account=self.copy_alarm_codes_from)
             for alarm_code in alarm_codes:
-                new_alarm_code = configurations.models.AlarmCode()
-                new_alarm_code.account = self,
-                new_alarm_code.code = alarm_code.code,
-                new_alarm_code.description = alarm_code.description
-                new_alarm_code.partition = alarm_code.partition
-                new_alarm_code.alarm_type = alarm_code.alarm_type
-                new_alarm_code.decryption_type = alarm_code.decryption_type
+                new_alarm_code = configurations.models.AlarmCode(
+                    account=self,  #Account(id=self.id), 
+                    code=alarm_code.code,
+                    description=alarm_code.description,
+                    partition=alarm_code.partition,
+                    alarm_type=alarm_code.alarm_type,
+                    decryption_type=alarm_code.decryption_type,
+                    has_return=alarm_code.has_return,
+                    return_delay_minutes=alarm_code.return_delay_minutes,
+                    return_delay_hours=alarm_code.return_delay_hours,
+                    is_periodic=alarm_code.is_periodic,
+                    periodic_interval_minutes=alarm_code.periodic_interval_minutes,
+                    periodic_interval_hours=alarm_code.periodic_interval_hours,
+                )
                 new_alarm_code.save()
                 
-            self.copy_alarm_codes = False
-            self.copy_alarm_codes_from = None
+        self.copy_alarm_codes = False
+        self.copy_alarm_codes_from = None
             
         super().save(*args, **kwargs)
     
@@ -214,7 +221,24 @@ class AccountUser(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True, verbose_name=_("Created By"))
-        
+    
+    
+    def get_autherized_day(self, day_of_the_week):
+        if day_of_the_week == 0:
+            return self.authorized_days_mon
+        elif day_of_the_week == 1:
+            return self.authorized_days_tue
+        elif day_of_the_week == 2:
+            return self.authorized_days_wed
+        elif day_of_the_week == 3:
+            return self.authorized_days_thu
+        elif day_of_the_week == 4:
+            return self.authorized_days_fri
+        elif day_of_the_week == 5:
+            return self.authorized_days_sat
+        elif day_of_the_week == 6:
+            return self.authorized_days_sun 
+    
     def __str__(self):
         return self.name 
     

@@ -143,11 +143,11 @@ def dycrypt_events():
                     pass
             else:
                 # Else Save and Emmit unsaved event message
-                try:
+                #try:
                     event.save()
                     send_message('events', 'send_uncommited_event', DecryptedEventSerializer(event).data )
-                except:
-                    pass
+                #except:
+                #    pass
             
         raw_event.decrypted = True
         raw_event.has_errors = not success
@@ -175,8 +175,8 @@ def account_notes_timer():
             
             
 def check_delayed_return_events():
-    for event in DecryptedEvent.objects.filter(has_return=False, handled_return_delay=False).exclude(alarm_code=None).order_by('id')[:100]:
-        if event.created_at + timedelta(minutes=event.alarm_code.return_delay) < datetime.now():
+    for event in DecryptedEvent.objects.filter(has_return=False, handled_return_delay=False, alarm_code__has_return=True).exclude(alarm_code=None).order_by('id')[:100]:
+        if event.created_at + timedelta(minutes=event.alarm_code.return_delay_minutes, hours=event.alarm_code.return_delay_hours) < datetime.now():
             event.status = 4
             event.delayed_return = True
             event.save()
@@ -184,7 +184,7 @@ def check_delayed_return_events():
             
 def check_delayed_periodic_events():
     for event in DecryptedEvent.objects.filter(is_last_periodic_event=True, handled_periodic_delay=False).exclude(alarm_code=None).order_by('id')[:100]:
-        if event.created_at + timedelta(minutes=event.alarm_code.periodic_interval_minutes, hours=event.alarm_code.periodic_interval_hours) < datetime.now():
+        if  event.created_at + timedelta(minutes=event.alarm_code.periodic_interval_minutes, hours=event.alarm_code.periodic_interval_hours) < datetime.now():
             event.status = 5
             event.delayed_periodic = True
             event.save()
