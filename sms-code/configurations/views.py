@@ -20,7 +20,7 @@ from django.utils.translation import gettext as _
 
 class ListDevices(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, SingleTableMixin, ListView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'configurations.view_device'
     
     model = Device
     table_class = DeviceTable 
@@ -40,7 +40,7 @@ class ListDevices(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, Sin
 
 class CreateDevice(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateView):
         
-    permission_required = 'accounts.add_account'
+    permission_required = 'configurations.add_device'
     
     model = Device
     form_class = DeviceForm
@@ -58,7 +58,7 @@ class CreateDevice(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateView):
 
 class DetailsDevice(PermissionRequiredMixin, DetailBreadcrumbMixin, DetailView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'configurations.view_device'
     
     model = Device
     form_class = DeviceForm
@@ -89,7 +89,7 @@ class DetailsDevice(PermissionRequiredMixin, DetailBreadcrumbMixin, DetailView):
 
 class UpdateeDevice(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'configurations.change_device'
     
     model = Device
     form_class = DeviceForm
@@ -111,7 +111,7 @@ class UpdateeDevice(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateView):
     
 class DeleteDevice(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
     
-    permission_required = 'accounts.delete_account'
+    permission_required = 'configurations.delete_device'
     
     model = Device
     template_name = 'generic/confirm_delete.html'

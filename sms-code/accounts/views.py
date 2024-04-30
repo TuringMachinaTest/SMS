@@ -102,7 +102,7 @@ class DetailsAccount(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateWithI
 
 class UpdateeAccount(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateWithInlinesView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'accounts.change_account'
     
     model = Account
     form_class = AccountForm
@@ -139,7 +139,7 @@ class DeleteAccount(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
     
 class ListInstallationCompanies(PermissionRequiredMixin, ListBreadcrumbMixin, ExportMixin, SingleTableMixin, FilterView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'accounts.view_installationcompany'
     
     model = InstallationCompany
     table_class = InstallationCompanyTable 
@@ -161,7 +161,7 @@ class ListInstallationCompanies(PermissionRequiredMixin, ListBreadcrumbMixin, Ex
 
 class CreateInstallationCompany(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithInlinesView):
         
-    permission_required = 'accounts.add_account'
+    permission_required = 'accounts.add_installationcompany'
     
     model = InstallationCompany
     form_class = InstallationCompanyForm
@@ -179,7 +179,7 @@ class CreateInstallationCompany(PermissionRequiredMixin, CreateBreadcrumbMixin, 
 
 class UpdateeInstallationCompany(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateWithInlinesView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'accounts.change_installationcompany'
     
     model = InstallationCompany
     form_class = InstallationCompanyForm
@@ -201,7 +201,7 @@ class UpdateeInstallationCompany(PermissionRequiredMixin, UpdateBreadcrumbMixin,
     
 class DetailsInstallationCompany(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateWithInlinesView, DetailView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'accounts.view_installationcompany'
     
     model = InstallationCompany
     form_class = InstallationCompanyForm
@@ -233,7 +233,7 @@ class DetailsInstallationCompany(PermissionRequiredMixin, DetailBreadcrumbMixin,
     
 class DeleteInstallationCompany(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
     
-    permission_required = 'accounts.delete_account'
+    permission_required = 'accounts.delete_installationcompany'
     
     model = InstallationCompany
     template_name = 'generic/confirm_delete.html'
@@ -243,7 +243,7 @@ class DeleteInstallationCompany(PermissionRequiredMixin, DeleteBreadcrumbMixin, 
     
 class ListCities(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, SingleTableMixin, FilterView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'accounts.view_city'
     
     model = City
     table_class = CityTable 
@@ -265,7 +265,7 @@ class ListCities(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, Sing
 
 class CreateCity(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateView):
         
-    permission_required = 'accounts.add_account'
+    permission_required = 'accounts.add_city'
     
     model = City
     form_class = CityForm
@@ -283,7 +283,7 @@ class CreateCity(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateView):
 
 class DetailsCity(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'accounts.view_city'
     
     model = City
     form_class = CityForm
@@ -314,7 +314,7 @@ class DetailsCity(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateView):
 
 class UpdateeCity(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'accounts.change_city'
     
     model = City
     form_class = CityForm
@@ -336,7 +336,7 @@ class UpdateeCity(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateView):
     
 class DeleteCity(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
     
-    permission_required = 'accounts.delete_account'
+    permission_required = 'accounts.delete_city'
     
     model = City
     template_name = 'generic/confirm_delete.html'
@@ -346,7 +346,7 @@ class DeleteCity(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
     
 class ListGroups(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, SingleTableMixin, FilterView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'accounts.view_group'
     
     model = Group
     table_class = GroupTable 
@@ -368,7 +368,7 @@ class ListGroups(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, Sing
 
 class CreateGroup(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateView):
         
-    permission_required = 'accounts.add_account'
+    permission_required = 'accounts.add_group'
     
     model = Group
     form_class = GroupForm
@@ -386,7 +386,7 @@ class CreateGroup(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateView):
 
 class DetailsGroup(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'accounts.view_group'
     
     model = Group
     form_class = GroupForm
@@ -417,7 +417,7 @@ class DetailsGroup(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateView):
 
 class UpdateeGroup(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'accounts.change_group'
     
     model = Group
     form_class = GroupForm
@@ -439,7 +439,7 @@ class UpdateeGroup(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateView):
     
 class DeleteGroup(PermissionRequiredMixin, DeleteBreadcrumbMixin, DeleteView):
     
-    permission_required = 'accounts.delete_account'
+    permission_required = 'accounts.delete_group'
     
     model = Group
     template_name = 'generic/confirm_delete.html'

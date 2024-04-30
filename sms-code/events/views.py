@@ -9,9 +9,7 @@ from django_filters.views import FilterView
 from braces.views import PermissionRequiredMixin
 from django.core import serializers
 
-from accounts.forms import AccountForm
 from events.forms import DecryptedEventForm, RawEventForm
-from events.serializers import DecryptedEventSerializer
 
 from .models import DecryptedEvent, RawEvent
 
@@ -24,7 +22,7 @@ from django.utils.translation import gettext as _
 
 class ListRawEvents(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, SingleTableMixin, FilterView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'events.view_rawevent'
     
     model = RawEvent
     table_class = RawEventTable 
@@ -45,7 +43,7 @@ class ListRawEvents(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, S
 
 class DetailsRawEvent(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'events.view_rawevent'
     
     model = RawEvent
     form_class = RawEventForm
@@ -76,7 +74,7 @@ class DetailsRawEvent(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateView
 
 class ListDecryptedEvents(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMixin, SingleTableMixin, FilterView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'events.view_decryptedevent'
     
     model = DecryptedEvent
     table_class = DecryptedEventTable 
@@ -99,7 +97,7 @@ class ListDecryptedEvents(PermissionRequiredMixin, ExportMixin, ListBreadcrumbMi
     
 class CreateDecryptedEvent(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateView):
         
-    permission_required = 'accounts.add_account'
+    permission_required = 'events.add_decryptedevent'
     
     model = DecryptedEvent
     form_class = DecryptedEventForm
@@ -124,7 +122,7 @@ class CreateDecryptedEvent(PermissionRequiredMixin, CreateBreadcrumbMixin, Creat
        
 class DetailsDecryptedEvent(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'events.view_decryptedevent'
     
     model = DecryptedEvent
     form_class = DecryptedEventForm
@@ -161,7 +159,7 @@ class DetailsDecryptedEvent(PermissionRequiredMixin, DetailBreadcrumbMixin, Upda
     
 class UpdateDecryptedEvent(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateView):
     
-    permission_required = 'accounts.view_account'
+    permission_required = 'events.change_decryptedevent'
     
     model = DecryptedEvent
     form_class = DecryptedEventForm
