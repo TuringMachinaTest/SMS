@@ -647,7 +647,7 @@ msgstr ""
 #: events/views.py:95 templates/includes/menu-list.html:146
 #: templates/includes/menu-list.html:179 templates/monitoring/index.html:147
 msgid "Raw Events"
-msgstr "الإحداث المشفرة"
+msgstr "الأحداث المشفرة"
 
 #: configurations/views.py:54
 msgid "Create Device"

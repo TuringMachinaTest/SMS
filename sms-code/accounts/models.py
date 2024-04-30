@@ -122,7 +122,7 @@ class Account(models.Model):
     
     def save(self, *args, **kwargs):
         
-        if self.copy_alarm_codes and self.copy_alarm_codes_from:
+        if not self._state.adding and self.copy_alarm_codes and self.copy_alarm_codes_from:
             alarm_codes = configurations.models.AlarmCode.objects.filter(account=self.copy_alarm_codes_from)
             for alarm_code in alarm_codes:
                 new_alarm_code = configurations.models.AlarmCode(

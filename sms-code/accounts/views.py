@@ -54,7 +54,7 @@ class CreateAccount(PermissionRequiredMixin, CreateBreadcrumbMixin, CreateWithIn
     
     model = Account
     form_class = AccountForm
-    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ServiceOrderInlineFormSet, ScheduleInlineFormSet]
+    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ScheduleInlineFormSet]
     
     template_name = 'generic/form.html'
     success_url = reverse_lazy('accounts:account_list')
@@ -73,7 +73,7 @@ class DetailsAccount(PermissionRequiredMixin, DetailBreadcrumbMixin, UpdateWithI
     
     model = Account
     form_class = AccountForm
-    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ServiceOrderInlineFormSet, ScheduleInlineFormSet]
+    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ScheduleInlineFormSet]
 
     template_name = 'generic/form.html'
     
@@ -106,7 +106,7 @@ class UpdateeAccount(PermissionRequiredMixin, UpdateBreadcrumbMixin, UpdateWithI
     
     model = Account
     form_class = AccountForm
-    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ServiceOrderInlineFormSet, ScheduleInlineFormSet]
+    inlines = [AccountUserInlineFormSet, ZoneInlineFormSet, AlarmCodeInlineFormSet, AccountNoteInlineFormSet, ScheduleInlineFormSet]
     
     formset_kwargs = {'form_kwargs': {'test': False}}
 
