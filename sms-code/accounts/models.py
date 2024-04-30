@@ -157,12 +157,13 @@ class AccountNote(models.Model):
         verbose_name_plural = _("Account Notes")
     
     account = models.ForeignKey(Account, on_delete=models.CASCADE, verbose_name=_("Account"))
-    decrypted_event = models.PositiveBigIntegerField(default=-1, verbose_name=_("Decrypted Event"))
+    decrypted_event = models.PositiveBigIntegerField(default=0, verbose_name=_("Decrypted Event"))
     
     note = models.TextField(max_length=120, null=True, blank=True, verbose_name=_("Note"))
+    
     timer = models.BooleanField(default=False, db_index=True, verbose_name=_("Timer"))
-    timer_interval_minutes = models.IntegerField(default=0, verbose_name=_("Minutes"))
-    timer_interval_hours = models.IntegerField(default=0, verbose_name=_("Hours"))
+    timer_interval_minutes = models.PositiveIntegerField(default=0, verbose_name=_("Minutes"))
+    timer_interval_hours = models.PositiveIntegerField(default=0, verbose_name=_("Hours"))
 
     
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
@@ -186,7 +187,7 @@ class AccountUser(models.Model):
 
     # Information
     name = models.CharField(max_length=40, verbose_name=_("Name"))
-    code = models.IntegerField(verbose_name=_("Code"))
+    code = models.PositiveIntegerField(verbose_name=_("Code"))
 
     in_out_codes = models.CharField(max_length=20, blank=True, verbose_name=_("In-Out Codes"))
     password = models.CharField(max_length=15, blank=True, verbose_name=_("Password"))
@@ -256,7 +257,7 @@ class Zone(models.Model):
     partition = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)], verbose_name=_("Partition"))
 
     name = models.CharField(max_length=30, verbose_name=_("Name"))
-    code = models.IntegerField(verbose_name=_("Code"))
+    code = models.PositiveIntegerField(verbose_name=_("Code"))
         
     def __str__(self):
         return self.name 

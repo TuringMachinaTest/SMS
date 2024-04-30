@@ -7,7 +7,7 @@ services:
     healthcheck:
       test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
     volumes:
-      - redis_data:/data
+      - redis-data:/data
 
   postgres:
     image: docker.io/postgres:latest
@@ -35,6 +35,6 @@ services:
 
 volumes:
   pg-data:
-  redis_data:
+  redis-data:
   pgadmin:
  

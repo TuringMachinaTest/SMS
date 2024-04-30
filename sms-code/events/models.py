@@ -76,13 +76,13 @@ class DecryptedEvent(PostgresPartitionedModel):
     note = models.TextField(max_length=120, null=True, blank=True, verbose_name=_("Note"))
         
     timer = models.BooleanField(default=False, db_index=True, verbose_name=_("Timer"))
-    timer_interval_minnutes = models.IntegerField(default=0, verbose_name=_("Minutes"))
-    timer_interval_hours = models.IntegerField(default=0, verbose_name=_("Hours"))
+    timer_interval_minnutes = models.PositiveIntegerField(default=0, verbose_name=_("Minutes"))
+    timer_interval_hours = models.PositiveIntegerField(default=0, verbose_name=_("Hours"))
 
     account_note = models.TextField(max_length=120, null=True, blank=True, verbose_name=_("Account Note"))
     account_note_timer = models.BooleanField(default=False, verbose_name=_("Timer"))
-    note_timer_interval_minnutes = models.IntegerField(default=0, verbose_name=_("Minutes"))
-    note_timer_interval_hours = models.IntegerField(default=0, verbose_name=_("Hours"))
+    note_timer_interval_minnutes = models.PositiveIntegerField(default=0, verbose_name=_("Minutes"))
+    note_timer_interval_hours = models.PositiveIntegerField(default=0, verbose_name=_("Hours"))
     
     has_return = models.BooleanField(default=False, db_index=True, verbose_name=_("Has Return"))
     delayed_return = models.BooleanField(default=False, db_index=True, verbose_name=_("Delayed Return"))

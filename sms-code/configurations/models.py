@@ -33,6 +33,7 @@ class AlarmCode(models.Model):
     )
         
     DECRYPTION_TYPES= (
+        (-1, _("None")),
         (0, _("Zone")),
         (1, _("Account User"))
     )
@@ -44,7 +45,7 @@ class AlarmCode(models.Model):
     description = models.CharField(max_length=40, verbose_name=_("Description"))
     
     #0 Zone, 1 User
-    decryption_type = models.IntegerField(default=0, choices=DECRYPTION_TYPES, verbose_name=_("Decryption Type"))
+    decryption_type = models.IntegerField(default=-1, choices=DECRYPTION_TYPES, verbose_name=_("Decryption Type"))
 
     # TYPE
     alarm_type = models.IntegerField(default=0, choices=ALARM_TYPES, verbose_name=_("Alarm Type"))
@@ -101,45 +102,45 @@ class Schedule(models.Model):
     
     is_open_saturday = models.BooleanField(default=False, verbose_name=_("Saturday"))
     opening_saturday = models.TimeField(null=True, blank=True, verbose_name=_("Opening"))
-    delay_opning_saturday = models.IntegerField(default=0, verbose_name=_("Delay"))
+    delay_opning_saturday = models.PositiveIntegerField(default=0, verbose_name=_("Delay"))
     closing_saturday = models.TimeField(null=True, blank=True, verbose_name=_("Closing"))
-    delay_closing_saturday = models.IntegerField(default=0, verbose_name=_("Delay"))
+    delay_closing_saturday = models.PositiveIntegerField(default=0, verbose_name=_("Delay"))
 
     is_open_sunday = models.BooleanField(default=False, verbose_name=_("Sunday"))
     opening_sunday = models.TimeField(null=True, blank=True, verbose_name=_("Opening"))
-    delay_opning_sunday = models.IntegerField(default=0, verbose_name=_("Delay"))
+    delay_opning_sunday = models.PositiveIntegerField(default=0, verbose_name=_("Delay"))
     closing_sunday = models.TimeField(null=True, blank=True, verbose_name=_("Closing"))
-    delay_closing_sunday = models.IntegerField(default=0, verbose_name=_("Delay"))
+    delay_closing_sunday = models.PositiveIntegerField(default=0, verbose_name=_("Delay"))
     
     is_open_monday = models.BooleanField(default=False, verbose_name=_("Monday"))
     opening_monday = models.TimeField(null=True, blank=True, verbose_name=_("Opening"))
-    delay_opning_monday = models.IntegerField(default=0, verbose_name=_("Delay"))
+    delay_opning_monday = models.PositiveIntegerField(default=0, verbose_name=_("Delay"))
     closing_monday = models.TimeField(null=True, blank=True, verbose_name=_("Closing"))
-    delay_closing_monday = models.IntegerField(default=0, verbose_name=_("Delay"))
+    delay_closing_monday = models.PositiveIntegerField(default=0, verbose_name=_("Delay"))
 
     is_open_tuesday = models.BooleanField(default=False, verbose_name=_("Tuesday"))
     opening_tuesday = models.TimeField(null=True, blank=True, verbose_name=_("Opening"))
-    delay_opning_tuesday = models.IntegerField(default=0, verbose_name=_("Delay"))
+    delay_opning_tuesday = models.PositiveIntegerField(default=0, verbose_name=_("Delay"))
     closing_tuesday = models.TimeField(null=True, blank=True, verbose_name=_("Closing"))
-    delay_closing_tuesday = models.IntegerField(default=0, verbose_name=_("Delay"))
+    delay_closing_tuesday = models.PositiveIntegerField(default=0, verbose_name=_("Delay"))
 
     is_open_wednesday = models.BooleanField(default=False, verbose_name=_("Wednesday"))
     opening_wednesday = models.TimeField(null=True, blank=True, verbose_name=_("Opening"))
-    delay_opning_wednesday = models.IntegerField(default=0, verbose_name=_("Delay"))
+    delay_opning_wednesday = models.PositiveIntegerField(default=0, verbose_name=_("Delay"))
     closing_wednesday = models.TimeField(null=True, blank=True, verbose_name=_("Closing"))
-    delay_closing_wednesday = models.IntegerField(default=0, verbose_name=_("Delay"))
+    delay_closing_wednesday = models.PositiveIntegerField(default=0, verbose_name=_("Delay"))
 
     is_open_thursday = models.BooleanField(default=False, verbose_name=_("Thursday"))
     opening_thursday = models.TimeField(null=True, blank=True, verbose_name=_("Opening"))
-    delay_opning_thursday = models.IntegerField(default=0, verbose_name=_("Delay"))
+    delay_opning_thursday = models.PositiveIntegerField(default=0, verbose_name=_("Delay"))
     closing_thursday = models.TimeField(null=True, blank=True, verbose_name=_("Closing"))
-    delay_closing_thursday = models.IntegerField(default=0, verbose_name=_("Delay"))
+    delay_closing_thursday = models.PositiveIntegerField(default=0, verbose_name=_("Delay"))
 
     is_open_friday = models.BooleanField(default=False, verbose_name=_("Friday"))
     opening_friday = models.TimeField(null=True, blank=True, verbose_name=_("Opening"))
-    delay_opning_friday = models.IntegerField(default=0, verbose_name=_("Delay"))
+    delay_opning_friday = models.PositiveIntegerField(default=0, verbose_name=_("Delay"))
     closing_friday = models.TimeField(null=True, blank=True, verbose_name=_("Closing"))
-    delay_closing_friday = models.IntegerField(default=0, verbose_name=_("Delay"))
+    delay_closing_friday = models.PositiveIntegerField(default=0, verbose_name=_("Delay"))
 
     def get_opening_time(self, day_of_week):
         if day_of_week == 0:
