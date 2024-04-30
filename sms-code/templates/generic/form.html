@@ -27,9 +27,9 @@
       </div>
 
 
-      <div class="row">
+      <div class="row" {% if '/raw_events/' in request.path %} dir="ltr" {% endif %}>
         <!-- left column -->
-        <div class="col-md-12">
+        <div class="col-md-12" >
           <!-- general form elements -->
           <!-- general form elements disabled -->
           <form method="post">

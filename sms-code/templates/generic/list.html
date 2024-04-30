@@ -10,7 +10,7 @@
 
   <section class="content">
     <div class="container-fluid">
-      <div class="row">
+      <div class="row" {% if '/raw_events/' in request.path %} dir="ltr" {% endif %}>
         
         <!-- left column -->
         <div class="col-md-12">

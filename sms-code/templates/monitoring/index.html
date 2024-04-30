@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %} jsGrid {% endblock title %}
+{% block title %} {% trans 'Operator' %} {% endblock title %}
 {% block extrastyle %}
 <!-- jsGrid -->
 <link rel="stylesheet" href="{% static 'plugins/jsgrid/jsgrid.min.css' %}">
@@ -150,7 +150,7 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="card-body">
-                  <div id="rawEventsGrid"></div>
+                  <div id="rawEventsGrid" dir="ltr"></div>
                 </div>
               </div>
               <!-- /.card-body -->

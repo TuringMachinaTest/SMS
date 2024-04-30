@@ -26,8 +26,8 @@ def event_listener(device_no):
 
         if not serial_port.is_open:
             serial_port.close()
-
             return
+        
         # serial_port.open()
     except:
         return
@@ -48,10 +48,10 @@ def event_listener(device_no):
         
         if cache.get("devices:kill-device:" + device.name) == "true":
             cache.delete("devices:kill-device:" + device.name)
-            return
+            break
         
         if cache.get("devices:kill-device") == "all":
-            return
+            break
         
         try:
             data = serial_port.read_until(end_line)
@@ -71,6 +71,8 @@ def event_listener(device_no):
 
             #print(data.decode())
             send_message('events', 'send_raw_event', RawEventSerializer(event).data )
+            
+    serial_port.close()
 
 
 def dycrypt_events():
