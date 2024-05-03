@@ -146,33 +146,33 @@ class Schedule(models.Model):
         if day_of_week == 0:
             return (datetime.combine(datetime.today(), self.opening_monday) - timedelta(minutes=self.delay_opning_monday)).time(), (datetime.combine(datetime.today(), self.opening_monday) + timedelta(minutes=self.delay_opning_monday)).time()
         elif day_of_week == 1:
-            return self.opening_tuesday - timedelta(minutes=self.delay_opning_tuesday).time(), self.opening_tuesday + timedelta(minutes=self.delay_opning_tuesday)
+            return (datetime.combine(datetime.today(), self.opening_tuesday) - timedelta(minutes=self.delay_opning_tuesday)).time(), (datetime.combine(datetime.today(), self.opening_tuesday) + timedelta(minutes=self.delay_opning_tuesday)).time()
         elif day_of_week == 2:
-            return self.opening_wednesday - timedelta(minutes=self.delay_opning_wednesday).time(), self.opening_wednesday + timedelta(minutes=self.delay_opning_wednesday)
+            return (datetime.combine(datetime.today(), self.opening_wednesday) - timedelta(minutes=self.delay_opning_wednesday)).time(), (datetime.combine(datetime.today(), self.opening_wednesday) + timedelta(minutes=self.delay_opning_wednesday)).time()
         elif day_of_week == 3:
-            return self.opening_thursday - timedelta(minutes=self.delay_opning_thursday).time(), self.opening_thursday + timedelta(minutes=self.delay_opning_thursday)
+            return (datetime.combine(datetime.today(), self.opening_thursday) - timedelta(minutes=self.delay_opning_thursday)).time(), (datetime.combine(datetime.today(), self.opening_thursday) + timedelta(minutes=self.delay_opning_thursday)).time()   
         elif day_of_week == 4:
-            return self.opening_friday - timedelta(minutes=self.delay_opning_friday).time(), self.opening_friday + timedelta(minutes=self.delay_opning_friday)
+            return (datetime.combine(datetime.today(), self.opening_friday) - timedelta(minutes=self.delay_opning_friday)).time(), (datetime.combine(datetime.today(), self.opening_friday) + timedelta(minutes=self.delay_opning_friday)).time()
         elif day_of_week == 5:
-            return self.opening_saturday - timedelta(minutes=self.delay_opning_saturday).time(), self.opening_saturday + timedelta(minutes=self.delay_opning_saturday)
+            return (datetime.combine(datetime.today(), self.opening_saturday) - timedelta(minutes=self.delay_opning_saturday)).time(), (datetime.combine(datetime.today(), self.opening_saturday) + timedelta(minutes=self.delay_opning_saturday)).time()
         elif day_of_week == 6:
-            return self.opening_sunday - timedelta(minutes=self.delay_opning_sunday).time(), self.opening_sunday + timedelta(minutes=self.delay_opning_sunday)
+            return (datetime.combine(datetime.today(), self.opening_sunday) - timedelta(minutes=self.delay_opning_sunday)).time(), (datetime.combine(datetime.today(), self.opening_sunday) + timedelta(minutes=self.delay_opning_sunday)).time()
     
     def get_closing_time(self, day_of_week):
         if day_of_week == 0:
             return (datetime.combine(datetime.today(), self.closing_monday) - timedelta(minutes=self.delay_closing_monday)).time(), (datetime.combine(datetime.today(), self.closing_monday) + timedelta(minutes=self.delay_closing_monday)).time()
         elif day_of_week == 1:
-            return self.closing_tuesday - timedelta(minutes=self.delay_closing_tuesday), self.closing_tuesday + timedelta(minutes=self.delay_closing_tuesday)
+            return (datetime.combine(datetime.today(), self.closing_tuesday) - timedelta(minutes=self.delay_closing_tuesday)).time(), (datetime.combine(datetime.today(), self.closing_tuesday) + timedelta(minutes=self.delay_closing_tuesday)).time()
         elif day_of_week == 2:
-            return self.closing_wednesday - timedelta(minutes=self.delay_closing_wednesday), self.closing_wednesday + timedelta(minutes=self.delay_closing_wednesday)
+            return (datetime.combine(datetime.today(), self.closing_wednesday) - timedelta(minutes=self.delay_closing_wednesday)).time(), (datetime.combine(datetime.today(), self.closing_wednesday) + timedelta(minutes=self.delay_closing_wednesday)).time()
         elif day_of_week == 3:
-            return self.closing_thursday - timedelta(minutes=self.delay_closing_thursday), self.closing_thursday + timedelta(minutes=self.delay_closing_thursday)
+            return (datetime.combine(datetime.today(), self.closing_thursday) - timedelta(minutes=self.delay_closing_thursday)).time(), (datetime.combine(datetime.today(), self.closing_thursday) + timedelta(minutes=self.delay_closing_thursday)).time()
         elif day_of_week == 4:
-            return self.closing_friday - timedelta(minutes=self.delay_closing_friday), self.closing_friday + timedelta(minutes=self.delay_closing_friday)
+            return (datetime.combine(datetime.today(), self.closing_friday) - timedelta(minutes=self.delay_closing_friday)).time(), (datetime.combine(datetime.today(), self.closing_friday) + timedelta(minutes=self.delay_closing_friday)).time()
         elif day_of_week == 5:
-            return self.closing_saturday - timedelta(minutes=self.delay_closing_saturday), self.closing_saturday + timedelta(minutes=self.delay_closing_saturday)
+            return (datetime.combine(datetime.today(), self.closing_saturday) - timedelta(minutes=self.delay_closing_saturday)).time(), (datetime.combine(datetime.today(), self.closing_saturday) + timedelta(minutes=self.delay_closing_saturday)).time()
         elif day_of_week == 6:
-            return self.closing_sunday - timedelta(minutes=self.delay_closing_sunday), self.closing_sunday + timedelta(minutes=self.delay_closing_sunday)
+            return (datetime.combine(datetime.today(), self.closing_sunday) - timedelta(minutes=self.delay_closing_sunday)).time(), (datetime.combine(datetime.today(), self.closing_sunday) + timedelta(minutes=self.delay_closing_sunday)).time()
         
     def get_is_open(self, day_of_week):
         if day_of_week == 0:
