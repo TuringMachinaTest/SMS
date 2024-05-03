@@ -134,12 +134,12 @@ class DetailsDecryptedEvent(PermissionRequiredMixin, DetailBreadcrumbMixin, Upda
         kwargs = super().get_form_kwargs()
                 
         instance = self.get_queryset().first()
-
-        kwargs['account_id'] = instance.account.id
+        
+        if instance and instance.account:
+            kwargs['account_id'] = instance.account.id
         
         # Add any additional parameters you want to pass to the form
         kwargs['details'] = True
-        kwargs['account_id'] = self.get_queryset().first().account.id
 
         return kwargs
     
@@ -171,12 +171,13 @@ class UpdateDecryptedEvent(PermissionRequiredMixin, UpdateBreadcrumbMixin, Updat
     def get_form_kwargs(self):
         # Get the default form kwargs
         kwargs = super().get_form_kwargs()
-        
+                
         instance = self.get_queryset().first()
         
-        kwargs['account_id'] = instance.account.id
+        if instance and instance.account:
+            kwargs['account_id'] = instance.account.id
         
-        if instance.status == -1 and (instance.locked_by == None or instance.locked_by != self.request.user.id) and not self.request.user.is_superuser:
+        if instance and instance.status == -1 and (instance.locked_by == None or instance.locked_by != self.request.user.id) and not self.request.user.is_superuser:
             kwargs['details'] = True        
         # Add any additional parameters you want to pass to the form
         
@@ -186,15 +187,18 @@ class UpdateDecryptedEvent(PermissionRequiredMixin, UpdateBreadcrumbMixin, Updat
         context = super(UpdateDecryptedEvent, self).get_context_data(**kwargs)
         
         instance = self.get_queryset().first()
-        if instance.status != -1:
-            instance.status = -1
-            instance.locked_at = datetime.now()
-            instance.locked_by = self.request.user
-            instance.save()
-        elif instance.locked_by == None or instance.locked_by != self.request.user.id:
-            context['details'] = True
-
-        context['account_id'] = instance.account.id
+        if instance:
+            if instance.status != -1:
+                instance.status = -1
+                instance.locked_at = datetime.now()
+                instance.locked_by = self.request.user
+                instance.save()
+                
+            elif instance.locked_by == None or instance.locked_by != self.request.user.id:
+                context['details'] = True
+                
+            if instance.account:
+                context['account_id'] = instance.account.id
 
         context['view_name'] = _("Update Event")
         context['history'] = serializers.serialize("python", instance.history.all())
