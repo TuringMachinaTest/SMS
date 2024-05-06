@@ -196,7 +196,6 @@ class AccountUser(models.Model):
     phone_number2 = models.CharField(max_length=20, blank=True, verbose_name=_("Phone Number 2"))
     phone_number3 = models.CharField(max_length=20, blank=True, verbose_name=_("Phone Number 3"))
     
-    #TODO: Fix titles
     title1 = models.CharField(max_length=150, blank=True, verbose_name=_("Title"))
     title2 = models.CharField(max_length=150, blank=True, verbose_name=_("Title"))
     title3 = models.CharField(max_length=150, blank=True, verbose_name=_("Title"))
