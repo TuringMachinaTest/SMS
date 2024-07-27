@@ -116,6 +116,7 @@ class AccountForm(forms.ModelForm):
                     Row(
                         Column('id', css_class="col-1"),
                         Column('name', css_class="col-3"), 
+                        Column('active', css_class="col-1"), 
                         Column('city'),
                         Column('zip_code'), 
                     ),

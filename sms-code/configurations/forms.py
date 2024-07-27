@@ -54,6 +54,9 @@ class AlarmCodeForm(forms.ModelForm):
                     Column("alarm_type")  
                 ),
                 Row(
+                    Column("priority")  
+                ),
+                Row(
                     Column("decryption_type")  
                 ),
                 Row(

@@ -50,6 +50,8 @@ class AlarmCode(models.Model):
     # TYPE
     alarm_type = models.IntegerField(default=0, choices=ALARM_TYPES, verbose_name=_("Alarm Type"))
 
+    priority = models.IntegerField(default=1, validators=[MaxValueValidator(5), MinValueValidator(1)], verbose_name=_("Priority"))
+
     has_return = models.BooleanField(default=False, verbose_name=_("Has Return"))
     return_delay_minutes = models.PositiveIntegerField(default=0, verbose_name=_("Minutes"))
     return_delay_hours = models.PositiveIntegerField(default=0, verbose_name=_("Hours"))

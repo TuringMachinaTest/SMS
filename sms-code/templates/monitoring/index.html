@@ -183,6 +183,8 @@
   let delayedPeriodicEvents = {{ delayed_periodic_events|safe }};
   let rawEvents = [];
 
+  console.log(uncommitedEvents)
+  
   $(function () {
 
     $("#uncommitedEventsGrid").jsGrid({
@@ -192,6 +194,7 @@
       sorting: true,
       paging: true,
       editing: true,
+      sorting: true,
 
       data: uncommitedEvents,
 
@@ -207,10 +210,14 @@
         { name: "account.id", type: "text", title: "{% trans 'Account ID' %}", width: 50 },
         { name: "account.name", type: "text", title: "{% trans 'Account Name' %}", width: 100 },
         { name: "alarm_code.code", type: "text", title: "{% trans 'Alarm Code' %}", width: 50},
+        { name: "alarm_code.priority", type: "number", title: "{% trans 'Alarm Priority' %}", width: 50},
+        { name: "zone.code", type: "text", title: "{% trans 'Zone' %}", width: 50},
+        { name: "user.code", type: "number", title: "{% trans 'User' %}", width: 50},
         { name: "alarm_code.description", type: "text", title: "{% trans 'Alarm Description' %}", width: 100},
         { name: "created_at", type: "datetime", title: "{% trans 'Timestamp' %}", sorting: true }
       ]
     });
+    $("#uncommitedEventsGrid").jsGrid("sort", "alarm_code.priority", "Desc")
 
     $("#delayedEventsGrid").jsGrid({
       width: "100%",
@@ -219,6 +226,7 @@
       sorting: true,
       paging: true,
       editing: true,
+      sorting: true,
 
       data: delayedEvents,
 
@@ -246,6 +254,7 @@
       sorting: true,
       paging: true,
       editing: true,
+      sorting: true,
 
       data: delayedPeriodicEvents,
 
@@ -273,6 +282,7 @@
       sorting: true,
       paging: true,
       editing: true,
+      sorting: true,
 
       data: followEvents,
 
@@ -301,6 +311,8 @@
       sorting: true,
       paging: true,
       editing: true,
+      sorting: true,
+      sorter: "alarm_code.priority",
 
       data: pendingEvents,
 
@@ -328,6 +340,8 @@
       sorting: true,
       paging: true,
       editing: true,
+      sorting: true,
+      sorter: "alarm_code.priority",
 
       data: lockedEvents,
 
@@ -387,6 +401,7 @@
         let messages = document.getElementById('messages')
         uncommitedEvents.push(data.message)
         $('#uncommitedEventsGrid').jsGrid("option", "data", uncommitedEvents)
+        $("#uncommitedEventsGrid").jsGrid("sort", "alarm_code.priority")
       }
       else if (data.type == "remove_uncommited_event") {
         const index = uncommitedEvents.map(x => x.id).indexOf(data.message);

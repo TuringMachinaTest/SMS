@@ -53,6 +53,8 @@ class Account(models.Model):
     
     id = models.PositiveIntegerField(primary_key=True, verbose_name=_("Account ID"))
     name = models.CharField(max_length=40, verbose_name=_("Account Name"))
+    
+    active = models.BooleanField(default=True, verbose_name=_("Active"))
 
     address_line1 = models.CharField(max_length=30, blank=True, verbose_name=_("Address Line 1"))
     address_line2 = models.CharField(max_length=30, blank=True ,verbose_name=_("Address Line 2"))

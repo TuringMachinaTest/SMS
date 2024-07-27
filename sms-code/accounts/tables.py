@@ -8,7 +8,7 @@ class AccountsTable(tables.Table):
     class Meta:
         model = Account
         template_name = "django_tables2/bootstrap4-responsive.html"
-        fields = ("id", "name" )
+        fields = ("id", "name", "active" )
 
     view = tables.LinkColumn('accounts:account_detail',text=_("View"), args=[tables.A('id')], attrs={
             'a': {'class': 'btn btn-info'},

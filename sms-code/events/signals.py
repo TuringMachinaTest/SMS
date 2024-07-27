@@ -14,6 +14,7 @@ def update_event_status(sender, instance, **kwargs):
     old_instance = DecryptedEvent.objects.filter(pk=instance.id).first()
     
     if old_instance == None:
+        send_message('alerts', 'send_event_alert', DecryptedEventSerializer(instance).data )
         return
     
     if instance.status != old_instance.status:
